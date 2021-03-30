@@ -26,3 +26,6 @@ class CreatePortfolioView(APIView):
             return Response(PortfolioSerializer(portfolio).data, status=status.HTTP_201_CREATED)
         
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdatePortfolioView(APIView):
+    

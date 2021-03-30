@@ -1,0 +1,5 @@
+npx create-react-app “[app_name_here]”, don't have to do the web-pack/Babel setup
+
+Use django-admin instead of py manage.py?
+
+Update portfolio page, search results stock page, idk how to make User models (some special authentication), 
