@@ -28,4 +28,9 @@ class CreatePortfolioView(APIView):
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UpdatePortfolioView(APIView):
+    pass 
+
+class StockView(generics.ListAPIView):
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer
     
