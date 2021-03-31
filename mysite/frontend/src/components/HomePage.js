@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Stock from './Stock';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import { TextField } from '@material-ui/core';
 
 export default class HomePage extends Component {
     constructor (props) {
@@ -12,7 +14,16 @@ export default class HomePage extends Component {
             <Router>
                 <Switch>
                     <Route exact path='/'>
-                        <p>This is the home page.</p> 
+                        <p>This is the home page.</p>
+                        <div>
+                            <Autocomplete 
+                            id='search-tickers'
+                            options={allTickers.map((stock) => stock.ticker)}
+                            renderInput={(params) => (
+                                <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
+                                )}
+                            />
+                        </div> 
                     </Route>
                     <Route path='/create' component={CreatePortfolioPage} />
                     <Route path='/stock/:ticker' component={Stock} />
@@ -21,3 +32,8 @@ export default class HomePage extends Component {
         );
     }
 }
+// <Autocomplete suggestions={Stock.objects.filter(Q(ticker__icontains=this.ticker))} />
+
+const allTickers = [
+
+]

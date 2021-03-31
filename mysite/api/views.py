@@ -34,3 +34,4 @@ class StockView(generics.ListAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     
+    # get_queryset modifies what objects to be returned for the view.
