@@ -34,6 +34,8 @@ export default class HomePage extends Component {
 }
 // <Autocomplete suggestions={Stock.objects.filter(Q(ticker__icontains=this.ticker))} />
 
+// Use javascript to send GET request to an api.views which, in the class, will return serializer_class(Stock.objects.all())
 const allTickers = [
-
+    { ticker: 'TSM', price: 45 },
+    { ticker: 'NOK', price: 4 },
 ]
