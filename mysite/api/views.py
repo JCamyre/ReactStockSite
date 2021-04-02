@@ -15,7 +15,7 @@ class PortfolioView(generics.ListAPIView):
 class CreatePortfolioView(APIView):
     serializer_class = CreatePortfolioSerializer
 
-    def post(self, request, format=None):
+    def post(self, request, format=None): # Post request from the user when creating a new portfolio. View processing their information.
 
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -35,3 +35,5 @@ class StockView(generics.ListAPIView):
     serializer_class = StockSerializer
     
     # get_queryset modifies what objects to be returned for the view.
+    # Idea for sending python data to javascript for the <Autocomplete />. 
+    # json_data = serializer_class(queryset). Idk how to pass context since api.views only for accessing information from database. 
