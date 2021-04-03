@@ -47,6 +47,9 @@ def add_stocks(): # Only run if you need to reset the Stock objects
     for ticker in get_nyse()['Code']:
         Stock.objects.create(ticker=ticker, slug=ticker)
 
+# Only run once to load all Stock objects.
+# add_stocks()
+
 def delete_all_stocks():
     Stock.objects.all().delete()
 
