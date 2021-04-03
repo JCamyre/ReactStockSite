@@ -11,15 +11,19 @@ export default class Home extends Component {
         return (
             <div>
                 <h1>Homepage</h1>
-                {/* <Autocomplete 
+                <Autocomplete 
                     id='search-tickers'
                     options={allTickers.map((stock) => stock.ticker)}
                     renderInput={(params) => (
                         <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
                         )}
-                    /> */}
+                    />
             </div>
         )
     }
 }
 
+const allTickers = [
+    { ticker: 'TSM', price: 45 },
+    { ticker: 'NOK', price: 4 },    
+]
