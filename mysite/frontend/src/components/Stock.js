@@ -11,6 +11,12 @@ export default class Stock extends Component {
 
     }
 
+    render() {
+        return (
+            <p>Yo</p>
+        )
+    }
+
     getStockDetails() {
         fetch('/api/get-stock' + '?ticker=' + this.ticker)
             .then((response) => response.json())

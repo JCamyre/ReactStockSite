@@ -14,18 +14,18 @@ export default class HomePage extends Component {
             <Router>
                 <Switch>
                     <Route exact path='/'>
-                        <p>This is the home page.</p>
-                        <div>
-                            <Autocomplete 
-                            id='search-tickers'
-                            options={allTickers.map((stock) => stock.ticker)}
-                            renderInput={(params) => (
-                                <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
-                                )}
-                            />
-                        </div> 
+                        <h1 style='font-family: Roboto;'>Homepage</h1>
+                            <div>
+                                <Autocomplete 
+                                id='search-tickers'
+                                options={allTickers.map((stock) => stock.ticker)}
+                                renderInput={(params) => (
+                                    <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
+                                    )}
+                                />
+                            </div> 
                     </Route>
-                    <Route path='/create' component={CreatePortfolioPage} />
+                    <Route path='/create' component={Stock} />
                     <Route path='/stock/:ticker' component={Stock} />
                 </Switch>
             </Router>
