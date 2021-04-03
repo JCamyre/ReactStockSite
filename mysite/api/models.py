@@ -39,7 +39,6 @@ class Stock(Model):
         return '$' + self.ticker
 
 # Methods
-
 def add_stocks(): # Only run if you need to reset the Stock objects
     # for ticker in get_nasdaq()['Ticker']:
     # 	Stock.objects.create(ticker=ticker)
