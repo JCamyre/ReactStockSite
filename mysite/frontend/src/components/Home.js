@@ -9,7 +9,7 @@ import { TextField } from '@material-ui/core';
 
 const allTickers = ['TSM', 'NOK'];
 
-export default function ControllableStates() {
+export default function Home() {
     // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 
     // Change the 'state' of value (which is tied to the Autocomplete tag) to the value passed to it.
     const [value, setValue] = React.useState(allTickers[0]);
