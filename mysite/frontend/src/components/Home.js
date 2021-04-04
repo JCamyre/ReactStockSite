@@ -1,6 +1,7 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
+import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 
 // const allTickers = [
 //     { ticker: 'TSM', price: 45 },
@@ -21,19 +22,28 @@ export default function Home() {
             {/* If value is not null, display value, otherwise null */}
             <div>{`value: ${value !== null ? `${value}` : 'null'}`}</div>
             <br />
-            <Autocomplete 
-                id='search-tickers'
-                value = {value}
-                onChange = {(event, newValue) => {
-                    setValue(newValue);
-                }}
-                // options={allTickers.map((stock) => stock.ticker)}
-                options={allTickers}
-                renderInput={(params) => (
-                    <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
-                    )}
-                style={{ width: 300 }}
-                />
+            <Grid container spacing={1}>
+                <Grid item xs={12} align='center'>
+                    <Autocomplete 
+                    id='search-tickers'
+                    value = {value}
+                    onChange = {(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                    // options={allTickers.map((stock) => stock.ticker)}
+                    options={allTickers}
+                    renderInput={(params) => (
+                        <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
+                        )}
+                    style={{ width: 300 }}
+                    />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <Button color='primary' variant='contained' to='/create' component={ Link }>
+                        Information
+                    </Button>
+                </Grid>
+            </Grid>        
         </div>
     );
 }

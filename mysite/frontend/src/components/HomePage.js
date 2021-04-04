@@ -3,6 +3,7 @@ import Stock from './Stock';
 import Home from './Home';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 
+
 export default function HomePage() {
     return (
             <Router>
@@ -11,7 +12,7 @@ export default function HomePage() {
                     <Route path='/create' component={Stock} />
                     <Route path='/stock/:ticker' component={Stock} />
                 </Switch>
-            </Router>    
+            </Router>      
     );
 }
 

@@ -4,12 +4,12 @@ import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 
 export default function Stock() {
-    const ticker = None;
+    const ticker = '';
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>
-                    Insert stock here
+                    (Insert stock here)
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
