@@ -57,7 +57,8 @@ export default function Home() {
 }
 // Handle routing with react-router. We want to route to the localhost:8000/api/view-stock to GET the stock information we need to display localhost:8000/stock/TSM
 // onPush, can I pass in {value} myself? Or have to access somehow.
-stockButtonPressed(ticker, setValue) {
+function stockButtonPressed(ticker, setValue) {
+    console.log('yo');
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -71,6 +72,7 @@ stockButtonPressed(ticker, setValue) {
         fetch("/api/view-stock", requestOptions)
         .then((response) => {
             if (response.ok) {
+                // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (redirects them to localhost:8000/stock/TSM)
                 history.push(`/stock/${value}`);
             } else {
                 setValue({ error: 'Room not found.' });
