@@ -45,7 +45,7 @@ export default function Home() {
                 <Grid item xs={12} align='center'>
                     {/* How to increase size of button? */}
                     <Button color='primary' variant='contained' to='/create' component={ Link } 
-                    onclick={() => {
+                    onClick={() => {
                         stockButtonPressed(value, setValue)
                     }}>
                         Information （{value})
