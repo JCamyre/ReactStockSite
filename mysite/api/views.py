@@ -37,3 +37,25 @@ class StockView(generics.ListAPIView):
     # get_queryset modifies what objects to be returned for the view.
     # Idea for sending python data to javascript for the <Autocomplete />. 
     # json_data = serializer_class(queryset). Idk how to pass context since api.views only for accessing information from database. 
+
+class FindStock(APIView):
+    lookup_url_kwarg = 'ticker'
+
+    def post(self, request, format=None):
+        # Get the value of ticker (lookup_url_kwarg) from the POST request from the user. 
+        ticker = request.data.get(self.lookup_url_kwarg)
+
+        if ticker != None:
+            stock_result = Stock.objects.filter(ticker=ticker)
+            if len(stock_result) > 0: # If the stock exists
+                stock = stock_result[0]
+                # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
+                self.request.session['stock_ticker'] = ticker 
+                return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
+
+            return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
