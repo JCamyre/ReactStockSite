@@ -15,7 +15,13 @@ const allTickers = ['TSM', 'NOK'];
 export default function Home() {
     // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 
     // Change the 'state' of value (which is tied to the Autocomplete tag) to the value passed to it.
+
+    // Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class, so convenient!
+    // "The useState Hook. A Hook is a special function that lets you “hook into” React features. For example, useState is a Hook that lets you add React state to function components.
     const [value, setValue] = React.useState(allTickers[0]);
+    // useState returns two values, the initial value of the state, and the function for updating the state variable
+
+    const [error, setError] = React.useState('');
 
     const history = useHistory();
 
@@ -46,7 +52,7 @@ export default function Home() {
                     {/* How to increase size of button? */}
                     <Button color='primary' variant='contained' to='/create' component={ Link } 
                     onClick={() => {
-                        stockButtonPressed(value, setValue)
+                        stockButtonPressed(value, history, setError)
                     }}>
                         Information （{value})
                     </Button>
@@ -57,27 +63,29 @@ export default function Home() {
 }
 // Handle routing with react-router. We want to route to the localhost:8000/api/view-stock to GET the stock information we need to display localhost:8000/stock/TSM
 // onPush, can I pass in {value} myself? Or have to access somehow.
-function stockButtonPressed(ticker, setValue) {
+function stockButtonPressed(ticker, history, setError) {
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             // will change to stock.ticker (since I want stocks to be dictionary)
+            // I think this is where the localhost:8000/stock?code=ticker takes place
             code: ticker,
         }),
     };
     // The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. 
     // It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
-        fetch("/api/view-stock", requestOptions)
+        fetch("/api/find-stock/", requestOptions) // Getting 403 error
         .then((response) => {
             if (response.ok) {
                 // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (redirects them to localhost:8000/stock/TSM)
                 history.push(`/stock/${value}`);
             } else {
-                setValue({ error: 'Room not found.' });
+                setError('Stock not found.');
             }
         }).catch((error) => {
             console.log(error);
+            console.log('Bruh what happened');
         });
 }
 
