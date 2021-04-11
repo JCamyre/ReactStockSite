@@ -47,7 +47,10 @@ class FindStock(APIView):
             self.request.session.create()
         
         # Get the value of ticker (lookup_url_kwarg) from the POST request from the user. 
+        # THIS IS THE ISSUE
         ticker = request.data.get(self.lookup_url_kwarg)
+
+        print(self.lookup_url_kwarg, request.data, ticker, 'from views.py')
 
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
@@ -56,10 +59,13 @@ class FindStock(APIView):
                 # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
                 # I havew to make a session thing because self.requestion.session dictionary is how I "cache" information (such as what stock they are current looking for) for the current user on the website. 
                 self.request.session['stock_ticker'] = ticker 
+                # Would have the session keep what stock you want to look at be best, or just write after you press search, get taken to /stock/TSMz
                 return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
 
-            return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'}, status=status.HTTP_400_BAD_REQUEST)
-
+            print('Bad Request 1')
+            return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'}, status=status.HTTP_404_NOT_FOUND)
+        
+        print('Bad Request 2 sup mf')
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
 
