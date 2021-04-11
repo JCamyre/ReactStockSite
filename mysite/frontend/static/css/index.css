@@ -4,6 +4,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: rgb(123, 71, 253);
+  color: rgba(255, 255, 255);
 }
 
 #main {
