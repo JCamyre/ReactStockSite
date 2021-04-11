@@ -51,7 +51,7 @@ export default function Home() {
                     {/* How to increase size of button? */}
                     <Button color='primary' variant='contained' to='/create' component={ Link } 
                     onClick={() => {
-                        stockButtonPressed(value, history, setError)
+                        stockButtonPressed(value, history, setError, value)
                     }}>
                         Information （{value})
                     </Button>
@@ -62,7 +62,7 @@ export default function Home() {
 }
 // Handle routing with react-router. We want to route to the localhost:8000/api/view-stock to GET the stock information we need to display localhost:8000/stock/TSM
 // onPush, can I pass in {value} myself? Or have to access somehow.
-function stockButtonPressed(ticker, history, setError) {
+function stockButtonPressed(ticker, history, setError, value) {
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -84,7 +84,6 @@ function stockButtonPressed(ticker, history, setError) {
         }
     }).catch((error) => {
         console.log(error);
-        console.log('Bruh what happened');
     });
 }
 
