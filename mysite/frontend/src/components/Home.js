@@ -3,12 +3,42 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { TextField } from '@material-ui/core';
 import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import { makeStyles } from '@material-ui/core/styles';
 
-
-// const allTickers = [
-//     { ticker: 'TSM', price: 45 },
-//     { ticker: 'NOK', price: 4 },    
-// ]
+// Add styles to Autocomplete component
+const useStyles = makeStyles((theme) => ({
+    root: {
+        "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
+            transform: 'translate(34px, 20px) scale(1);'
+        }
+    },
+    inputRoot: {
+        color: 'white',
+        '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+            // Default left padding is 6px
+            paddingLeft: 26
+        },
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "white"
+    },
+    "&:hover .MuiOutlinedInput-notchedOutline": {
+        borderColor: "white"
+    },
+    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        borderColor: "white"
+    },
+    option: {
+        '&[data-focus="true"]': {
+            backgroundColor: '#F8F8F8',
+            borderColor: 'transparent'
+        },
+        '&[aria-selected="true"]': {
+            backgroundColor: theme.palette.grey.A200,
+            borderColor: 'transparent',
+        }
+    }
+}));
 
 const allTickers = ['TSM', 'NOK'];
 
@@ -25,6 +55,8 @@ export default function Home() {
 
     const history = useHistory();
 
+    const classes = useStyles();
+
     return (
         <div>
             {/* Have to use {``} to write in javascript and display in HTML */}
@@ -37,6 +69,7 @@ export default function Home() {
                     </Typography>
                     <Autocomplete 
                     id='search-tickers'
+                    classes={classes}
                     value = {value}
                     onChange = {(event, newValue) => {
                         setValue(newValue);
@@ -70,7 +103,7 @@ function stockButtonPressed(ticker, history, setError, value) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             // will change to stock.ticker (since I want stocks to be dictionary)
-            // localhost:8000/stock?code=ticker takes place, so that in the views.py, I can access the user's POST request data
+            // localhost:8000/stock?ticker= takes place, so that in the views.py, I can access the user's POST request data
             ticker: ticker,
         }),
     };

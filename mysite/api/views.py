@@ -39,6 +39,7 @@ class StockView(generics.ListAPIView):
     # json_data = serializer_class(queryset). Idk how to pass context since api.views only for accessing information from database. 
 
 class FindStock(APIView):
+    # Since I have to convert serialize object to JSON to send it to React, have to automatically update every minute or so (Stock.update_stock)
     lookup_url_kwarg = 'ticker'
 
     def post(self, request, format=None):
@@ -56,9 +57,12 @@ class FindStock(APIView):
             stock_result = Stock.objects.filter(ticker=ticker)
             if len(stock_result) > 0: # If the stock exists
                 stock = stock_result[0]
+                print(stock)
                 # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
                 # I havew to make a session thing because self.requestion.session dictionary is how I "cache" information (such as what stock they are current looking for) for the current user on the website. 
-                self.request.session['stock_ticker'] = ticker 
+                self.request.session['stock_ticker'] = stock.ticker
+                print(stock)
+                self.request.session['stock_dd'] = stock.due_diligence() 
                 # Would have the session keep what stock you want to look at be best, or just write after you press search, get taken to /stock/TSMz
                 return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
 

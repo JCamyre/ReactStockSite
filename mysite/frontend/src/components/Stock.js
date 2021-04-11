@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 export default function Stock(props) {
     // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
     // Rn, props.match.params = {ticker: 'TSM'}
+    // I'm assuming props.match is referring to the route path that "matches" the requested path
     const ticker = props.match.params.ticker;
 
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>
-                    (Insert stock here)
+                    Stock: { ticker }
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
@@ -23,16 +24,23 @@ export default function Stock(props) {
         </Grid>
     );
 }
+// Goal: access attributes from Models
 
-function getRoomDetails(ticker) {
-    return fetch('/api/find-stock' + '?ticker=' + ticker)
-    .then((response) => {
-        // Get the response from fetching the following url and do stuff with it
-        if (!response.ok) {
-
-        }
-    })
-}
+// function getTickerDetails(ticker) {
+//     // getTickerDetails is how I can access the database from React? (due_diligence)
+//     // .then is if fetch() works,  then do this with the returned 'response' argument
+//     return fetch('/api/find-stock' + '?ticker=' + ticker)
+//     .then((response) => {
+//         // Get the response from fetching the following url and do stuff with it
+//         if (!response.ok) {
+//             history.push('/')
+//         }
+//         return response.json();
+//     })
+//     .then((data) => {
+//         const [ticker, setTicker] = data.ticker,
+//     });
+// }
 
 // export default class Stock extends Component {
 //     constructor(props) {
