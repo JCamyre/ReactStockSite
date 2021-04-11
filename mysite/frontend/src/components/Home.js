@@ -79,7 +79,7 @@ function stockButtonPressed(ticker, history, setError, value) {
     fetch("/api/find-stock", requestOptions) // Getting 403 error
     .then((response) => {
         if (response.ok) {
-            // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (redirects them to localhost:8000/stock/TSM)
+            // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (only paths for components? redirects them to localhost:8000/stock/TSM)
             history.push(`/stock/${value}`);
         } else {
             setError('Stock not found.');

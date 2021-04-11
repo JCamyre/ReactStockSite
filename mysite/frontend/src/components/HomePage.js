@@ -14,6 +14,7 @@ export default function HomePage() {
                 </Switch>
             </Router>      
     );
+    // with /stock/:ticker, we can access 'ticker' in Stock.js
 }
 
 // export default class HomePage extends Component {

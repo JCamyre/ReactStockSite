@@ -3,8 +3,11 @@ import { Grid, Button, Typography, IconButton } from '@material-ui/core';
 import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 
-export default function Stock() {
-    const ticker = '';
+export default function Stock(props) {
+    // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
+    // Rn, props.match.params = {ticker: 'TSM'}
+    const ticker = props.match.params.ticker;
+
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
@@ -19,6 +22,16 @@ export default function Stock() {
             </Grid>
         </Grid>
     );
+}
+
+function getRoomDetails(ticker) {
+    return fetch('/api/find-stock' + '?ticker=' + ticker)
+    .then((response) => {
+        // Get the response from fetching the following url and do stuff with it
+        if (!response.ok) {
+
+        }
+    })
 }
 
 // export default class Stock extends Component {
