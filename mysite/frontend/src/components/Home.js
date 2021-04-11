@@ -27,12 +27,14 @@ export default function Home() {
 
     return (
         <div>
-            <h1>Homepage</h1>
             {/* Have to use {``} to write in javascript and display in HTML */}
             {/* If value is not null, display value, otherwise null */}
             <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
+                    <Typography component='h4' variant='h4'>
+                        Homepage
+                    </Typography>
                     <Autocomplete 
                     id='search-tickers'
                     value = {value}
