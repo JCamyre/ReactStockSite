@@ -42,6 +42,10 @@ class FindStock(APIView):
     lookup_url_kwarg = 'ticker'
 
     def post(self, request, format=None):
+        # Check to see if user already has an existing session key
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
+        
         # Get the value of ticker (lookup_url_kwarg) from the POST request from the user. 
         ticker = request.data.get(self.lookup_url_kwarg)
 
@@ -50,6 +54,7 @@ class FindStock(APIView):
             if len(stock_result) > 0: # If the stock exists
                 stock = stock_result[0]
                 # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
+                # I havew to make a session thing because self.requestion.session dictionary is how I "cache" information (such as what stock they are current looking for) for the current user on the website. 
                 self.request.session['stock_ticker'] = ticker 
                 return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
 

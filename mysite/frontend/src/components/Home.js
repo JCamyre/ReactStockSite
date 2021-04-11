@@ -30,7 +30,6 @@ export default function Home() {
             <h1>Homepage</h1>
             {/* Have to use {``} to write in javascript and display in HTML */}
             {/* If value is not null, display value, otherwise null */}
-            <div>{`value: ${value !== null ? `${value}` : 'null'}`}</div>
             <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
@@ -64,28 +63,29 @@ export default function Home() {
 // Handle routing with react-router. We want to route to the localhost:8000/api/view-stock to GET the stock information we need to display localhost:8000/stock/TSM
 // onPush, can I pass in {value} myself? Or have to access somehow.
 function stockButtonPressed(ticker, history, setError) {
+    console.log(ticker);
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            // will change to stock.ticker (since I want stocks to be dictionary)
-            // I think this is where the localhost:8000/stock?code=ticker takes place
-            code: ticker,
-        }),
+        // body: JSON.stringify({
+        //     // will change to stock.ticker (since I want stocks to be dictionary)
+        //     // I think this is where the localhost:8000/stock?code=ticker takes place
+        //     code: ticker,
+        // }),
     };
     // The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. 
     // It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
-        fetch("/api/find-stock/", requestOptions) // Getting 403 error
-        .then((response) => {
-            if (response.ok) {
-                // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (redirects them to localhost:8000/stock/TSM)
-                history.push(`/stock/${value}`);
-            } else {
-                setError('Stock not found.');
-            }
-        }).catch((error) => {
-            console.log(error);
-            console.log('Bruh what happened');
-        });
+    fetch("/api/find-stock", requestOptions) // Getting 403 error
+    .then((response) => {
+        if (response.ok) {
+            // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (redirects them to localhost:8000/stock/TSM)
+            history.push(`/stock/${value}`);
+        } else {
+            setError('Stock not found.');
+        }
+    }).catch((error) => {
+        console.log(error);
+        console.log('Bruh what happened');
+    });
 }
 

@@ -3,3 +3,19 @@ npx create-react-app “[app_name_here]”, don't have to do the web-pack/Babel 
 Use django-admin instead of py manage.py?
 
 Update portfolio page, search results stock page, idk how to make User models (some special authentication), 
+
+If a page is not loading and the console is not saying a path/view can not be found, then probably an error in the .js files (which does not show an error, you have to find it manually)
+
+./frontend "npm i"
+
+Inspect element, then check console to debug Javascript code
+
+If you debug, and it doesn't work, then shift + f5
+
+Each of the .js is considered a "component", which can update and reload instantly when information is updated/changed. Different widgets in each 
+component. 
+
+Ｄｏ　Ｉ　ｎｅｅｄ　＂ｊｏｉｎｓｔｏｃｋ＂　page? I think I do: localhost:8000/view/query?=TSM, and then I would be taken to localhost:8000/stock/TSM. 
+
+A personal portfolio site, redoing the educational site
+

@@ -6,6 +6,6 @@ from .views import index
 urlpatterns = [
     path('', index),
     path('create', index),
-    path('stock/<str:slug>', index),
+    path('stock/<str:ticker>', index), # Maybe change back to 'stock/<str:slug>'
     path('portfolio/<int:pk>', index),
 ]
