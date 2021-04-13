@@ -61,8 +61,9 @@ class FindStock(APIView):
                 # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
                 # I havew to make a session thing because self.requestion.session dictionary is how I "cache" information (such as what stock they are current looking for) for the current user on the website. 
                 self.request.session['stock_ticker'] = stock.ticker
-                print(stock)
-                self.request.session['stock_dd'] = stock.due_diligence() 
+                print(stock.due_diligence())
+                # Have to make due_diligence output JSON serializable. 
+                # self.request.session['stock_dd'] = stock.due_diligence() 
                 # Would have the session keep what stock you want to look at be best, or just write after you press search, get taken to /stock/TSMz
                 return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
 

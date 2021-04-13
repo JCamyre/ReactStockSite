@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Add styles to Autocomplete component
+// https://material-ui.com/api/autocomplete/, can use index.css
 const useStyles = makeStyles((theme) => ({
     root: {
         "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+// How to access database from React JS code. https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
 const allTickers = ['TSM', 'NOK'];
 
 export default function Home() {
