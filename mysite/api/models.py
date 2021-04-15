@@ -31,12 +31,14 @@ class Stock(Model):
     ticker = CharField(max_length=5)
     slug = SlugField(max_length=5, default=ticker)
 
-    def due_diligence(self): # Is this better than a variable named due_diligence = lambda _: stock_obj.due_diligence()
-        stock_obj = py_trd.Stock(self.ticker)
-        return stock_obj.due_diligence()
+    # def due_diligence(self): # Is this better than a variable named due_diligence = lambda _: stock_obj.due_diligence()
+    #     stock_obj = py_trd.Stock(self.ticker)
+    #     return stock_obj.due_diligence()
+    
+    # due_diligence = due_diligence
 
     def __str__(self):
-        return '$' + self.ticker
+        return self.ticker
 
 # Methods
 def add_stocks(): # Only run if you need to reset the Stock objects
@@ -51,7 +53,7 @@ def add_stocks(): # Only run if you need to reset the Stock objects
 
 def delete_all_stocks():
     Stock.objects.all().delete()
-
+    
 def delete_duplicate_stocks():
     all_stocks = Stock.objects.all()
     unique_tickers = set([stock.ticker for stock in all_stocks])

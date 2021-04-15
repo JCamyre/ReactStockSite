@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
-from .models import Portfolio, Stock
+from .models import Portfolio, Stock, delete_all_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
+import py_trading
 
 # So the frontend.views handles the rendering of the index.html, which contains code for reactjs. 
 # Then api.views handles the backend/logic of the webpages. Specific views handles specific urls. 
@@ -34,14 +35,33 @@ class StockView(generics.ListAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     
+    print(Stock.objects.filter(ticker='TSM'))
+    
+    # print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0]).due_diligence())
+    
     # get_queryset modifies what objects to be returned for the view.
     # Idea for sending python data to javascript for the <Autocomplete />. 
     # json_data = serializer_class(queryset). Idk how to pass context since api.views only for accessing information from database. 
+    
+class GetStock(APIView):
+    serializer_class = StockSerializer
+    lookup_url_kwarg = 'ticker'
+
+    def get(self, request, format=None):
+        ticker = request.GET.get(self.lookup_url_kwarg)
+        if ticker != None:
+            stock = Stock.objects.filter(ticker=ticker)
+            if len(stock) > 0:
+                stock = stock[0]
+                # Have to have attribute for Stock models for the due_diligence information
+                due_diligence_data = py_trading.Stock(stock.ticker).due_diligence()
+                print(due_diligence_data)
+                
 
 class FindStock(APIView):
     # Since I have to convert serialize object to JSON to send it to React, have to automatically update every minute or so (Stock.update_stock)
     lookup_url_kwarg = 'ticker'
-
+    
     def post(self, request, format=None):
         # Check to see if user already has an existing session key
         if not self.request.session.exists(self.request.session.session_key):
@@ -51,17 +71,15 @@ class FindStock(APIView):
         # THIS IS THE ISSUE
         ticker = request.data.get(self.lookup_url_kwarg)
 
-        print(self.lookup_url_kwarg, request.data, ticker, 'from views.py')
+        print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
 
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
             if len(stock_result) > 0: # If the stock exists
                 stock = stock_result[0]
-                print(stock)
                 # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
                 # I havew to make a session thing because self.requestion.session dictionary is how I "cache" information (such as what stock they are current looking for) for the current user on the website. 
-                self.request.session['stock_ticker'] = stock.ticker
-                print(stock.due_diligence())
+                self.request.session['ticker'] = stock.ticker
                 # Have to make due_diligence output JSON serializable. 
                 # self.request.session['stock_dd'] = stock.due_diligence() 
                 # Would have the session keep what stock you want to look at be best, or just write after you press search, get taken to /stock/TSMz

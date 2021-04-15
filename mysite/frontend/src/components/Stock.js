@@ -29,7 +29,7 @@ export default function Stock(props) {
 // function getTickerDetails(ticker) {
 //     // getTickerDetails is how I can access the database from React? (due_diligence)
 //     // .then is if fetch() works,  then do this with the returned 'response' argument
-//     return fetch('/api/find-stock' + '?ticker=' + ticker)
+//     return fetch('/api/get-stock' + '?ticker=' + ticker)
 //     .then((response) => {
 //         // Get the response from fetching the following url and do stuff with it
 //         if (!response.ok) {
@@ -41,6 +41,10 @@ export default function Stock(props) {
 //         const [ticker, setTicker] = data.ticker,
 //     });
 // }
+
+// fetch('/api/stock/ticker').then((response) => ({
+
+// })
 
 // export default class Stock extends Component {
 //     constructor(props) {

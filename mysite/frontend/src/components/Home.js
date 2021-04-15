@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // How to access database from React JS code. https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-const allTickers = ['TSM', 'NOK'];
+const allTickers = ['TIC', 'NOK'];
 
 export default function Home() {
     // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 
@@ -79,7 +79,7 @@ export default function Home() {
                     // options={allTickers.map((stock) => stock.ticker)}
                     options={allTickers}
                     renderInput={(params) => (
-                        <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
+                        <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
                         )}
                     style={{ width: 300 }}
                     />
@@ -102,7 +102,10 @@ export default function Home() {
 function stockButtonPressed(ticker, history, setError, value) {
     const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCookie("csrftoken")
+        },
         body: JSON.stringify({
             // will change to stock.ticker (since I want stocks to be dictionary)
             // localhost:8000/stock?ticker= takes place, so that in the views.py, I can access the user's POST request data
@@ -111,7 +114,7 @@ function stockButtonPressed(ticker, history, setError, value) {
     };
     // The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. 
     // It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
-    fetch("/api/find-stock", requestOptions) // Getting 403 error
+    fetch("/api/find-stock", requestOptions) // Getting 403 error for all API POST requests...
     .then((response) => {
         if (response.ok) {
             // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (only paths for components? redirects them to localhost:8000/stock/TSM)
@@ -124,3 +127,18 @@ function stockButtonPressed(ticker, history, setError, value) {
     });
 }
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
