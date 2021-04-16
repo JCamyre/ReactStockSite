@@ -42,17 +42,18 @@ class Stock(Model):
 
 # Methods
 def add_stocks(): # Only run if you need to reset the Stock objects
-    # for ticker in get_nasdaq()['Ticker']:
-    # 	Stock.objects.create(ticker=ticker)
+    for ticker in get_nasdaq():
+    	Stock.objects.create(ticker=ticker, slug=ticker)
 
-    for ticker in get_nyse()['Code']:
-        Stock.objects.create(ticker=ticker[1:], slug=ticker[1:])
+    for ticker in get_nyse():
+        Stock.objects.create(ticker=ticker, slug=ticker)
 
 # Only run once to load all Stock objects.
 # add_stocks()
 
-def delete_all_stocks():
+def reset_stocks():
     Stock.objects.all().delete()
+    add_stocks()
     
 def delete_duplicate_stocks():
     all_stocks = Stock.objects.all()

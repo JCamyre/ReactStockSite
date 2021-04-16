@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // How to access database from React JS code. https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-const allTickers = ['TIC', 'NOK'];
+const allTickers = ['BYND', 'TSM'];
 
 export default function Home() {
     // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 

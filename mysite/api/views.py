@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
-from .models import Portfolio, Stock, delete_all_stocks
+from .models import Portfolio, Stock, reset_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
