@@ -35,9 +35,7 @@ class StockView(generics.ListAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     
-    print(Stock.objects.filter(ticker='TSM'))
-    
-    # print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0]).due_diligence())
+    print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0]).due_diligence())
     
     # get_queryset modifies what objects to be returned for the view.
     # Idea for sending python data to javascript for the <Autocomplete />. 
@@ -62,6 +60,8 @@ class FindStock(APIView):
     # Since I have to convert serialize object to JSON to send it to React, have to automatically update every minute or so (Stock.update_stock)
     lookup_url_kwarg = 'ticker'
     
+    reset_stocks()
+    
     def post(self, request, format=None):
         # Check to see if user already has an existing session key
         if not self.request.session.exists(self.request.session.session_key):
@@ -71,7 +71,7 @@ class FindStock(APIView):
         # THIS IS THE ISSUE
         ticker = request.data.get(self.lookup_url_kwarg)
 
-        print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
+        # print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
 
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
@@ -85,10 +85,8 @@ class FindStock(APIView):
                 # Would have the session keep what stock you want to look at be best, or just write after you press search, get taken to /stock/TSMz
                 return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
 
-            print('Bad Request 1')
             return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'}, status=status.HTTP_404_NOT_FOUND)
         
-        print('Bad Request 2 sup mf')
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
 

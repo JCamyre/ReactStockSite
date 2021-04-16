@@ -7,6 +7,7 @@ from .views import PortfolioView, CreatePortfolioView, UpdatePortfolioView, Stoc
 
 urlpatterns = [
     path('portfolio', PortfolioView.as_view()),
+    path('stock', StockView.as_view()), # Confused what to use StockView for. 
     path('find-stock', FindStock.as_view()),
     path('update-portfolio', UpdatePortfolioView.as_view()),
     path('get-stock', GetStock.as_view()),
