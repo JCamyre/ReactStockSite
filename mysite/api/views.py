@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
-from .models import Portfolio, Stock, reset_stocks
+from .models import Portfolio, Stock
+from .methods import reset_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
@@ -31,15 +32,12 @@ class CreatePortfolioView(APIView):
 class UpdatePortfolioView(APIView):
     pass 
 
-class StockView(generics.ListAPIView):
+class StockView(generics.ListAPIView): # A Specific stock's detailed info page with Due diligence
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     
-    print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0]).due_diligence())
+    print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).news_sentiments())
     
-    # get_queryset modifies what objects to be returned for the view.
-    # Idea for sending python data to javascript for the <Autocomplete />. 
-    # json_data = serializer_class(queryset). Idk how to pass context since api.views only for accessing information from database. 
     
 class GetStock(APIView):
     serializer_class = StockSerializer
@@ -59,9 +57,7 @@ class GetStock(APIView):
 class FindStock(APIView):
     # Since I have to convert serialize object to JSON to send it to React, have to automatically update every minute or so (Stock.update_stock)
     lookup_url_kwarg = 'ticker'
-    
-    reset_stocks()
-    
+      
     def post(self, request, format=None):
         # Check to see if user already has an existing session key
         if not self.request.session.exists(self.request.session.session_key):
