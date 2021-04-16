@@ -26,21 +26,21 @@ export default function Stock(props) {
 }
 // Goal: access attributes from Models
 
-// function getTickerDetails(ticker) {
-//     // getTickerDetails is how I can access the database from React? (due_diligence)
-//     // .then is if fetch() works,  then do this with the returned 'response' argument
-//     return fetch('/api/get-stock' + '?ticker=' + ticker)
-//     .then((response) => {
-//         // Get the response from fetching the following url and do stuff with it
-//         if (!response.ok) {
-//             history.push('/')
-//         }
-//         return response.json();
-//     })
-//     .then((data) => {
-//         const [ticker, setTicker] = data.ticker,
-//     });
-// }
+function getTickerDetails(ticker) {
+    // getTickerDetails is how I can access the database from React? (due_diligence)
+    // .then is if fetch() works,  then do this with the returned 'response' argument
+    return fetch('/api/get-stock' + '?ticker=' + ticker)
+    .then((response) => {
+        // Get the response from fetching the following url and do stuff with it
+        if (!response.ok) {
+            history.push('/')
+        }
+        return response.json();
+    })
+    .then((data) => {
+        const [ticker, setTicker] = useState(data.ticker),
+    });
+}
 
 // fetch('/api/stock/ticker').then((response) => ({
 

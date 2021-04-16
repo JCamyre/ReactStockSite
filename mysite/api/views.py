@@ -36,12 +36,12 @@ class StockView(generics.ListAPIView): # A Specific stock's detailed info page w
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     
-    print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).news_sentiments())
+    print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).financials())
     
     
 class GetStock(APIView):
     serializer_class = StockSerializer
-    lookup_url_kwarg = 'ticker'
+    lookup_url_kwarg = 'ticker' # localhost:8000/api/get-stock?ticker=TSM
 
     def get(self, request, format=None):
         ticker = request.GET.get(self.lookup_url_kwarg)
@@ -49,9 +49,14 @@ class GetStock(APIView):
             stock = Stock.objects.filter(ticker=ticker)
             if len(stock) > 0:
                 stock = stock[0]
+                data = StockSerializer(stock)
+                data['ticker'] = stock.ticker
                 # Have to have attribute for Stock models for the due_diligence information
-                due_diligence_data = py_trading.Stock(stock.ticker).due_diligence()
+                due_diligence_data = py_trading.Stock(Stock.objects.all().filter(ticker=stock.ticker)[0].ticker).financials()
                 print(due_diligence_data)
+                data['dd_data'] = due_diligence_data
+                
+                return Response(data, status=status.HTTP_200_OK)
                 
 
 class FindStock(APIView):
