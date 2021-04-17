@@ -9,6 +9,8 @@ export default function Stock(props) {
     // I'm assuming props.match is referring to the route path that "matches" the requested path
     const ticker = props.match.params.ticker;
 
+    getTickerDetails();
+
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
@@ -17,9 +19,21 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
+                <Button color='primary' variant='contained' onClick = {() => { 
+                    getTickerDetails(ticker)
+                }}>
+                    Get due diligence
+                </Button>
+            </Grid>
+            <Grid item xs={12} align='center'>
                 <Button color='secondary' variant='contained' to='/' component={Link}>
                     Back
                 </Button>
+            </Grid>
+            <Grid item xs={12} align='center'>
+                <Typography component='h4' variant='h4'>
+                    { due_diligence }
+                </Typography>
             </Grid>
         </Grid>
     );
@@ -30,46 +44,15 @@ function getTickerDetails(ticker) {
     // getTickerDetails is how I can access the database from React? (due_diligence)
     // .then is if fetch() works,  then do this with the returned 'response' argument
     return fetch('/api/get-stock' + '?ticker=' + ticker)
-    .then((response) => {
-        // Get the response from fetching the following url and do stuff with it
-        if (!response.ok) {
-            history.push('/')
-        }
-        return response.json();
-    })
-    .then((data) => {
-        const [ticker, setTicker] = useState(data.ticker),
-    });
+        .then((response) => {
+            // Get the response from fetching the following url and do stuff with it
+            if (!response.ok) {
+                history.push('/');
+            }
+            return response.json(); // .then((response.json()) => { }):
+        })
+        .then((data) => {
+            // const [ticker, setTicker] = React.useState(data.ticker),
+            const [due_diligence, setDD] = React.useState(data.dd_data);
+        });
 }
-
-// fetch('/api/stock/ticker').then((response) => ({
-
-// })
-
-// export default class Stock extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             stock: 'None',
-//         };
-//         // Get ticker after clicking stock link from search_results page. localhost:8000/stock/TSM. this.ticker = TSM
-//         this.ticker = this.props.match.params.roomCode;
-
-//     }
-
-//     render() {
-//         return (
-//             <p>Yo</p>
-//         )
-//     }
-
-//     getStockDetails() {
-//         fetch('/api/get-stock' + '?ticker=' + this.ticker)
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 this.setState({
-//                     stock: data.stock,
-//                 })
-//             });
-//         }
-// }
