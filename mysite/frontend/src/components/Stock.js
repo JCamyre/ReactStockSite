@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Button, Typography, IconButton } from '@material-ui/core';
 import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 export default function Stock(props) {
     // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
     // Rn, props.match.params = {ticker: 'TSM'}
     // I'm assuming props.match is referring to the route path that "matches" the requested path
     const ticker = props.match.params.ticker;
+
+    const [due_diligence, setDD] = React.useState('');
+
+    const history = useHistory(); // Allows us to go back to a previous webpage. 
 
     getTickerDetails();
 
@@ -19,9 +24,7 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Button color='primary' variant='contained' onClick = {() => { 
-                    getTickerDetails(ticker)
-                }}>
+                <Button color='primary' variant='contained' onClick = {() => getTickerDetails(ticker, history, setDD) }>
                     Get due diligence
                 </Button>
             </Grid>
@@ -40,7 +43,7 @@ export default function Stock(props) {
 }
 // Goal: access attributes from Models
 
-function getTickerDetails(ticker) {
+function getTickerDetails(ticker, history, setDD) { 
     // getTickerDetails is how I can access the database from React? (due_diligence)
     // .then is if fetch() works,  then do this with the returned 'response' argument
     return fetch('/api/get-stock' + '?ticker=' + ticker)
@@ -53,6 +56,6 @@ function getTickerDetails(ticker) {
         })
         .then((data) => {
             // const [ticker, setTicker] = React.useState(data.ticker),
-            const [due_diligence, setDD] = React.useState(data.dd_data);
+            setDD(data.dd_data);
         });
 }

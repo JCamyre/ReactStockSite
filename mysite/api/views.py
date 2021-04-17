@@ -49,7 +49,7 @@ class GetStock(APIView):
             stock = Stock.objects.filter(ticker=ticker)
             if len(stock) > 0:
                 stock = stock[0]
-                data = StockSerializer(stock)
+                data = StockSerializer(stock).data
                 data['ticker'] = stock.ticker
                 # Have to have attribute for Stock models for the due_diligence information
                 due_diligence_data = py_trading.Stock(Stock.objects.all().filter(ticker=stock.ticker)[0].ticker).financials()
@@ -57,6 +57,7 @@ class GetStock(APIView):
                 data['dd_data'] = due_diligence_data
                 
                 return Response(data, status=status.HTTP_200_OK)
+            return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
                 
 
 class FindStock(APIView):
