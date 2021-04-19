@@ -8,11 +8,12 @@ export default function HomePage() {
     return (
             <Router>
                 <Switch>
+                    {/* All these paths are from frontend.urls */}
                     <Route exact path='/' component={Home} />
                     <Route path='/create' component={Stock} />
                     <Route path='/stock/:ticker' component={Stock} />
                 </Switch>
             </Router>      
     );
-    // with /stock/:ticker, we can access 'ticker' in Stock.js
+    // with /stock/:ticker, we can access the 'ticker' keyword in Stock.js
 }

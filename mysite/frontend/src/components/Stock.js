@@ -14,8 +14,6 @@ export default function Stock(props) {
 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
-    getTickerDetails();
-
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
@@ -55,7 +53,7 @@ function getTickerDetails(ticker, history, setDD) {
             return response.json(); // .then((response.json()) => { }):
         })
         .then((data) => {
-            // const [ticker, setTicker] = React.useState(data.ticker),
-            setDD(data.dd_data);
+            // setDD(data.dd_data);
+            console.log(data.dd_data);
         });
 }
