@@ -35,8 +35,8 @@ class UpdatePortfolioView(APIView):
 class StockView(generics.ListAPIView): # A Specific stock's detailed info page with Due diligence
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    
-    print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).financials())
+      
+    # print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).financials())
     
     
 class GetStock(APIView):
@@ -53,7 +53,7 @@ class GetStock(APIView):
                 data['ticker'] = stock.ticker
                 # Have to have attribute for Stock models for the due_diligence information
                 due_diligence_data = py_trading.Stock(Stock.objects.all().filter(ticker=stock.ticker)[0].ticker).financials()
-                print(due_diligence_data)
+                print(ticker, due_diligence_data)
                 data['dd_data'] = due_diligence_data
                 
                 return Response(data, status=status.HTTP_200_OK)
