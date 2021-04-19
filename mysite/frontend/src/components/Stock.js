@@ -53,7 +53,7 @@ function getTickerDetails(ticker, history, setDD) {
             return response.json(); // .then((response.json()) => { }):
         })
         .then((data) => {
-            // setDD(data.dd_data);
-            console.log(data.dd_data);
+            setDD(data.dd_keys);
+            console.log(data.dd_keys, data.dd_values);
         });
 }
