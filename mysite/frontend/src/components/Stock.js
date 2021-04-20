@@ -60,7 +60,7 @@ export default function Stock(props) {
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
-                <Typography component='h4' variant='h4'>
+                <Typography component='h2' variant='h2'>
                     Stock: { ticker }
                 </Typography>
             </Grid>
@@ -79,6 +79,7 @@ export default function Stock(props) {
                     {/* { due_diligence } */}
                 </Typography>
             </Grid>
+            <Grid item xs={12} align='center'>
             <table {...getTableProps()}>
                 <thead>
                         {
@@ -117,6 +118,7 @@ export default function Stock(props) {
                 </tr>
                 </tbody>
             </table>
+            </Grid>
         </Grid>
     );
 }
