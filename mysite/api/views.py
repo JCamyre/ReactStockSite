@@ -59,9 +59,9 @@ class GetStock(APIView):
                     data_dict[key] = val
                 keys, values = data_dict.keys(), data_dict.values()
                 print(keys, values)
-                data['dd_keys'] = keys 
-                data['dd_values'] = values
-                
+                data['keys'] = keys 
+                data['vals'] = values
+                # data['data_dict'] = data_dict
                 return Response(data, status=status.HTTP_200_OK)
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
                 

@@ -29,17 +29,18 @@ export default function Stock(props) {
     const columns = useMemo(
         () => [
             {
-                Header: 'Column 1',
+                Header: 'Keys',
                 accessor: 'yocol1'
             },
             {
-                Header: 'Column 2',
+                Header: 'Values',
                 accessor: 'yocol2'
             },
         ],
         []
     );
 
+    // const tableInstance = React.useState('');
     const tableInstance = useTable({ 
         columns, 
         data: tableData // Have to do data: tableData, can't just have plain tableData
@@ -53,8 +54,27 @@ export default function Stock(props) {
         prepareRow,
     } = tableInstance 
 
+
+
     // const [due_diligence, setData] = React.useState(tableData);
 
+    // const table, setTable = React.useState('');
+
+
+    // function due_diligence() {
+    //     data.keys, data.values
+    //     const tableData = useMemo(() => [
+        
+    //     ]
+    // }
+    // List of dictionaries
+    const myMap = new Map();
+    // myMap.put('Key', item)
+    const dummyKeys = ['Col 1', 'Col 2', 'Col 3', 'Col 4'];
+    const dummyVals = ['Value 1', 'Value 2', 'Value 3', 'Value 4'];
+    dummyKeys.forEach((item, index) => myMap.set(item, dummyVals[index]));
+    console.log(myMap);
+    
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
     return (
@@ -65,7 +85,7 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Button color='primary' variant='contained' onClick = {() => getTickerDetails(ticker, history, setData) }>
+                <Button color='primary' variant='contained' onClick = {() => getTickerDetails(ticker, history, '') }>
                     Get due diligence
                 </Button>
             </Grid>
@@ -136,7 +156,42 @@ function getTickerDetails(ticker, history, setData) {
             return response.json(); 
         })
         .then((data) => { // data == response.json()
-            setData(data.dd_keys);
-            console.log(data.dd_keys, data.dd_values);
+            // setData(data.dd_keys);
+            console.log(data.keys, data.vals);
+            // Loop through data.keys and data.vals and assign to tableData
+        //     const tableData = useMemo(
+        //         () => [
+        //             // {
+        //             //     yocol1: 'yo',
+        //             //     yocol2: 'yo2',
+        //             // },
+        //             // {
+        //             //     yocol1: 'yoagain',
+        //             //     yocol2: 'yoagain2',
+        //             // }
+        //         ],
+        //         []
+        //     );
+        
+        //     const columns = useMemo(
+        //         () => [
+        //             // {
+        //             //     Header: 'Column 1',
+        //             //     accessor: 'yocol1'
+        //             // },
+        //             // {
+        //             //     Header: 'Column 2',
+        //             //     accessor: 'yocol2'
+        //             // },
+        //         ],
+        //         []
+        //     );
         });
+        // renderTable();
 }
+
+// function renderTable() {
+//     return (
+
+//     )
+// }
