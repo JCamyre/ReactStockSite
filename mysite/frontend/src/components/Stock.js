@@ -67,18 +67,6 @@ export default function Stock(props) {
         
     //     ]
     // }
-    // List of dictionaries
-    const arr = [];
-    // myMap.put('Key', item)
-    const dummyKeys = ['P/E', 'Market Cap', '52w lows', 'ATH'];
-    const dummyVals = ['29.5', '8.31 b', '4.50', '461'];
-    dummyKeys.forEach((item, index) => {
-        const tempDict = {};
-        tempDict['Col 1'] = item;
-        tempDict['Col 2'] = dummyVals[index];
-        arr.push(tempDict);
-    });
-    console.log(arr);
     
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
@@ -159,7 +147,16 @@ function getTickerDetails(ticker, history, setData) {
         })
         .then((data) => { // data == response.json()
             // setData(data.dd_keys);
+            const arr = [];
+            data.keys.forEach((item, index) => {
+                const tempDict = {};
+                tempDict['Col 1'] = item;
+                tempDict['Col 2'] = data.vals[index];
+                arr.push(tempDict);
+            });
+            console.log(arr);
             console.log(data.keys, data.vals);
+
             // Loop through data.keys and data.vals and assign to tableData
         //     const tableData = useMemo(
         //         () => [
