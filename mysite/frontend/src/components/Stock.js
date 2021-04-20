@@ -147,45 +147,52 @@ function getTickerDetails(ticker, history, setData) {
         })
         .then((data) => { // data == response.json()
             // setData(data.dd_keys);
-            const arr = [];
+            const tableData = [];
             data.keys.forEach((item, index) => {
                 const tempDict = {};
                 tempDict['Col 1'] = item;
                 tempDict['Col 2'] = data.vals[index];
-                arr.push(tempDict);
+                tableData.push(tempDict);
             });
-            console.log(arr);
+            console.log(tableData);
             console.log(data.keys, data.vals);
 
             // Loop through data.keys and data.vals and assign to tableData
-        //     const tableData = useMemo(
-        //         () => [
-        //             // {
-        //             //     yocol1: 'yo',
-        //             //     yocol2: 'yo2',
-        //             // },
-        //             // {
-        //             //     yocol1: 'yoagain',
-        //             //     yocol2: 'yoagain2',
-        //             // }
-        //         ],
-        //         []
-        //     );
+            const tableData = useMemo(
+                () => tableData,
+                []
+            );
+                
+            // Would like to make this dynamic, len(tableData[0]) is how many dictionaries for columns. 
+            const columns = useMemo(
+                () => [
+                    {
+                        Header: 'Column 1',
+                        accessor: 'Col 1'
+                    },
+                    {
+                        Header: 'Column 2',
+                        accessor: 'Col 2'
+                    },
+                ],
+                []
+            );
+            const tableInstance = useTable({ 
+                columns, 
+                data: tableData
+            })
         
-        //     const columns = useMemo(
-        //         () => [
-        //             // {
-        //             //     Header: 'Column 1',
-        //             //     accessor: 'yocol1'
-        //             // },
-        //             // {
-        //             //     Header: 'Column 2',
-        //             //     accessor: 'yocol2'
-        //             // },
-        //         ],
-        //         []
-        //     );
+            const {
+                getTableProps,
+                getTableBodyProps,
+                headerGroups,
+                rows,
+                prepareRow,
+            } = tableInstance 
+            
         });
+
+        
         // renderTable();
 }
 
