@@ -68,12 +68,17 @@ export default function Stock(props) {
     //     ]
     // }
     // List of dictionaries
-    const myMap = new Map();
+    const arr = [];
     // myMap.put('Key', item)
-    const dummyKeys = ['Col 1', 'Col 2', 'Col 3', 'Col 4'];
-    const dummyVals = ['Value 1', 'Value 2', 'Value 3', 'Value 4'];
-    dummyKeys.forEach((item, index) => myMap.set(item, dummyVals[index]));
-    console.log(myMap);
+    const dummyKeys = ['P/E', 'Market Cap', '52w lows', 'ATH'];
+    const dummyVals = ['29.5', '8.31 b', '4.50', '461'];
+    dummyKeys.forEach((item, index) => {
+        const tempDict = {};
+        tempDict['Col 1'] = item;
+        tempDict['Col 2'] = dummyVals[index];
+        arr.push(tempDict);
+    });
+    console.log(arr);
     
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
@@ -133,9 +138,6 @@ export default function Stock(props) {
                                 </tr>
                             )
                         })}
-                <tr>
-                    <td></td>
-                </tr>
                 </tbody>
             </table>
             </Grid>
