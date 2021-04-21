@@ -12,12 +12,10 @@ export default function Stock(props) {
     // I'm assuming props.match is referring to the route path that "matches" the requested path
     const ticker = props.match.params.ticker;
 
+
     // Saves data, so React doesn't perform logic everytime the webpage is loaded
-    const [tableData, setTableData] = React.useState('');
 
-    const [columns, setColumns] = React.useState('');
-
-    const [tableInstance, setTableInstance] = React.useState(''); 
+    tableInstance = getTickerDetails();
 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
@@ -39,14 +37,14 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                {/* <ReactTable tableInstance={tableInstance} /> */}
+                <ReactTable tableInstance={tableInstance} />
             </Grid>
         </Grid>
     );
 }
 // Goal: access attributes from Models
 
-function getTickerDetails(ticker, history, setTableData, setColumns, setTableInstance, columns, tableData) { 
+function getTickerDetails(ticker, history) { 
     // getTickerDetails is how I can access the database from React? (due_diligence)
     // .then is if fetch() works,  then do this with the returned 'response' argument
     return fetch('/api/get-stock' + '?ticker=' + ticker)
@@ -58,8 +56,7 @@ function getTickerDetails(ticker, history, setTableData, setColumns, setTableIns
             return response.json(); 
         })
         .then((data) => { // data == response.json()
-            // Placeholder data (until getTickerDetails ran)
-         
+       
             const jsonData = [];
             data.keys.forEach((item, index) => {
                 const tempDict = {};
@@ -68,12 +65,12 @@ function getTickerDetails(ticker, history, setTableData, setColumns, setTableIns
                 jsonData.push(tempDict);
             });
             console.log(jsonData);
-            setTableData(jsonData, setTableData, setColumns, setTableInstance, columns, tableData);
+            setTableData(jsonData);
         });
 }
 
 
-function setTableData(jsonData, setTableData, setColumns, setTableInstance, columns, tableData) {
+function setTableData(jsonData) {
             // Loop through data.keys and data.vals and assign to tableData
             tempTableData = useMemo(
                 () => jsonData,
@@ -94,16 +91,14 @@ function setTableData(jsonData, setTableData, setColumns, setTableInstance, colu
                 ],
                 []
             );
-            setTableData(tempTableData);
-            setColumns(tempColumns);
 
             const tempInstance = useTable({ 
-                columns, 
-                data: tableData
+                tempColumns, 
+                data: tempTableData
             });
 
             // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
 
-            setTableInstance(tempInstance);
+            return tempInstance;
 }
 
