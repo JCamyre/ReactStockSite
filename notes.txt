@@ -19,3 +19,7 @@ component.
 
 A personal portfolio site, redoing the educational site
 
+Axios to make requests to the API endpoints (api/find-stock) on the backend server (mysite/API).
+Django cors headers to allow resources from backend to be accessed on other domains, becareful not to leak private info
+
+Can split huge constances into separate .js files. Same for functionsdrea

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useTable } from 'react-table';
 
+
 export default function Stock(props) {
     // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
     // Rn, props.match.params = {ticker: 'TSM'}
@@ -12,62 +13,19 @@ export default function Stock(props) {
     const ticker = props.match.params.ticker;
 
     // Saves data, so React doesn't perform logic everytime the webpage is loaded
-    const tableData = useMemo(
-        () => [
-            {
-                yocol1: 'yo',
-                yocol2: 'yo2',
-            },
-            {
-                yocol1: 'yoagain',
-                yocol2: 'yoagain2',
-            }
-        ],
-        []
-    );
+    const [tableData, setTableData] = React.useState('');
 
-    const columns = useMemo(
-        () => [
-            {
-                Header: 'Keys',
-                accessor: 'yocol1'
-            },
-            {
-                Header: 'Values',
-                accessor: 'yocol2'
-            },
-        ],
-        []
-    );
+    const [columns, setColumns] = React.useState('');
 
-    // const tableInstance = React.useState('');
-    const tableInstance = useTable({ 
+    const tempInstance = useTable({ 
         columns, 
         data: tableData // Have to do data: tableData, can't just have plain tableData
-    })
+    });
 
-    const { // I think this is like a, b, c = list.split(), but with methods
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = tableInstance 
+    const [tableInstance, setTableInstance] = React.useState(tempInstance); 
 
-
-
-    // const [due_diligence, setData] = React.useState(tableData);
-
-    // const table, setTable = React.useState('');
-
-
-    // function due_diligence() {
-    //     data.keys, data.values
-    //     const tableData = useMemo(() => [
-        
-    //     ]
-    // }
-    
+    const [ddData, setddData] = React.useState(null);
+ 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
     return (
@@ -93,48 +51,14 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-            <table {...getTableProps()}>
-                <thead>
-                        {
-                        // loop through headerGroups, for each headerGroup, map the columns and render the 'Header' label for each column
-                        headerGroups.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {
-                                    headerGroup.headers.map(column => (
-                                        <th {...column.getHeaderProps()}>
-                                            { column.render('Header') }
-                                        </th>
-                                ))}
-                            </tr>
-                        ))}
-                </thead>
-                <tbody {...getTableBodyProps()}>
-                    {
-                        rows.map(row => {
-                            prepareRow(row)
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {
-                                        row.cells.map(cell => {
-                                            return (
-                                                <td {...cell.getCellProps()}>
-                                                    {
-                                                        cell.render('Cell')}
-                                                </td>
-                                            )
-                                        })}
-                                </tr>
-                            )
-                        })}
-                </tbody>
-            </table>
+            
             </Grid>
         </Grid>
     );
 }
 // Goal: access attributes from Models
 
-function getTickerDetails(ticker, history, setData) { 
+function getTickerDetails(ticker, history, setTableData, setColumns) { 
     // getTickerDetails is how I can access the database from React? (due_diligence)
     // .then is if fetch() works,  then do this with the returned 'response' argument
     return fetch('/api/get-stock' + '?ticker=' + ticker)
@@ -146,7 +70,8 @@ function getTickerDetails(ticker, history, setData) {
             return response.json(); 
         })
         .then((data) => { // data == response.json()
-            // setData(data.dd_keys);
+            // Placeholder data (until getTickerDetails ran)
+         
             const tableData = [];
             data.keys.forEach((item, index) => {
                 const tempDict = {};
@@ -158,13 +83,13 @@ function getTickerDetails(ticker, history, setData) {
             console.log(data.keys, data.vals);
 
             // Loop through data.keys and data.vals and assign to tableData
-            const tableData = useMemo(
+            tempTableData = useMemo(
                 () => tableData,
                 []
             );
                 
             // Would like to make this dynamic, len(tableData[0]) is how many dictionaries for columns. 
-            const columns = useMemo(
+            tempColumns = useMemo(
                 () => [
                     {
                         Header: 'Column 1',
@@ -177,27 +102,21 @@ function getTickerDetails(ticker, history, setData) {
                 ],
                 []
             );
-            const tableInstance = useTable({ 
+
+            const tempInstance = useTable({ 
                 columns, 
                 data: tableData
             })
+
+            // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
+            setTableData(tempTableData);
+            setColumns(tempColumns);
+            setTableInstance(tempInstance);
         
-            const {
-                getTableProps,
-                getTableBodyProps,
-                headerGroups,
-                rows,
-                prepareRow,
-            } = tableInstance 
-            
+
         });
 
         
         // renderTable();
 }
 
-// function renderTable() {
-//     return (
-
-//     )
-// }
