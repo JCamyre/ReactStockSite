@@ -36,7 +36,8 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Button color='primary' variant='contained' onClick = {() => getTickerDetails(ticker, history, '') }>
+                <Button color='primary' variant='contained' 
+                        onClick = {() => getTickerDetails(ticker, history, setTableData, setColumns, setTableInstance, columns, tableData) }>
                     Get due diligence
                 </Button>
             </Grid>
@@ -58,7 +59,7 @@ export default function Stock(props) {
 }
 // Goal: access attributes from Models
 
-function getTickerDetails(ticker, history, setTableData, setColumns) { 
+function getTickerDetails(ticker, history, setTableData, setColumns, setTableInstance, columns, tableData) { 
     // getTickerDetails is how I can access the database from React? (due_diligence)
     // .then is if fetch() works,  then do this with the returned 'response' argument
     return fetch('/api/get-stock' + '?ticker=' + ticker)
@@ -72,19 +73,23 @@ function getTickerDetails(ticker, history, setTableData, setColumns) {
         .then((data) => { // data == response.json()
             // Placeholder data (until getTickerDetails ran)
          
-            const tableData = [];
+            const jsonData = [];
             data.keys.forEach((item, index) => {
                 const tempDict = {};
                 tempDict['Col 1'] = item;
                 tempDict['Col 2'] = data.vals[index];
-                tableData.push(tempDict);
+                jsonData.push(tempDict);
             });
-            console.log(tableData);
-            console.log(data.keys, data.vals);
+            console.log(jsonData);
+            setTableData(jsonData, setTableData, setColumns, setTableInstance, columns, tableData);
+        });
+}
 
+
+function setTableData(jsonData, setTableData, setColumns, setTableInstance, columns, tableData) {
             // Loop through data.keys and data.vals and assign to tableData
             tempTableData = useMemo(
-                () => tableData,
+                () => jsonData,
                 []
             );
                 
@@ -102,21 +107,16 @@ function getTickerDetails(ticker, history, setTableData, setColumns) {
                 ],
                 []
             );
+            setTableData(tempTableData);
+            setColumns(tempColumns);
 
             const tempInstance = useTable({ 
                 columns, 
                 data: tableData
-            })
+            });
 
             // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
-            setTableData(tempTableData);
-            setColumns(tempColumns);
+
             setTableInstance(tempInstance);
-        
-
-        });
-
-        
-        // renderTable();
 }
 

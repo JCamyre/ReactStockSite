@@ -1,20 +1,11 @@
 import { useTable } from 'react-table';
 
-function ReactTable(columns, tableData, tableInstance) {
+function ReactTable(tableInstance) {
     // How to change amount of cols based on number of unique keys 
 
     if (json_data !== null) {
-
-
-
-        const tempInstance = useTable({ 
-            columns, 
-            data: tableData // Have to do data: tableData, can't just have plain tableData
-        });
     
-        setTableInstance();
-    
-        const { // I think this is like a, b, c = list.split(), but with methods
+          const { // I think this is like a, b, c = list.split(), but with methods
             getTableProps, // How to make this a React Hook?
             getTableBodyProps,
             headerGroups,
