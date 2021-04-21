@@ -4,7 +4,7 @@ import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useTable } from 'react-table';
-
+import ReactTable from './ReactTable.js'; // THE ISSUE WAS { ReactTable }. THAT'S WHY ALWAYS GOOGLE ERROR FIRST!!! 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.'
 
 export default function Stock(props) {
     // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
@@ -17,15 +17,8 @@ export default function Stock(props) {
 
     const [columns, setColumns] = React.useState('');
 
-    const tempInstance = useTable({ 
-        columns, 
-        data: tableData // Have to do data: tableData, can't just have plain tableData
-    });
+    const [tableInstance, setTableInstance] = React.useState(''); 
 
-    const [tableInstance, setTableInstance] = React.useState(tempInstance); 
-
-    const [ddData, setddData] = React.useState(null);
- 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
     return (
@@ -34,12 +27,6 @@ export default function Stock(props) {
                 <Typography component='h2' variant='h2'>
                     Stock: { ticker }
                 </Typography>
-            </Grid>
-            <Grid item xs={12} align='center'>
-                <Button color='primary' variant='contained' 
-                        onClick = {() => getTickerDetails(ticker, history, setTableData, setColumns, setTableInstance, columns, tableData) }>
-                    Get due diligence
-                </Button>
             </Grid>
             <Grid item xs={12} align='center'>
                 <Button color='secondary' variant='contained' to='/' component={Link}>
@@ -52,7 +39,7 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-            
+                {/* <ReactTable tableInstance={tableInstance} /> */}
             </Grid>
         </Grid>
     );
