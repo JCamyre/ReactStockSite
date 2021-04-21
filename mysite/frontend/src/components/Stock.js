@@ -12,10 +12,9 @@ export default function Stock(props) {
     // I'm assuming props.match is referring to the route path that "matches" the requested path
     const ticker = props.match.params.ticker;
 
-
     // Saves data, so React doesn't perform logic everytime the webpage is loaded
 
-    tableInstance = getTickerDetails();
+    const tableInstance = getTickerDetails();
 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
@@ -92,13 +91,13 @@ function setTableData(jsonData) {
                 []
             );
 
-            const tempInstance = useTable({ 
+            const tableInstance = useTable({ 
                 tempColumns, 
                 data: tempTableData
             });
 
             // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
 
-            return tempInstance;
+            return tableInstance;
 }
 
