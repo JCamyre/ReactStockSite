@@ -27,6 +27,8 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "react-router-dom": "^5.2.0",
-    "react-table": "^7.6.3"
+    "react-table": "^7.6.3",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   }
 }

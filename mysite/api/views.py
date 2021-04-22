@@ -56,12 +56,9 @@ class GetStock(APIView):
                 # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
                 data_dict = dict()
                 for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label']): # Value and Label columns are swapped smh
-                    data_dict[key] = val
-                keys, values = data_dict.keys(), data_dict.values()
-                print(keys, values)
-                data['keys'] = keys 
-                data['vals'] = values
-                # data['data_dict'] = data_dict
+                    data[key] = val
+                print(data)
+
                 return Response(data, status=status.HTTP_200_OK)
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
                 

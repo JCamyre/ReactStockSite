@@ -36,7 +36,7 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                <ReactTable tableInstance={tableInstance} />
+                {/* <ReactTable tableInstance={tableInstance} /> */}
             </Grid>
         </Grid>
     );
@@ -55,7 +55,7 @@ function getTickerDetails(ticker, history) {
             return response.json(); 
         })
         .then((data) => { // data == response.json()
-       
+            console.log('We have received data in getTickerDetails');
             const jsonData = [];
             data.keys.forEach((item, index) => {
                 const tempDict = {};
@@ -63,8 +63,13 @@ function getTickerDetails(ticker, history) {
                 tempDict['Col 2'] = data.vals[index];
                 jsonData.push(tempDict);
             });
-            console.log(jsonData);
+            console.log(jsonData[0]);
+            console.log(typeof jsonData[0]);
+            console.log(typeof {'Col 1': 2});
             setTableData(jsonData);
+        })
+        .catch(err => {
+            console.log('SHEEESH!!!!!!', err);
         });
 }
 
