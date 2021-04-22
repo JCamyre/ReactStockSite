@@ -4,8 +4,8 @@ import { useTable } from 'react-table';
 
 function ReactTable(tableInstance) {
     // How to change amount of cols based on number of unique keys 
-    console.log('We are in ReactTable');
-    console.log(tableInstance);
+    // console.log('We are in ReactTable');
+    // console.log(tableInstance);
     
     const { // I think this is like a, b, c = list.split(), but with methods
         getTableProps, // How to make this a React Hook?

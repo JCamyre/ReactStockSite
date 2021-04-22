@@ -14,9 +14,9 @@ export default function Stock(props) {
 
     // Saves data, so React doesn't perform logic everytime the webpage is loaded
 
-    const tableInstance = getTickerDetails();
-
     const history = useHistory(); // Allows us to go back to a previous webpage. 
+
+    const tableInstance = getTickerDetails(ticker, history);
 
     return (
         <Grid container spacing={1}>
@@ -75,6 +75,8 @@ function setTableData(jsonData) {
                 () => jsonData,
                 []
             );
+
+            console.log(tempTableData);
                 
             // Would like to make this dynamic, len(tableData[0]) is how many dictionaries for columns. 
             tempColumns = useMemo(
