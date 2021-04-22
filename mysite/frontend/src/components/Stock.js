@@ -16,7 +16,20 @@ export default function Stock(props) {
 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
-    const tableInstance = getTickerDetails(ticker, history);
+    const [data, setData] = useState([]);
+
+    // useEffect makes it so that we call the API only once React done rendering/loading
+    useEffect(() => {
+        (async () => {
+            fetch('/api/get-stock' + '?ticker=' + ticker)
+                .then((response) => response.json())
+                .then((data) => {
+                    setData(data);
+                 }) // hopefully this returns data
+            })();
+        }, []);
+
+    console.log(data);
 
     return (
         <Grid container spacing={1}>
@@ -43,35 +56,35 @@ export default function Stock(props) {
 }
 // Goal: access attributes from Models
 
-function getTickerDetails(ticker, history) { 
-    // getTickerDetails is how I can access the database from React? (due_diligence)
-    // .then is if fetch() works,  then do this with the returned 'response' argument
-    return fetch('/api/get-stock' + '?ticker=' + ticker)
-        .then((response) => { 
-            // Get the response from fetching the following url and do stuff with it
-            if (!response.ok) {
-                history.push('/');
-            }
-            return response.json(); 
-        })
-        .then((data) => { // data == response.json()
-            console.log('We have received data in getTickerDetails');
-            const jsonData = [];
-            data.keys.forEach((item, index) => {
-                const tempDict = {};
-                tempDict['Col 1'] = item;
-                tempDict['Col 2'] = data.vals[index];
-                jsonData.push(tempDict);
-            });
-            console.log(jsonData[0]);
-            console.log(typeof jsonData[0]);
-            console.log(typeof {'Col 1': 2});
-            setTableData(jsonData);
-        })
-        .catch(err => {
-            console.log('SHEEESH!!!!!!', err);
-        });
-}
+// function getTickerDetails(ticker, history) { 
+//     // getTickerDetails is how I can access the database from React? (due_diligence)
+//     // .then is if fetch() works,  then do this with the returned 'response' argument
+//     return fetch('/api/get-stock' + '?ticker=' + ticker)
+//         .then((response) => { 
+//             // Get the response from fetching the following url and do stuff with it
+//             if (!response.ok) {
+//                 history.push('/');
+//             }
+//             return response.json(); 
+//         })
+//         .then((data) => { // data == response.json()
+//             console.log('We have received data in getTickerDetails');
+//             const jsonData = [];
+//             data.keys.forEach((item, index) => {
+//                 const tempDict = {};
+//                 tempDict['Col 1'] = item;
+//                 tempDict['Col 2'] = data.vals[index];
+//                 jsonData.push(tempDict);
+//             });
+//             console.log(jsonData[0]);
+//             console.log(typeof jsonData[0]);
+//             console.log(typeof {'Col 1': 2});
+//             setTableData(jsonData);
+//         })
+//         .catch(err => {
+//             console.log('SHEEESH!!!!!!', err);
+//         });
+// }
 
 
 function setTableData(jsonData) {
