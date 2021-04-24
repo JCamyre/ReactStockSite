@@ -2,18 +2,22 @@ import React from 'react';
 import { useTable } from 'react-table';
 
 
-function ReactTable(tableInstance) {
+export default function Table({ columns, data }) {
     // How to change amount of cols based on number of unique keys 
-    console.log('We are in ReactTable');
-    console.log(tableInstance);
-    
-    const { // I think this is like a, b, c = list.split(), but with methods
+
+     const { // I think this is like a, b, c = list.split(), but with methods
         getTableProps, // How to make this a React Hook?
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
-    } = tableInstance 
+    } = useTable({
+        columns,
+        data
+    });
+    
+    // data has to be in [{}] form. Just a dictionary is not good enough. Has to be list(dict()). 
+    
 
     return (
         <table {...getTableProps()}>
@@ -33,8 +37,8 @@ function ReactTable(tableInstance) {
             </thead>
             <tbody {...getTableBodyProps()}>
                 {
-                    rows.map(row => {
-                        prepareRow(row)
+                    rows.map((row) => {
+                        prepareRow(row);
                         return (
                             <tr {...row.getRowProps()}>
                                 {
@@ -55,4 +59,3 @@ function ReactTable(tableInstance) {
 }
 
 
-export default ReactTable

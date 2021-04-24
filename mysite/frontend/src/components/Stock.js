@@ -4,7 +4,7 @@ import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { useTable } from 'react-table';
-import ReactTable from './ReactTable.js'; // THE ISSUE WAS { ReactTable }. THAT'S WHY ALWAYS GOOGLE ERROR FIRST!!! 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.'
+import Table from './Table.js'; // THE ISSUE WAS { Table }. THAT'S WHY ALWAYS GOOGLE ERROR FIRST!!! 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.'
 
 export default function Stock(props) {
     // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
@@ -25,11 +25,24 @@ export default function Stock(props) {
                 .then((response) => response.json())
                 .then((data) => {
                     setData(data);
-                 }) // hopefully this returns data
+                 })
             })();
         }, []);
 
-    console.log(data);
+    // Limit testing, probably not right. 
+
+    const columns = useMemo(
+        () => [
+            {
+                Header: 'Average Volume',
+                accessor: 'Avg Volume',
+            },
+            {
+                Header: 'Short Float',
+                accessor: 'Short Float',
+            }
+        ]
+    );
 
     return (
         <Grid container spacing={1}>
@@ -49,7 +62,8 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
-                {/* <ReactTable tableInstance={tableInstance} /> */}
+                {/* data={[data]} 200 IQ */}
+                <Table columns={columns} data={[data]} />
             </Grid>
         </Grid>
     );
@@ -87,37 +101,37 @@ export default function Stock(props) {
 // }
 
 
-function setTableData(jsonData) {
-            // Loop through data.keys and data.vals and assign to tableData
-            tempTableData = useMemo(
-                () => jsonData,
-                []
-            );
+// function setTableData(jsonData) {
+//             // Loop through data.keys and data.vals and assign to tableData
+//             tempTableData = useMemo(
+//                 () => jsonData,
+//                 []
+//             );
 
-            console.log(tempTableData);
+//             console.log(tempTableData);
                 
-            // Would like to make this dynamic, len(tableData[0]) is how many dictionaries for columns. 
-            tempColumns = useMemo(
-                () => [
-                    {
-                        Header: 'Column 1',
-                        accessor: 'Col 1'
-                    },
-                    {
-                        Header: 'Column 2',
-                        accessor: 'Col 2'
-                    },
-                ],
-                []
-            );
+//             // Would like to make this dynamic, len(tableData[0]) is how many dictionaries for columns. 
+//             tempColumns = useMemo(
+//                 () => [
+//                     {
+//                         Header: 'Column 1',
+//                         accessor: 'Col 1'
+//                     },
+//                     {
+//                         Header: 'Column 2',
+//                         accessor: 'Col 2'
+//                     },
+//                 ],
+//                 []
+//             );
 
-            const tableInstance = useTable({ 
-                tempColumns, 
-                data: tempTableData
-            });
+//             const tableInstance = useTable({ 
+//                 tempColumns, 
+//                 data: tempTableData
+//             });
 
-            // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
+//             // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
 
-            return tableInstance;
-}
+//             return tableInstance;
+// }
 
