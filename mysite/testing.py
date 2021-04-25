@@ -35,11 +35,13 @@ def r_and_d(ticker):
     soup = BeautifulSoup(request.text, 'lxml')
     tables = soup.find_all('table', {'class': 'histDataTable'})
     _pattern = re.compile(r'\d{1,3}\.\d{2}M')
+    all_dicts = []
     for table in tables:
         keys = [key.get_text() for key in table.find_all('td', {'class': 'col1'})]
         vals = [_find_match(_pattern, val.get_text()).group() for val in table.find_all('td', {'class': 'col2'})]
         data_dict = {key : val for key, val in zip(keys, vals)}
-        print(data_dict)
-        
+        all_dicts.append(data_dict)
+    print(all_dicts)
+            
         
 r_and_d('NIO')        

@@ -55,8 +55,7 @@ class GetStock(APIView):
                 due_diligence_data = py_trading.Stock(Stock.objects.all().filter(ticker=stock.ticker)[0].ticker).financials() # Should I convert to dictionary?
                 # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
                 data_dict = {key : val for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label'])} # Value and Label columns are swapped smh
-                data = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data.items()))
-                print(data)
+                data = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data_dict.items()))
                 
                 return Response(data, status=status.HTTP_200_OK)
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)

@@ -6,21 +6,21 @@ import { useHistory } from 'react-router';
 import { useTable } from 'react-table';
 import Table from './Table.js'; // THE ISSUE WAS { Table }. THAT'S WHY ALWAYS GOOGLE ERROR FIRST!!! 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.'
 
-const ShortF = ({ values }) => {
-    // Loop through the array and create a badge-like component instead of a comma-separated string
+// const ShortF = ({ values }) => {
+//     // Loop through the array and create a badge-like component instead of a comma-separated string
 
-    return (
-        <>
-            {values.map((shortfloat, idx) => {
-                return (
-                    <span key={idx} className='badge'>
-                        {shortfloat}
-                    </span>
-                );
-            })}
-        </>
-    );
-}
+//     return (
+//         <>
+//             {values.map((shortfloat, idx) => {
+//                 return (
+//                     <span key={idx} className='badge'>
+//                         {shortfloat}
+//                     </span>
+//                 );
+//             })}
+//         </>
+//     );
+// }
 
 export default function Stock(props) {
     // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
@@ -58,6 +58,7 @@ export default function Stock(props) {
                 accessor: 'Short Float',
                 // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
                 // Cell: ({ cell: { value } }) => <ShortF values={value} />
+                Cell: ({ cell: { value } }) => <h1>{value}</h1>
             }
         ]
     );
