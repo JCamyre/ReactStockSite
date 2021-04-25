@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { useTable } from 'react-table';
 import Table from './Table.js'; // THE ISSUE WAS { Table }. THAT'S WHY ALWAYS GOOGLE ERROR FIRST!!! 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined.'
 
+// Change color of stuff depending on high/low
 const ShortF = ({ value }) => {
     // Loop through the array and create a badge-like component instead of a comma-separated string
 
@@ -88,70 +89,3 @@ export default function Stock(props) {
         </Grid>
     );
 }
-// Goal: access attributes from Models
-
-// function getTickerDetails(ticker, history) { 
-//     // getTickerDetails is how I can access the database from React? (due_diligence)
-//     // .then is if fetch() works,  then do this with the returned 'response' argument
-//     return fetch('/api/get-stock' + '?ticker=' + ticker)
-//         .then((response) => { 
-//             // Get the response from fetching the following url and do stuff with it
-//             if (!response.ok) {
-//                 history.push('/');
-//             }
-//             return response.json(); 
-//         })
-//         .then((data) => { // data == response.json()
-//             console.log('We have received data in getTickerDetails');
-//             const jsonData = [];
-//             data.keys.forEach((item, index) => {
-//                 const tempDict = {};
-//                 tempDict['Col 1'] = item;
-//                 tempDict['Col 2'] = data.vals[index];
-//                 jsonData.push(tempDict);
-//             });
-//             console.log(jsonData[0]);
-//             console.log(typeof jsonData[0]);
-//             console.log(typeof {'Col 1': 2});
-//             setTableData(jsonData);
-//         })
-//         .catch(err => {
-//             console.log('SHEEESH!!!!!!', err);
-//         });
-// }
-
-
-// function setTableData(jsonData) {
-//             // Loop through data.keys and data.vals and assign to tableData
-//             tempTableData = useMemo(
-//                 () => jsonData,
-//                 []
-//             );
-
-//             console.log(tempTableData);
-                
-//             // Would like to make this dynamic, len(tableData[0]) is how many dictionaries for columns. 
-//             tempColumns = useMemo(
-//                 () => [
-//                     {
-//                         Header: 'Column 1',
-//                         accessor: 'Col 1'
-//                     },
-//                     {
-//                         Header: 'Column 2',
-//                         accessor: 'Col 2'
-//                     },
-//                 ],
-//                 []
-//             );
-
-//             const tableInstance = useTable({ 
-//                 tempColumns, 
-//                 data: tempTableData
-//             });
-
-//             // Once these hooks' values change (idk proper vocab), React will update, hopefully update <ReactTable />
-
-//             return tableInstance;
-// }
-
