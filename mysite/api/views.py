@@ -54,9 +54,7 @@ class GetStock(APIView):
                 # Have to have attribute for Stock models for the due_diligence information
                 due_diligence_data = py_trading.Stock(Stock.objects.all().filter(ticker=stock.ticker)[0].ticker).financials() # Should I convert to dictionary?
                 # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
-                data_dict = dict()
-                for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label']): # Value and Label columns are swapped smh
-                    data[key] = val
+                data_dict = {key : val for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label'])} # Value and Label columns are swapped smh
                 data = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data.items()))
                 print(data)
                 
