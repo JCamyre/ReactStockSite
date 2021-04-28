@@ -41,3 +41,9 @@ tr {
   line-height: 1.235;
   letter-spacing: 0.00735em;
 }
+
+.badge {
+  border-radius: 25px;
+  padding: 25px;
+  background: #FFD19B;  
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTable } from 'react-table';
 
-
+// Can I make so everytime I reference Table component, I can pass in data. Right now I can only have data for one table. 
 export default function Table({ columns, data }) {
     // How to change amount of cols based on number of unique keys 
 

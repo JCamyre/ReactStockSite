@@ -33,7 +33,9 @@ export default function Stock(props) {
 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
-    const [data, setData] = useState([]);
+    const [data1, setData1] = useState([]);
+    const [data2, setData2] = useState([]);
+    const [data3, setData3] = useState([]);
 
     // useEffect makes it so that we call the API only once React done rendering/loading
     useEffect(() => {
@@ -41,30 +43,20 @@ export default function Stock(props) {
             fetch('/api/get-stock' + '?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
-                    setData(data);
+                    // I think I can access different parts of json data like this: data['1'], data['2'], data['3']
+                    setData1(data['data1']);
                  })
             })();
         }, []);
 
-    // Limit testing, probably not right. 
+        // Limit testing, probably not right. 
+        
+    const [columns1, setColumns1] = useState([]);
+    const [columns2, setColumns2] = useState([]);
+    const [columns3, setColumns3] = useState([]);
 
-    const columns = useMemo(
-        () => [
-            {
-                Header: 'Average Volume',
-                accessor: 'Avg Volume',
-                Cell: ({ cell: { value } }) => <h1>{value}</h1>
-            },
-            {
-                Header: 'Short Float',
-                accessor: 'Short Float',
-                // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
-                Cell: ({ cell: { value } }) => <ShortF value={value} />
-                // Cell: ({ cell: { value } }) => <h2>{value}</h2>
-            }
-        ]
-    );
-
+    Table1();
+    
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
@@ -88,4 +80,23 @@ export default function Stock(props) {
             </Grid>
         </Grid>
     );
+}
+
+function Table1() {
+    setColumns1(useMemo(
+        () => [
+            {
+                Header: 'Average Volume',
+                accessor: 'Avg Volume',
+                Cell: ({ cell: { value } }) => <h1>{value}</h1>
+            },
+            {
+                Header: 'Short Float',
+                accessor: 'Short Float',
+                // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
+                Cell: ({ cell: { value } }) => <ShortF value={value} />
+                // Cell: ({ cell: { value } }) => <h2>{value}</h2>
+            }
+        ]
+    ));
 }
