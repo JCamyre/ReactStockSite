@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Grid, Button, Typography, IconButton } from '@material-ui/core';
 import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
@@ -45,18 +45,29 @@ export default function Stock(props) {
                 .then((data) => {
                     // I think I can access different parts of json data like this: data['1'], data['2'], data['3']
                     setData1(data['data1']);
+                    setData2(data['data2']);
+                    setData3(data['data3']);
                  })
             })();
         }, []);
 
         // Limit testing, probably not right. 
-        
+    console.log(data1, data2, data3);
+    
     const [columns1, setColumns1] = useState([]);
     const [columns2, setColumns2] = useState([]);
     const [columns3, setColumns3] = useState([]);
 
-    Table1();
+    // useEffect waits for page to render before performing logic. So idk what useMemo actually did for me when used to setColumns...
+    // "Remember that the function passed to useMemo runs during rendering. Don’t do anything there that you wouldn’t normally do while rendering. For example, side effects belong in useEffect, not useMemo."
+    // Memoization: optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again.
     
+    Table1(setColumns1);
+    
+    Table2(setColumns2);
+
+    Table3(setColumns3);
+        
     return (
         <Grid container spacing={1}>
             <Grid item xs={12} align='center'>
@@ -70,21 +81,21 @@ export default function Stock(props) {
                 </Button>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Typography component='h4' variant='h4'>
-                    {/* { due_diligence } */}
-                </Typography>
+                <Table columns={[columns1]} data={[data1]} />
             </Grid>
             <Grid item xs={12} align='center'>
-                {/* data={[data]} 200 IQ */}
-                <Table columns={columns} data={[data]} />
+                <Table columns={[columns2]} data={[data2]} />
             </Grid>
+            <Grid item xs={12} align='center'>
+                <Table columns={[columns3]} data={[data3]} />
+            </Grid>            
         </Grid>
     );
 }
 
-function Table1() {
-    setColumns1(useMemo(
-        () => [
+function Table1(setColumns) {
+    useEffect(() => { 
+        setColumns(
             {
                 Header: 'Average Volume',
                 accessor: 'Avg Volume',
@@ -97,6 +108,33 @@ function Table1() {
                 Cell: ({ cell: { value } }) => <ShortF value={value} />
                 // Cell: ({ cell: { value } }) => <h2>{value}</h2>
             }
-        ]
-    ));
+    )});  
+}
+
+function Table2(setColumns) {
+    useEffect(() => {
+        setColumns(
+            {
+                Header: 'The First Value',
+                accessor: 'Key 1',
+            },
+            {
+                Header: 'The Second Value',
+                accessor: 'Key 2'
+            }
+    )});
+}
+
+function Table3(setColumns) {
+    useEffect(() => {
+        setColumns(
+            {
+                Header: 'The Third Value',
+                accessor: 'Key 3',
+            },
+            {
+                Header: 'The Fourth Value',
+                accessor: 'Key 4',
+            }
+    )});
 }
