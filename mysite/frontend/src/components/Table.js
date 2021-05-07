@@ -5,7 +5,7 @@ import { useTable } from 'react-table';
 export default function Table({ columns, data }) {
     // How to change amount of cols based on number of unique keys 
 
-     const { // I think this is like a, b, c = list.split(), but with methods
+    const { // I think this is like a, b, c = list.split(), but with methods
         getTableProps, // How to make this a React Hook?
         getTableBodyProps,
         headerGroups,

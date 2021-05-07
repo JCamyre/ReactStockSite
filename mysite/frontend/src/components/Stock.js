@@ -33,40 +33,77 @@ export default function Stock(props) {
 
     const history = useHistory(); // Allows us to go back to a previous webpage. 
 
+    const [fetching, setFetching] = useState(true);
+
+    // set up dummy data, specific for each table
+    const columns1 = useMemo(() => [
+        {
+            id: 'avgvolume',
+            Header: 'Average Volume',
+            accessor: 'Avg Volume',
+            Cell: ({ cell: { value } }) => <h1>{value}</h1>
+        },
+        {
+            id: 'shortfloat',
+            Header: 'Short Float',
+            accessor: 'Short Float',
+            // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
+            Cell: ({ cell: { value } }) => <ShortF value={value} />
+            // Cell: ({ cell: { value } }) => <h2>{value}</h2>
+        }]);
+
     const [data1, setData1] = useState([]);
     const [data2, setData2] = useState([]);
     const [data3, setData3] = useState([]);
 
     // useEffect makes it so that we call the API only once React done rendering/loading
-    useEffect(() => {
-        (async () => {
+    // Maybe no useMemo() up here?
+    // What I think async () does: Tells the code in the brackets to only run when called. 
+    // Still idk why sometimes data doesn't get fetched
+    useEffect(() => { 
+        const fetchData = async () => {
             fetch('/api/get-stock' + '?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
                     // I think I can access different parts of json data like this: data['1'], data['2'], data['3']
-                    setData1(data['data1']);
-                    setData2(data['data2']);
-                    setData3(data['data3']);
-                 })
-            })();
-        }, []);
+                    // Why sometimes json data not received: useEffect() runs method only after page fully loads. The table component loads before page fully rendered,
+                    // therefore, the data was never setData(), so empty data array sent to table component, causing error.
+                    if (data !== null) {
+                        setData1(data['data1']);
+                        setData2(data['data2']);
+                        setData3(data['data3']);
+                        setFetching(false);
+                        console.log(data1, data2, data3, data);
+                    } else {
+                        console.log('WTF, Fetch bugged');
+                    }
+                    }, [])
+                .catch(e => {
+                    console.log(e);
+                    setFetching(false);
+            })};
+        fetchData();
+    }, []);
 
-        // Limit testing, probably not right. 
-    console.log(data1, data2, data3);
-    
-    const [columns1, setColumns1] = useState([]);
-    const [columns2, setColumns2] = useState([]);
-    const [columns3, setColumns3] = useState([]);
+    console.log(data1, data1['Short Float'], data1['Avg Volume']);
+
+    // const [columns1, setColumns1] = useState([]);
+    // const [columns2, setColumns2] = useState([]);
+    // const [columns3, setColumns3] = useState([]);
+
+
 
     // useEffect waits for page to render before performing logic. So idk what useMemo actually did for me when used to setColumns...
     // "Remember that the function passed to useMemo runs during rendering. Don’t do anything there that you wouldn’t normally do while rendering. For example, side effects belong in useEffect, not useMemo."
     // Memoization: optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again.
     
-    Table1(setColumns1);
+    // useEffect(() => {
+    //     Table1(setColumns1);
     
-    Table2(setColumns2);
-
-    Table3(setColumns3);
+    //     Table2(setColumns2);
+    
+    //     Table3(setColumns3);
+    // });
         
     return (
         <Grid container spacing={1}>
@@ -81,38 +118,47 @@ export default function Stock(props) {
                 </Button>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Table columns={[columns1]} data={[data1]} />
+                <Typography component='h3'>{ fetching ? 'Fetching data...' : ''}</Typography>
             </Grid>
             <Grid item xs={12} align='center'>
+                <Table columns={columns1} data={[data1]} />
+            </Grid>
+            {/* <Grid item xs={12} align='center'>
                 <Table columns={[columns2]} data={[data2]} />
             </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={[columns3]} data={[data3]} />
-            </Grid>            
+            </Grid>             */}
         </Grid>
     );
 }
 
+// Current issue, useEffect only runs after rendering, which is good cause the data from /api/ doesn't come until rendered. However, the ReactTable is returning nothing, which is a problem. 
+// function ReactTable(columns, data) {
+//     return <div>yo</div>
+//     useEffect(() => {
+//         return <Table columns={[columns]} data={[data]} />
+//     });
+// }   
+
 function Table1(setColumns) {
-    useEffect(() => { 
-        setColumns(
-            {
-                Header: 'Average Volume',
-                accessor: 'Avg Volume',
-                Cell: ({ cell: { value } }) => <h1>{value}</h1>
-            },
-            {
-                Header: 'Short Float',
-                accessor: 'Short Float',
-                // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
-                Cell: ({ cell: { value } }) => <ShortF value={value} />
-                // Cell: ({ cell: { value } }) => <h2>{value}</h2>
-            }
-    )});  
+    // got rid of useEffect()
+    setColumns(
+        {
+            Header: 'Average Volume',
+            accessor: 'Avg Volume',
+            Cell: ({ cell: { value } }) => <h1>{value}</h1>
+        },
+        {
+            Header: 'Short Float',
+            accessor: 'Short Float',
+            // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
+            Cell: ({ cell: { value } }) => <ShortF value={value} />
+            // Cell: ({ cell: { value } }) => <h2>{value}</h2>
+        });
 }
 
 function Table2(setColumns) {
-    useEffect(() => {
         setColumns(
             {
                 Header: 'The First Value',
@@ -122,12 +168,10 @@ function Table2(setColumns) {
                 Header: 'The Second Value',
                 accessor: 'Key 2'
             }
-    )});
-}
+        )};
 
 function Table3(setColumns) {
-    useEffect(() => {
-        setColumns(
+    setColumns(
             {
                 Header: 'The Third Value',
                 accessor: 'Key 3',
@@ -136,5 +180,4 @@ function Table3(setColumns) {
                 Header: 'The Fourth Value',
                 accessor: 'Key 4',
             }
-    )});
-}
+    )};
