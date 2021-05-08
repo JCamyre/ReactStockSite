@@ -70,6 +70,8 @@ export default function Stock(props) {
             Cell: ({ cell: { value } }) => <h5>${ value }</h5>
         }
     ]);
+
+    // One of the tutorials I was following said I could update information every 5 seconds, find it... good for up to date stock information
     
 
     const [data1, setData1] = useState([]);

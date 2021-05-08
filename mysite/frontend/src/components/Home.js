@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // How to access database from React JS code. https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-// const allTickers = ['BABA', 'BILI', 'DADA', 'JD', 'PDD', 'VIPS'];
-const allTickers = ['BYND', 'TSM'];
+const allTickers = ['BABA', 'BILI', 'DADA', 'JD', 'PDD', 'TSM', 'VIPS'];
+// const allTickers = ['BYND', 'TSM'];
 
 
 export default function Home() {

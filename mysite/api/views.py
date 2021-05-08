@@ -42,7 +42,7 @@ class StockView(generics.ListAPIView): # A Specific stock's detailed info page w
 class GetStock(APIView):
     serializer_class = StockSerializer
     lookup_url_kwarg = 'ticker' # localhost:8000/api/get-stock?ticker=TSM
-
+    
     def get(self, request, format=None):
         ticker = request.GET.get(self.lookup_url_kwarg)
         if ticker != None:
