@@ -53,23 +53,21 @@ export default function Stock(props) {
 
     const columns2 = useMemo(() => [
         {
-            Header: 'The First Value',
-            accessor: 'Key 1',
+            Header: 'Market Cap',
+            accessor: 'Market Cap',
         },
         {
-            Header: 'The Second Value',
-            accessor: 'Key 2'
+            Header: 'Forward P/E',
+            accessor: 'Forward P/E',
+            Cell: ({ cell: { value } }) => <h5>{ value } P/E</h5>
         }
     ]);
 
     const columns3 = useMemo(() => [
         {
-            Header: 'The Third Value',
-            accessor: 'Key 3',
-        },
-        {
-            Header: 'The Fourth Value',
-            accessor: 'Key 4',
+            Header: 'Price',
+            accessor: 'Price',
+            Cell: ({ cell: { value } }) => <h5>${ value }</h5>
         }
     ]);
     
@@ -140,16 +138,16 @@ export default function Stock(props) {
                 </Button>
             </Grid>
             <Grid item xs={12} align='center'>
-                <Typography component='h3'>{ fetching ? 'Fetching data...' : ''}</Typography>
+                <Typography component='h4' variant='h4'>{ fetching ? 'Fetching data...' : ''}</Typography>
             </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />
             </Grid>
             <Grid item xs={12} align='center'>
-                <Table columns={columns2} data={[data2]} />
+                <Table columns={columns2} data={[data1]} />
             </Grid>
             <Grid item xs={12} align='center'>
-                <Table columns={columns3} data={[data3]} />
+                <Table columns={columns3} data={[data1]} />
             </Grid>            
         </Grid>
     );
@@ -183,12 +181,12 @@ function Table1(setColumns) {
 function Table2(setColumns) {
         setColumns(
             {
-                Header: 'The First Value',
-                accessor: 'Key 1',
+                Header: 'Market Cap',
+                accessor: 'Market Cap',
             },
             {
-                Header: 'The Second Value',
-                accessor: 'Key 2'
+                Header: 'Forward P/E',
+                accessor: 'Forward P/E',
             }
         )};
 
