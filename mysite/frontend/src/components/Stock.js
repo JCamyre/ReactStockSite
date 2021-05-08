@@ -41,16 +41,38 @@ export default function Stock(props) {
             id: 'avgvolume',
             Header: 'Average Volume',
             accessor: 'Avg Volume',
-            Cell: ({ cell: { value } }) => <h1>{value}</h1>
+            // Cell: ({ cell: { value } }) => <h1>{value}</h1>
         },
         {
             id: 'shortfloat',
             Header: 'Short Float',
             accessor: 'Short Float',
             // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
-            Cell: ({ cell: { value } }) => <ShortF value={value} />
-            // Cell: ({ cell: { value } }) => <h2>{value}</h2>
+            // Cell: ({ cell: { value } }) => <ShortF value={value} />
         }]);
+
+    const columns2 = useMemo(() => [
+        {
+            Header: 'The First Value',
+            accessor: 'Key 1',
+        },
+        {
+            Header: 'The Second Value',
+            accessor: 'Key 2'
+        }
+    ]);
+
+    const columns3 = useMemo(() => [
+        {
+            Header: 'The Third Value',
+            accessor: 'Key 3',
+        },
+        {
+            Header: 'The Fourth Value',
+            accessor: 'Key 4',
+        }
+    ]);
+    
 
     const [data1, setData1] = useState([]);
     const [data2, setData2] = useState([]);
@@ -123,12 +145,12 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />
             </Grid>
-            {/* <Grid item xs={12} align='center'>
-                <Table columns={[columns2]} data={[data2]} />
+            <Grid item xs={12} align='center'>
+                <Table columns={columns2} data={[data2]} />
             </Grid>
             <Grid item xs={12} align='center'>
-                <Table columns={[columns3]} data={[data3]} />
-            </Grid>             */}
+                <Table columns={columns3} data={[data3]} />
+            </Grid>            
         </Grid>
     );
 }

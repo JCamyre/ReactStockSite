@@ -1,0 +1,25 @@
+export default function Stock {
+	const [data1, setData1] = React.useState([]);
+	const [data2, setData2] = React.useState([]);
+	const [data3, setData3] = React.useState([]);
+
+	return (
+		<Table data=data1 columns=columns1/>
+		<Table data=data2 columns=columns2/>
+		<Table data=data3 columns=columns3/>
+	);	
+}
+
+
+
+function Table1 (){
+	setData1();
+}
+
+function Table2() {
+	setData2();
+}
+
+function Table3() {
+	setData3();
+}

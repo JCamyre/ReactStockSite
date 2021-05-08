@@ -23,3 +23,10 @@ Axios to make requests to the API endpoints (api/find-stock) on the backend serv
 Django cors headers to allow resources from backend to be accessed on other domains, becareful not to leak private info
 
 Can split huge constances into separate .js files. Same for functionsdrea
+
+STILL HAVE TO FIX ISSUE WITH LOADING TICKERS: NONE OF MY CHINESE STOCKS ARE ON THE LIST?? True
+
+Get Stock graph data so I can put a cool graph up.
+
+Visuals are very important here.
+

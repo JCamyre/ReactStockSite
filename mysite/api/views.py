@@ -58,7 +58,7 @@ class GetStock(APIView):
                 # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
                 data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
                 data['data1'] = data_dict
-                data['data1'] = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data['data1'].items()))
+                # data['data1'] = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data['data1'].items()))
                 data['data2'] = {'Key 1': 'Value 1', 'Key 2': 'Value 2'}
                 data['data3'] = {'Key 3': 'Value 3', 'Key 4': 'Value 4'}
                 print(data)            
