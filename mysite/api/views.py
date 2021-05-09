@@ -101,9 +101,13 @@ class FindStock(APIView):
         
 class GetAllStocks(APIView):
     
-    def post(self, request, format=None):
-        all_stocks = Stock.objects.filter(ticker='TS')
-        data['all_stocks'] = all_stocks
+    def get(self, request, format=None):
+        all_stocks = Stock.objects.all()[:25]
+        all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
+        print(all_stocks)
+        data = {}
+        data['all_tickers'] = all_stocks
+        # Serializer for all stock objects?
         return Response(data, status=status.HTTP_200_OK)
         # What condition should I return Response(status=status.HTTP_404_NOT_FOUND)
 

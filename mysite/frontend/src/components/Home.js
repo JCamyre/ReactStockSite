@@ -51,16 +51,17 @@ export default function Home() {
 
     // Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class, so convenient!
     // "The useState Hook. A Hook is a special function that lets you “hook into” React features. For example, useState is a Hook that lets you add React state to function components.
-    const [alltickers, setAllTickers] = React.useState([]);
+    const [allTickers, setAllTickers] = React.useState([]);
+    const [value, setValue] = React.useState([]);
     const [fetching, setFetching] = React.useState(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const fetchData = async () => {
             fetch('/api/get-all-stocks')
                 .then((response) => response.json())
                 .then((data) => {
                     if (data!==null) {
-                        setAllTickers(data['all_tickers']);
+                        setAllTickers(data['all_tickers'].sort());
                         setFetching(false);
                     } else {
                         console.log('Something bugged while accessing API');
@@ -72,7 +73,9 @@ export default function Home() {
             })}
         fetchData();
     }, []);
-    
+
+    console.log(allTickers);
+ 
     // useState returns two values, the initial value of the state, and the function for updating the state variable
 
     const [error, setError] = React.useState('');
@@ -95,10 +98,10 @@ export default function Home() {
                     id='search-tickers'
                     classes={classes}
                     value = {value}
+                    // Don't get this "onChange" line
                     onChange = {(event, newValue) => {
                         setValue(newValue);
                     }}
-                    // options={allTickers.map((stock) => stock.ticker)}
                     options={allTickers}
                     renderInput={(params) => (
                         <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
@@ -114,6 +117,9 @@ export default function Home() {
                     }}>
                         Information （{value})
                     </Button>
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <Typography component='h3' variant='h3'>{ fetching ? 'Fetching...' : '' }</Typography>
                 </Grid>
             </Grid>        
         </div>
