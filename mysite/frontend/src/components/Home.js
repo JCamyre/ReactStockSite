@@ -42,9 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // How to access database from React JS code. https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-const allTickers = ['BABA', 'BILI', 'DADA', 'JD', 'PDD', 'TSM', 'VIPS'];
-// const allTickers = ['BYND', 'TSM'];
 
+const allTickers = ['BABA', 'BILI', 'DADA', 'JD', 'PDD', 'TSM', 'VIPS'].sort();
 
 export default function Home() {
     // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 
@@ -52,7 +51,28 @@ export default function Home() {
 
     // Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class, so convenient!
     // "The useState Hook. A Hook is a special function that lets you “hook into” React features. For example, useState is a Hook that lets you add React state to function components.
-    const [value, setValue] = React.useState(allTickers[0]);
+    const [alltickers, setAllTickers] = React.useState([]);
+    const [fetching, setFetching] = React.useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            fetch('/api/get-all-stocks')
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data!==null) {
+                        setAllTickers(data['all_tickers']);
+                        setFetching(false);
+                    } else {
+                        console.log('Something bugged while accessing API');
+                    }
+                }, [])
+            .catch(e => {
+                console.log(e);
+                setFetching(false);
+            })}
+        fetchData();
+    }, []);
+    
     // useState returns two values, the initial value of the state, and the function for updating the state variable
 
     const [error, setError] = React.useState('');

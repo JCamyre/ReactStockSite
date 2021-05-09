@@ -42,7 +42,7 @@ class StockView(generics.ListAPIView): # A Specific stock's detailed info page w
 class GetStock(APIView):
     serializer_class = StockSerializer
     lookup_url_kwarg = 'ticker' # localhost:8000/api/get-stock?ticker=TSM
-    
+      
     def get(self, request, format=None):
         ticker = request.GET.get(self.lookup_url_kwarg)
         if ticker != None:
@@ -99,5 +99,12 @@ class FindStock(APIView):
         
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
+class GetAllStocks(APIView):
+    
+    def post(self, request, format=None):
+        all_stocks = Stock.objects.filter(ticker='TS')
+        data['all_stocks'] = all_stocks
+        return Response(data, status=status.HTTP_200_OK)
+        # What condition should I return Response(status=status.HTTP_404_NOT_FOUND)
 
 

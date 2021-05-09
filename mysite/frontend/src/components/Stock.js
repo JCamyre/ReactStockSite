@@ -38,10 +38,9 @@ export default function Stock(props) {
     // set up dummy data, specific for each table
     const columns1 = useMemo(() => [
         {
-            id: 'avgvolume',
-            Header: 'Average Volume',
-            accessor: 'Avg Volume',
-            // Cell: ({ cell: { value } }) => <h1>{value}</h1>
+            Header: 'Price',
+            accessor: 'Price',
+            Cell: ({ cell: { value } }) => <h5>${ value }</h5>
         },
         {
             id: 'shortfloat',
@@ -65,9 +64,9 @@ export default function Stock(props) {
 
     const columns3 = useMemo(() => [
         {
-            Header: 'Price',
-            accessor: 'Price',
-            Cell: ({ cell: { value } }) => <h5>${ value }</h5>
+            id: 'avgvolume',
+            Header: 'Average Volume',
+            accessor: 'Avg Volume',
         }
     ]);
 
