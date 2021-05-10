@@ -41,10 +41,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-// How to access database from React JS code. https://www.digitalocean.com/community/tutorials/build-a-to-do-application-using-django-and-react
-
-const allTickers = ['BABA', 'BILI', 'DADA', 'JD', 'PDD', 'TSM', 'VIPS'].sort();
-
 export default function Home() {
     // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 
     // Change the 'state' of value (which is tied to the Autocomplete tag) to the value passed to it.
@@ -54,6 +50,7 @@ export default function Home() {
     const [allTickers, setAllTickers] = React.useState([]);
     const [value, setValue] = React.useState([]);
     const [fetching, setFetching] = React.useState(true);
+    const [cellHeightCache, setcellHeightCache] = React.useState();
 
     React.useEffect(() => {
         const fetchData = async () => {
@@ -74,10 +71,6 @@ export default function Home() {
         fetchData();
     }, []);
 
-    console.log(allTickers);
- 
-    // useState returns two values, the initial value of the state, and the function for updating the state variable
-
     const [error, setError] = React.useState('');
 
     const history = useHistory();
@@ -86,8 +79,6 @@ export default function Home() {
 
     return (
         <div>
-            {/* Have to use {``} to write in javascript and display in HTML */}
-            {/* If value is not null, display value, otherwise null */}
             <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
@@ -98,7 +89,7 @@ export default function Home() {
                     id='search-tickers'
                     classes={classes}
                     value = {value}
-                    // Don't get this "onChange" line
+                    // When you select a new value from Autocomplete list, setValue(newValue)
                     onChange = {(event, newValue) => {
                         setValue(newValue);
                     }}
@@ -132,10 +123,9 @@ function stockButtonPressed(ticker, history, setError, value) {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
-            "X-CSRFToken": getCookie("csrftoken")
+            // "X-CSRFToken": getCookie("csrftoken")
         },
         body: JSON.stringify({
-            // will change to stock.ticker (since I want stocks to be dictionary)
             // localhost:8000/stock?ticker= takes place, so that in the views.py, I can access the user's POST request data
             ticker: ticker,
         }),
@@ -161,7 +151,6 @@ function getCookie(name) {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
             if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;

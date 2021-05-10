@@ -19,6 +19,13 @@ def add_stocks(): # Only run if you need to reset the Stock objects
 def reset_stocks():
     Stock.objects.all().delete()
     add_stocks()
+    for stock in Stock.objects.all():
+        try:
+            print(py_trading.Stock(stock.ticker).financials(), stock.ticker)
+        except:
+            stock.delete()
+            print(stock.ticker + ' is bad')
+            
     
 def delete_duplicate_stocks():
     all_stocks = Stock.objects.all()

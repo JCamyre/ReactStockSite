@@ -52,19 +52,30 @@ class GetStock(APIView):
                 data = StockSerializer(stock).data
                 data['ticker'] = stock.ticker # Idk how to access data likes this
                 # Have to have attribute for Stock models for the due_diligence information
-                due_diligence_data = py_trading.Stock(Stock.objects.all().filter(ticker=stock.ticker)[0].ticker).financials() # Should I convert to dictionary?
-                # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
-                print(due_diligence_data[0])
-                # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
-                data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
-                data['data1'] = data_dict
-                # data['data1'] = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data['data1'].items()))
-                data['data2'] = {'Key 1': 'Value 1', 'Key 2': 'Value 2'}
-                data['data3'] = {'Key 3': 'Value 3', 'Key 4': 'Value 4'}
-                print(data)            
-                
-                # Have different tables of information: General info, financials, stuff for trading (short float, average volume, etc)
+                try:
+                    current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
+                    due_diligence_data = py_trading.Stock(current_stock).financials() # Should I convert to dictionary?
+                    # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
+                    print(due_diligence_data[0])
+                    # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
+                    data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
+                    data['data1'] = data_dict
+                    # data['data1'] = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data['data1'].items()))
+                    data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
+                    data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
+                    data['news'] = current_stock.news_sentiments()
+                    data['short_selling'] = current_stock.short_selling()
+                    data['put_call_ratio'] = current_stock.put_call_ratio()
+                    data['social_media'] = current_stock.social_media_sentiment()
+                    data['big_money'] = current_stock.big_money()
+                    
+                    print(data)            
+                except:
+                    return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
+                    # Have different tables of information: General info, financials, stuff for trading (short float, average volume, etc)
                 return Response(data, status=status.HTTP_200_OK)
+                
+            print('yo')
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
                 
 
@@ -100,9 +111,11 @@ class FindStock(APIView):
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
 class GetAllStocks(APIView):
-    
+      
+    # reset_stocks()
+     
     def get(self, request, format=None):
-        all_stocks = Stock.objects.all()[:25]
+        all_stocks = Stock.objects.all()[:100]
         all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
         print(all_stocks)
         data = {}
