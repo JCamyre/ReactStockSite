@@ -1,6 +1,7 @@
 from .models import Stock, Portfolio
 import py_trading
 from py_trading.download_tickers import get_nasdaq, get_nyse
+import concurrent.futures
 
 
 def add_stocks(): # Only run if you need to reset the Stock objects
@@ -16,12 +17,22 @@ def add_stocks(): # Only run if you need to reset the Stock objects
 
 # Only run once to load all Stock objects.
 
-def reset_stocks():
+def reset_stocks(n_threads):
     Stock.objects.all().delete()
     add_stocks()
-    for stock in Stock.objects.all():
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        results = [executor.submit(test_stocks, i, n_threads) for i in range(n_threads)] # Can try executor.map()
+        
+        for f in concurrent.futures.as_completed(results):
+            print(f.result())
+    
+def test_stocks(index_of_thread, num_of_threads): # Divide # of stocks per thread / total stocks to be tested. Index_of_thread is which thread from 0 to n threads.
+    n_stocks_per_thread = len(Stock.objects.all()) 
+    portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
+    
+    for stock in portion:
         try:
-            print(py_trading.Stock(stock.ticker).financials(), stock.ticker)
+            print(stock.ticker)
         except:
             stock.delete()
             print(stock.ticker + ' is bad')
