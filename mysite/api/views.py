@@ -111,9 +111,7 @@ class FindStock(APIView):
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
 class GetAllStocks(APIView):
-      
-    # reset_stocks()
-     
+         
     def get(self, request, format=None):
         all_stocks = Stock.objects.all()[:100]
         all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
