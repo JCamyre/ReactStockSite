@@ -4,9 +4,8 @@ import { TextField } from '@material-ui/core';
 import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
+import { List, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
 
-// Add styles to Autocomplete component
-// https://material-ui.com/api/autocomplete/, can use index.css
 const useStyles = makeStyles((theme) => ({
     root: {
         "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
@@ -42,16 +41,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Home() {
-    // I'm assuming React.useState() will accept initial value for the state "value" and creates a function called setValue, which will 
-    // Change the 'state' of value (which is tied to the Autocomplete tag) to the value passed to it.
-
-    // Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class, so convenient!
-    // "The useState Hook. A Hook is a special function that lets you “hook into” React features. For example, useState is a Hook that lets you add React state to function components.
+    // All variables with React state.
     const [allTickers, setAllTickers] = React.useState([]);
     const [value, setValue] = React.useState([]);
     const [fetching, setFetching] = React.useState(true);
-    const [cellHeightCache, setcellHeightCache] = React.useState();
 
+    const [cellHeightCache, setcellHeightCache] = React.useState(new CellMeasurerCache({
+        defaultHeight: 42,
+        fixedWidth: true
+    }));
+    const [searchingFor, setsearchingFor] = React.useState('');
+    const [onSelect, setonSelect] = React.useState('');
+    const [selection, setSelection] = React.useState('');
+    const [error, setError] = React.useState('');
+
+    // Other variables
+    const history = useHistory();
+    const classes = useStyles();
+
+    // Returns the full list of stocks from Django database from '/api/get-all-stocks' once React app finishes loading. 
     React.useEffect(() => {
         const fetchData = async () => {
             fetch('/api/get-all-stocks')
@@ -71,13 +79,63 @@ export default function Home() {
         fetchData();
     }, []);
 
-    const [error, setError] = React.useState('');
 
-    const history = useHistory();
+    setonSelect(item => setSelection(item));
 
-    const classes = useStyles();
+    const renderItem = (item) => {
+        return <div className='searchItem'>{item}</div>
+    }
+
+    const renderMenu = (items, _, autocompleteStyle) => {
+        cellHeightCache.clearAll();
+
+        const rowRenderer = ({key, index, parent, style}) => {
+            const Item = items[index]
+            const onMouseDown = e => {
+                if (e.button === 0) {
+                    Item.props.onClick(e);
+                }
+            }
+            return (
+                <CellMeasurer
+                    cache={cellHeightCache}
+                    key={key}
+                    parent={parent}
+                    rowIndex={index}
+                    >
+                        {React.cloneElement(Item, {
+                            style: style,
+                            key, key,
+                            onMouseEnter: null,
+                            onMouseDown: onMouseDown
+                        })}
+                </CellMeasurer>
+            )
+        }
+        return (
+            <List 
+                rowHeight = {cellHeightCache.rowHeight}
+                height={207}
+                rowCount = {items.length}
+                rowRenderer={rowRenderer}
+                width={autocompleteStyle.minWidth || 0}
+                style={{
+                    //...customStyles,
+                    height:'auto',
+                    maxHeight: '207px'
+                }}
+            />    
+        )
+    }
+
+    const searchTerm = searchingFor;
+    // Check our list of options to see if any matches our searchTerm. If there are none, set data to []. 
+    const data = searchTerm ? allTickers.filter(item => 
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        ) : []
 
     return (
+        
         <div>
             <br />
             <Grid container spacing={1}>
@@ -87,16 +145,20 @@ export default function Home() {
                     </Typography>
                     <Autocomplete 
                     id='search-tickers'
+                    items={data} // options = {data}
                     classes={classes}
-                    value = {value}
+                    value = {searchingFor}
+                    renderItem = {renderItem}
+                    renderMenu = {renderMenu}
+                    // getItemValue = { item => item.value }. Not needed for us since the ticker strings are in the array list
                     // When you select a new value from Autocomplete list, setValue(newValue)
-                    onChange = {(event, newValue) => {
+                    onChange = {(e, newValue) => {
                         setValue(newValue);
                     }}
-                    options={allTickers}
-                    renderInput={(params) => (
-                        <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
-                        )}
+                    onSelect = {onSelect}
+                    // renderInput={(params) => (
+                    //     <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
+                    //     )}
                     style={{ width: 300 }}
                     />
                 </Grid>
@@ -116,26 +178,20 @@ export default function Home() {
         </div>
     );
 }
-// Handle routing with react-router. We want to route to the localhost:8000/api/view-stock to GET the stock information we need to display localhost:8000/stock/TSM
-// onPush, can I pass in {value} myself? Or have to access somehow.
+
 function stockButtonPressed(ticker, history, setError, value) {
     const requestOptions = {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
-            // "X-CSRFToken": getCookie("csrftoken")
         },
         body: JSON.stringify({
-            // localhost:8000/stock?ticker= takes place, so that in the views.py, I can access the user's POST request data
             ticker: ticker,
         }),
     };
-    // The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. 
-    // It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
-    fetch("/api/find-stock", requestOptions) // Getting 403 error for all API POST requests...
+    fetch("/api/find-stock", requestOptions)
     .then((response) => {
         if (response.ok) {
-            // history.push pushes a new entry into the history stack, basically redirecting the user to a new route/path (only paths for components? redirects them to localhost:8000/stock/TSM)
             history.push(`/stock/${value}`);
         } else {
             setError('Stock not found.');
@@ -143,19 +199,4 @@ function stockButtonPressed(ticker, history, setError, value) {
     }).catch((error) => {
         console.log(error);
     });
-}
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
 }
