@@ -50,10 +50,11 @@ export default function Home() {
         defaultHeight: 42,
         fixedWidth: true
     }));
-    const [searchingFor, setsearchingFor] = React.useState('');
-    const [onSelect, setonSelect] = React.useState('');
+    const [searchingFor, setsearchingFor] = React.useState('HP');
+    // const [onSelect, setonSelect] = React.useState('');
     const [selection, setSelection] = React.useState('');
     const [error, setError] = React.useState('');
+    const [data, setData] = React.useState('');
 
     // Other variables
     const history = useHistory();
@@ -79,8 +80,7 @@ export default function Home() {
         fetchData();
     }, []);
 
-
-    setonSelect(item => setSelection(item));
+    const onSelect = (item) => setSelection(item);
 
     const renderItem = (item) => {
         return <div className='searchItem'>{item}</div>
@@ -130,9 +130,14 @@ export default function Home() {
 
     const searchTerm = searchingFor;
     // Check our list of options to see if any matches our searchTerm. If there are none, set data to []. 
-    const data = searchTerm ? allTickers.filter(item => 
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-        ) : []
+
+    React.useEffect(() => {
+        const tempdata = searchTerm ? allTickers.filter(item => 
+            // item.toLowerCase().includes(searchTerm.toLowerCase())
+            console.log(item.toLowerCase(), typeof(searchTerm))
+            ) : [];
+        setData(tempdata);
+    });
 
     return (
         
@@ -156,9 +161,10 @@ export default function Home() {
                         setValue(newValue);
                     }}
                     onSelect = {onSelect}
-                    // renderInput={(params) => (
-                    //     <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
-                    //     )}
+                    // Need renderInput for Autocomplete tag. 
+                    renderInput={(params) => (
+                        <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
+                        )}
                     style={{ width: 300 }}
                     />
                 </Grid>
