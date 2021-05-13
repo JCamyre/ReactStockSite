@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Table from './Table.js';
 
-// Change color of stuff depending on high/low
+// Change color of text depending on high/low
 const ShortF = ({ value }) => {
     // Loop through the array and create a badge-like component instead of a comma-separated string
 
@@ -19,37 +19,30 @@ const ShortF = ({ value }) => {
 }
 
 export default function Stock(props) {
-    // props argument is accepting the /stock/:ticker argument, which is from the value in Home.js/stockButtonPressed
+    // Variables to access the stock ticker for specific webpage and navigate to different webpages. 
     const ticker = props.match.params.ticker;
+    const history = useHistory();
 
-    const history = useHistory(); // Allows us to go back to a previous webpage. 
-
+    // React state variables
     const [fetching, setFetching] = useState(true);
-
     const [stockNotFound, setNotFound] = useState(false);
-  
-    const columns1 = Table1();
-
-    const columns2 = Table2();
-
-    const columns3 = Table3();
-
-    // One of the tutorials I was following said I could update information every 5 seconds, find it... good for up to date stock information
-
     const [data1, setData1] = useState([]);
     const [data2, setData2] = useState([]);
     const [data3, setData3] = useState([]);
 
-    // What I think async () does: Tells the code in the brackets to only run when called. 
-    // Still idk why sometimes data doesn't get fetched
+    // All columns for the different tables of data.
+    const columns1 = Table1();
+    const columns2 = Table2();
+    const columns3 = Table3();
+
+    // One of the tutorials I was following said I could update information every 5 seconds, find it... good for up to date stock information
+
+    // Once React is done rendering, receive the data for the specific Stock, which will be displayed with the tables. 
     useEffect(() => { 
         const fetchData = async () => {
             fetch('/api/get-stock' + '?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
-                    // I think I can access different parts of json data like this: data['1'], data['2'], data['3']
-                    // Why sometimes json data not received: useEffect() runs method only after page fully loads. The table component loads before page fully rendered,
-                    // therefore, the data was never setData(), so empty data array sent to table component, causing error.
                     if (data !== null) {
                         setData1(data['data1']);
                         setData2(data['data2']);
@@ -57,7 +50,7 @@ export default function Stock(props) {
                         setFetching(false);
                         console.log(data1, data2, data3, data);
                     } else {
-                        console.log('WTF, Fetch bugged');
+                        console.log('Fetch bugged');
                     }
                     }, [])
                 .catch(e => {
@@ -69,9 +62,6 @@ export default function Stock(props) {
     }, []);
 
     console.log(data1, data1['Short Float'], data1['Avg Volume']);
-
-    // useMemo() runs during rendering and memoizing a value (runs a complex function, caches value with specific arguments, can access if same args are used). Ex: the fetch() function for accessing stock API.
-    // useEffect() runs after all rendering.
 
     return (
         <Grid container spacing={1}>
@@ -113,8 +103,6 @@ function Table1() {
             id: 'shortfloat',
             Header: 'Short Float',
             accessor: 'Short Float',
-            // Pass in the custom ShortF component for each cell. Take value from cell, and pass it to <ShortF />
-            // Cell: ({ cell: { value } }) => <ShortF value={value} />
         }
     ]);
     return columns1

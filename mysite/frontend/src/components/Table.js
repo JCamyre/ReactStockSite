@@ -1,12 +1,11 @@
 import React from 'react';
 import { useTable } from 'react-table';
 
-// Can I make so everytime I reference Table component, I can pass in data. Right now I can only have data for one table. 
 export default function Table({ columns, data }) {
-    // How to change amount of cols based on number of unique keys 
 
-    const { // I think this is like a, b, c = list.split(), but with methods
-        getTableProps, // How to make this a React Hook?
+    // Extract all methods from useTable() method with our passed in columns and data arguments.
+    const {
+        getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
@@ -16,14 +15,13 @@ export default function Table({ columns, data }) {
         data
     });
     
-    // data has to be in [{}] form. Just a dictionary is not good enough. Has to be list(dict()). 
+    // data has to be in [{}] form. 
     
 
     return (
         <table {...getTableProps()}>
             <thead>
                     {
-                    // loop through headerGroups, for each headerGroup, map the columns and render the 'Header' label for each column
                     headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {
