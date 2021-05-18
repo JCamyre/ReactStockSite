@@ -52,9 +52,9 @@ export default function Home() {
     }));
     const [searchingFor, setsearchingFor] = React.useState('HP');
     // const [onSelect, setonSelect] = React.useState('');
-    const [selection, setSelection] = React.useState('');
+    const [selection, setSelection] = React.useState('HP');
     const [error, setError] = React.useState('');
-    const [data, setData] = React.useState('');
+    const [data, setData] = React.useState([]);
 
     // Other variables
     const history = useHistory();
@@ -79,8 +79,6 @@ export default function Home() {
             })}
         fetchData();
     }, []);
-
-    const onSelect = (item) => setSelection(item);
 
     const renderItem = (item) => {
         return <div className='searchItem'>{item}</div>
@@ -128,13 +126,12 @@ export default function Home() {
         )
     }
 
-    const searchTerm = searchingFor;
+    // const searchTerm = selection;
     // Check our list of options to see if any matches our searchTerm. If there are none, set data to []. 
 
     React.useEffect(() => {
-        const tempdata = searchTerm ? allTickers.filter(item => 
-            // item.toLowerCase().includes(searchTerm.toLowerCase())
-            console.log(item.toLowerCase(), typeof(searchTerm))
+        const tempdata = selection ? allTickers.filter(item => 
+            item.toLowerCase().includes(selection.toString().toLowerCase())
             ) : [];
         setData(tempdata);
     });
@@ -150,7 +147,7 @@ export default function Home() {
                     </Typography>
                     <Autocomplete 
                     id='search-tickers'
-                    items={data} // options = {data}
+                    options={data}
                     classes={classes}
                     value = {searchingFor}
                     renderItem = {renderItem}
@@ -160,7 +157,10 @@ export default function Home() {
                     onChange = {(e, newValue) => {
                         setValue(newValue);
                     }}
-                    onSelect = {onSelect}
+                    onSelect = {(item) => {
+                        setSelection(item);
+                        console.log(selection);
+                    }}
                     // Need renderInput for Autocomplete tag. 
                     renderInput={(params) => (
                         <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
