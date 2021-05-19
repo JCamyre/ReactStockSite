@@ -55,23 +55,30 @@ class GetStock(APIView):
                 # Have to have attribute for Stock models for the due_diligence information
                 
                 try:
-                    print(py_trading.Stock(stock.ticker))
+                    current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
+                    current_stock = py_trading.Stock(current_stock)                
                 except:
                     return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
                 # If I have to generate all of this information everytime someone clicks on a stock, what's the point of having a database for these stocks? All I need is the GetAllStocks view for homepages and get the ticker string, and use py_trading.Stock(ticker)
                 # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
-                current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
-                current_stock = py_trading.Stock(current_stock)
-                due_diligence_data = py_trading.Stock(current_stock).financials() # Should I convert to dictionary?
+
+                due_diligence_data = current_stock.financials() # Should I convert to dictionary?
                 # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
                 # print(due_diligence_data[0])
                 # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
-                data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
+                
+                # Really janky fix for now, seemingly .financials() labels and values r random (sometimes swapped, sometimes not)
+                data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])}
+                try:
+                    data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
+                except:
+                    data_dict = {key : val for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label'])}
+                    data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
                 data['data1'] = data_dict
+                data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
-                data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
-                data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
-                print(py_trading.Stock(current_stock).get_month_data().values.tolist())
+                
+                print(current_stock.get_month_data().tolist())
                 # data['news'] = current_stock.news_sentiments()
                 # data['short_selling'] = current_stock.short_selling()
                 # data['put_call_ratio'] = current_stock.put_call_ratio()
