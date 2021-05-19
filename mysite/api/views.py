@@ -64,6 +64,7 @@ class GetStock(APIView):
 
                     data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
                     data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
+                    print(data)
                     # data['news'] = current_stock.news_sentiments()
                     # data['short_selling'] = current_stock.short_selling()
                     # data['put_call_ratio'] = current_stock.put_call_ratio()

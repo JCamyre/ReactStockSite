@@ -80,7 +80,7 @@ export default function Stock(props) {
             </Grid>
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>{ fetching ? 'Fetching data...' : ''}</Typography>
-                <Typography component='h2' variant='h4'>{ stockNotFound ? '' : 'Sorry, that stock could not be accessed at this time!'}</Typography>
+                <Typography component='h2' variant='h4'>{ stockNotFound ? 'Sorry, that stock could not be accessed at this time!' : ''}</Typography>
             </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />

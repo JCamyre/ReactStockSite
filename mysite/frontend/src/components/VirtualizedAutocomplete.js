@@ -9,7 +9,7 @@ const ListboxComponent = React.forwardRef(function ListboxComponent(
 ) {
     const { children, role, ...other } = props;
     const itemCount = Array.isArray(children) ? children.length : 0;
-    const itemSize = 36; // change this
+    const itemSize = 40;
 
     return (
         <div ref={ref}>
