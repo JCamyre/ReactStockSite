@@ -20,15 +20,15 @@ export default function CustomCarousel () {
                     media = {<img src='https://external-preview.redd.it/CSVwH8lIonZ9Rrh6Y2rjBPToSv-GztQDGdYzLcHB8_k.jpg?auto=webp&s=b08f0781847a2017fde0cf926eb1cf7a1509899f' />}
                     mediaBackgroundStyle = {{ backgroundColor: red[400] }}
                     style = {{ backgroundColor: red[600] }}
-                    title = 'This is a very cool feature'
-                    subtitle = 'Just using this will blow your mind'
+                    title = "Check out our customers' big wins!"
+                    subtitle = 'Big dubs!!!😂'
                 />
                 <Slide 
                     media = {<img src='https://cdn.vox-cdn.com/thumbor/6oEPJ9s5H9rzubYWS-LKBWhNE9k=/0x0:3000x2225/1200x800/filters:focal(1082x339:1562x819)/cdn.vox-cdn.com/uploads/chorus_image/image/66609943/GettyImages_137497593.0.jpg' />}
                     mediaBackgroundStyle = {{ backgroundColor: red[400] }}
                     style = {{ backgroundColor: red[600] }}
-                    title = 'This is a very cool feature'
-                    subtitle = 'Just using this will blow your mind'
+                    title = 'Tiger.'
+                    subtitle = 'Cutie 🥰!'
                 />                
             </AutoRotatingCarousel>
         </div>

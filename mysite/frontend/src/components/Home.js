@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import VirtualizedAutocomplete from './VirtualizedAutocomplete.js';
 import CustomCarousel from './CustomCarousel.js';
+import CustomApexChart from './CustomApexChart.js';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,6 +53,7 @@ export default function Home() {
     const [selection, setSelection] = React.useState('');
     const [error, setError] = React.useState('');
     const [data, setData] = React.useState(['A']);
+    const [seriesData, setSeriesData] = React.useState([]);
 
     // Other variables
     const history = useHistory();
@@ -71,6 +73,8 @@ export default function Home() {
                         setData(tickers);
                         setSelection(tickers[0]);
                         setFetching(false);
+
+                        // setSeriesData(data['']);
                     } else {
                         console.log('Something bugged while accessing API');
                     }
@@ -111,6 +115,11 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={12} align='center'>
                     <CustomCarousel />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    {/* <CustomApexChart 
+                        seriesData = {}
+                    /> */}
                 </Grid>
             </Grid>        
         </div>

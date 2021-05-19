@@ -71,6 +71,7 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <Typography component='h2' variant='h2'>
                     Stock: { ticker }
+                    {/* Get name of company */}
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>

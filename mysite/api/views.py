@@ -53,28 +53,32 @@ class GetStock(APIView):
                 data = StockSerializer(stock).data
                 data['ticker'] = stock.ticker # Idk how to access data likes this
                 # Have to have attribute for Stock models for the due_diligence information
+                
                 try:
-                    current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
-                    due_diligence_data = py_trading.Stock(current_stock).financials() # Should I convert to dictionary?
-                    # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
-                    print(due_diligence_data[0])
-                    # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
-                    data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
-                    data['data1'] = data_dict
-
-                    data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
-                    data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
-                    print(data)
-                    # data['news'] = current_stock.news_sentiments()
-                    # data['short_selling'] = current_stock.short_selling()
-                    # data['put_call_ratio'] = current_stock.put_call_ratio()
-                    # data['social_media'] = current_stock.social_media_sentiment()
-                    # data['big_money'] = current_stock.big_money()
-                    
-                    print(data)            
+                    print(py_trading.Stock(stock.ticker))
                 except:
                     return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
-                    # Have different tables of information: General info, financials, stuff for trading (short float, average volume, etc)
+                # If I have to generate all of this information everytime someone clicks on a stock, what's the point of having a database for these stocks? All I need is the GetAllStocks view for homepages and get the ticker string, and use py_trading.Stock(ticker)
+                # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
+                current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
+                current_stock = py_trading.Stock(current_stock)
+                due_diligence_data = py_trading.Stock(current_stock).financials() # Should I convert to dictionary?
+                # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
+                # print(due_diligence_data[0])
+                # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
+                data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
+                data['data1'] = data_dict
+
+                data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
+                data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
+                print(py_trading.Stock(current_stock).get_month_data().values.tolist())
+                # data['news'] = current_stock.news_sentiments()
+                # data['short_selling'] = current_stock.short_selling()
+                # data['put_call_ratio'] = current_stock.put_call_ratio()
+                # data['social_media'] = current_stock.social_media_sentiment()
+                # data['big_money'] = current_stock.big_money()
+                
+                print(data)            
                 return Response(data, status=status.HTTP_200_OK)
                 
             print('yo')
@@ -119,7 +123,6 @@ class GetAllStocks(APIView):
     def get(self, request, format=None):
         all_stocks = Stock.objects.all()[:1000]
         all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
-        print(all_stocks)
         data = {}
         data['all_tickers'] = all_stocks
 
