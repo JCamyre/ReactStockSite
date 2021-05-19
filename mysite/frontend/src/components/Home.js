@@ -4,8 +4,8 @@ import { TextField } from '@material-ui/core';
 import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
-import { List, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
 import VirtualizedAutocomplete from './VirtualizedAutocomplete.js';
+import CustomCarousel from './CustomCarousel.js';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,10 +48,6 @@ export default function Home() {
     const [value, setValue] = React.useState([]);
     const [fetching, setFetching] = React.useState(true);
 
-    const [cellHeightCache, setcellHeightCache] = React.useState(new CellMeasurerCache({
-        defaultHeight: 42,
-        fixedWidth: true
-    }));
     const [searchingFor, setsearchingFor] = React.useState('');
     const [selection, setSelection] = React.useState('');
     const [error, setError] = React.useState('');
@@ -67,7 +63,10 @@ export default function Home() {
             fetch('/api/get-all-stocks')
                 .then((response) => response.json())
                 .then((data) => {
-                    if (data!==null) {
+                    if (data['Stock not found']) {
+                        console.log('uh ohhh');
+                    }
+                    else if (data!==null) {
                         const tickers = data['all_tickers'].sort()
                         setData(tickers);
                         setSelection(tickers[0]);
@@ -109,6 +108,9 @@ export default function Home() {
                 </Grid>
                 <Grid item xs={12} align='center'>
                     <Typography component='h3' variant='h3'>{ fetching ? 'Fetching...' : '' }</Typography>
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <CustomCarousel />
                 </Grid>
             </Grid>        
         </div>

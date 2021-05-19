@@ -122,8 +122,7 @@ class GetAllStocks(APIView):
         print(all_stocks)
         data = {}
         data['all_tickers'] = all_stocks
-        # Serializer for all stock objects?
+
         return Response(data, status=status.HTTP_200_OK)
-        # What condition should I return Response(status=status.HTTP_404_NOT_FOUND)
 
 
