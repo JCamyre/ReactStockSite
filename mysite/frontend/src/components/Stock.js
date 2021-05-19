@@ -40,15 +40,17 @@ export default function Stock(props) {
     // Once React is done rendering, receive the data for the specific Stock, which will be displayed with the tables. 
     useEffect(() => { 
         const fetchData = async () => {
-            fetch('/api/get-stock' + '?ticker=' + ticker)
+            fetch('/api/get-stock?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
+                    if (data)
                     if (data !== null) {
+                        console.log(data);
                         setData1(data['data1']);
                         setData2(data['data2']);
                         setData3(data['data3']);
                         setFetching(false);
-                        console.log(data1, data2, data3, data);
+                        console.log(data['data1'], data['data2'], data['data3'], data);
                     } else {
                         console.log('Fetch bugged');
                     }
@@ -60,8 +62,9 @@ export default function Stock(props) {
             })};
         fetchData();
     }, []);
-
-    console.log(data1, data1['Short Float'], data1['Avg Volume']);
+    if (data1 != null) {
+        console.log(data1, data1['Short Float'], data1['Avg Volume']);
+    }
 
     return (
         <Grid container spacing={1}>

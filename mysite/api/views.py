@@ -45,6 +45,7 @@ class GetStock(APIView):
       
     def get(self, request, format=None):
         ticker = request.GET.get(self.lookup_url_kwarg)
+        
         if ticker != None:
             stock = Stock.objects.filter(ticker=ticker)
             if len(stock) > 0:
@@ -60,14 +61,14 @@ class GetStock(APIView):
                     # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
                     data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])} # Value and Label columns are swapped smh
                     data['data1'] = data_dict
-                    # data['data1'] = dict(filter(lambda elem: elem[0] == 'Avg Volume' or elem[0] == 'Short Float', data['data1'].items()))
+
                     data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
                     data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
-                    data['news'] = current_stock.news_sentiments()
-                    data['short_selling'] = current_stock.short_selling()
-                    data['put_call_ratio'] = current_stock.put_call_ratio()
-                    data['social_media'] = current_stock.social_media_sentiment()
-                    data['big_money'] = current_stock.big_money()
+                    # data['news'] = current_stock.news_sentiments()
+                    # data['short_selling'] = current_stock.short_selling()
+                    # data['put_call_ratio'] = current_stock.put_call_ratio()
+                    # data['social_media'] = current_stock.social_media_sentiment()
+                    # data['big_money'] = current_stock.big_money()
                     
                     print(data)            
                 except:
