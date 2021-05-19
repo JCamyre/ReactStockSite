@@ -93,6 +93,8 @@ class FindStock(APIView):
         ticker = request.data.get(self.lookup_url_kwarg)
 
         # print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
+        
+        print(ticker)
 
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)

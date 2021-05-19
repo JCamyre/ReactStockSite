@@ -95,44 +95,16 @@ export default function Home() {
                     <VirtualizedAutocomplete 
                     // When you pass in a variable to a React component parameter, it is sent as a JSON object. 
                         data = {data}
-                        onSelect = {(ticker) => {
-                            console.log('yo')
-                        }}
+                        setter = {setSelection}
                     />
-                    {/* <Autocomplete 
-                    id='search-tickers'
-                    options={data}
-                    classes={classes}
-                    value = {value}
-                    renderItem = {renderItem}
-                    renderMenu = {renderMenu}
-                    // getItemValue = { item => item.value }. Not needed for us since the ticker strings are in the array list
-                    // When you select a new value from Autocomplete list, setValue(newValue)
-
-                    // 
-                    // onChange = {(e, newValue) => {
-                    //     // onChangeHandle();
-                    //     setValue(newValue);
-                    // }}
-                    // When you select an item from Autocomplete list
-                    onSelect = {(item) => {
-                        setSelection(item);
-                    }}
-                    // onUpdateInput = {updateOptions}
-                    // Need renderInput for Autocomplete tag. 
-                    renderInput={(params) => (
-                        <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
-                        )}
-                    style={{ width: 300 }}
-                    /> */}
                 </Grid>
                 <Grid item xs={12} align='center'>
                     {/* How to increase size of button? */}
                     <Button color='primary' variant='contained' to='/create' component={ Link } 
                     onClick={() => {
-                        stockButtonPressed(value, history, setError, value)
+                        stockButtonPressed(selection, history, setError)
                     }}>
-                        Information （{value})
+                        Information （{selection})
                     </Button>
                 </Grid>
                 <Grid item xs={12} align='center'>
@@ -143,7 +115,7 @@ export default function Home() {
     );
 }
 
-function stockButtonPressed(ticker, history, setError, value) {
+function stockButtonPressed(ticker, history, setError) {
     const requestOptions = {
         method: "POST",
         headers: { 
@@ -153,10 +125,11 @@ function stockButtonPressed(ticker, history, setError, value) {
             ticker: ticker,
         }),
     };
+    console.log(ticker);
     fetch("/api/find-stock", requestOptions)
     .then((response) => {
         if (response.ok) {
-            history.push(`/stock/${value}`);
+            history.push(`/stock/${ticker}`);
         } else {
             setError('Stock not found.');
         }

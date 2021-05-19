@@ -32,8 +32,8 @@ const ListboxComponent = React.forwardRef(function ListboxComponent(
     )
 });
 
-export default function VirtualizedAutocomplete (data, onSelect) {
-    console.log(onSelect);
+export default function VirtualizedAutocomplete (data, setter) {
+    // Not sure how using parameters with Components anymore: JSON object has keys for both data and setter. 
     return (
         <Autocomplete
             id='virtualized-autocomplete'
@@ -44,7 +44,10 @@ export default function VirtualizedAutocomplete (data, onSelect) {
             renderInput={(params) => (
                 <TextField {...params} variant='outlined' label='Stocks' fullWidth />
             )}
-            onSelect = {onSelect}
+            onChange = {(e, ticker) => {
+                console.log(ticker);
+                data['setter'](ticker);
+            }}
         />
     )
 }
