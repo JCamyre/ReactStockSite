@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
 
+
 # So the frontend.views handles the rendering of the index.html, which contains code for reactjs. 
 # Then api.views handles the backend/logic of the webpages. Specific views handles specific urls. 
 
@@ -77,8 +78,10 @@ class GetStock(APIView):
                 data['data1'] = data_dict
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
+                print(current_stock.get_month_data().index[0].timestamp())
+                # dates = [datetime.timestamp(datetime.strptime(date, '%Y-%m-%d')) for date in current_stock.get_month_data().index]
                 
-                print(current_stock.get_month_data().tolist())
+                # print(current_stock.get_month_data().tolist())
                 # data['news'] = current_stock.news_sentiments()
                 # data['short_selling'] = current_stock.short_selling()
                 # data['put_call_ratio'] = current_stock.put_call_ratio()
