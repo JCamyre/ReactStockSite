@@ -82,7 +82,7 @@ class GetStock(APIView):
 class FindStock(APIView):
     # Since I have to convert serialize object to JSON to send it to React, have to automatically update every minute or so (Stock.update_stock)
     lookup_url_kwarg = 'ticker'
-      
+        
     def post(self, request, format=None):
         # Check to see if user already has an existing session key
         if not self.request.session.exists(self.request.session.session_key):
