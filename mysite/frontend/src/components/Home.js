@@ -5,6 +5,8 @@ import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import { List, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
+import VirtualizedAutocomplete from './VirtualizedAutocomplete.js';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,11 +52,10 @@ export default function Home() {
         defaultHeight: 42,
         fixedWidth: true
     }));
-    const [searchingFor, setsearchingFor] = React.useState('HP');
-    // const [onSelect, setonSelect] = React.useState('');
-    const [selection, setSelection] = React.useState('HP');
+    const [searchingFor, setsearchingFor] = React.useState('');
+    const [selection, setSelection] = React.useState('');
     const [error, setError] = React.useState('');
-    const [data, setData] = React.useState([]);
+    const [data, setData] = React.useState(['A']);
 
     // Other variables
     const history = useHistory();
@@ -67,7 +68,9 @@ export default function Home() {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data!==null) {
-                        setAllTickers(data['all_tickers'].sort());
+                        const tickers = data['all_tickers'].sort()
+                        setData(tickers);
+                        setSelection(tickers[0]);
                         setFetching(false);
                     } else {
                         console.log('Something bugged while accessing API');
@@ -80,62 +83,6 @@ export default function Home() {
         fetchData();
     }, []);
 
-    const renderItem = (item) => {
-        return <div className='searchItem'>{item}</div>
-    }
-
-    const renderMenu = (items, _, autocompleteStyle) => {
-        cellHeightCache.clearAll();
-
-        const rowRenderer = ({key, index, parent, style}) => {
-            const Item = items[index]
-            const onMouseDown = e => {
-                if (e.button === 0) {
-                    Item.props.onClick(e);
-                }
-            }
-            return (
-                <CellMeasurer
-                    cache={cellHeightCache}
-                    key={key}
-                    parent={parent}
-                    rowIndex={index}
-                    >
-                        {React.cloneElement(Item, {
-                            style: style,
-                            key, key,
-                            onMouseEnter: null,
-                            onMouseDown: onMouseDown
-                        })}
-                </CellMeasurer>
-            )
-        }
-        return (
-            <List 
-                rowHeight = {cellHeightCache.rowHeight}
-                height={207}
-                rowCount = {items.length}
-                rowRenderer={rowRenderer}
-                width={autocompleteStyle.minWidth || 0}
-                style={{
-                    //...customStyles,
-                    height:'auto',
-                    maxHeight: '207px'
-                }}
-            />    
-        )
-    }
-
-    // const searchTerm = selection;
-    // Check our list of options to see if any matches our searchTerm. If there are none, set data to []. 
-
-    React.useEffect(() => {
-        const tempdata = selection ? allTickers.filter(item => 
-            item.toLowerCase().includes(selection.toString().toLowerCase())
-            ) : [];
-        setData(tempdata);
-    });
-
     return (
         
         <div>
@@ -145,28 +92,39 @@ export default function Home() {
                     <Typography component='h4' variant='h4'>
                         Homepage
                     </Typography>
-                    <Autocomplete 
+                    <VirtualizedAutocomplete 
+                    // When you pass in a variable to a React component parameter, it is sent as a JSON object. 
+                        data = {data}
+                        onSelect = {(ticker) => {
+                            console.log('yo')
+                        }}
+                    />
+                    {/* <Autocomplete 
                     id='search-tickers'
                     options={data}
                     classes={classes}
-                    value = {searchingFor}
+                    value = {value}
                     renderItem = {renderItem}
                     renderMenu = {renderMenu}
                     // getItemValue = { item => item.value }. Not needed for us since the ticker strings are in the array list
                     // When you select a new value from Autocomplete list, setValue(newValue)
-                    onChange = {(e, newValue) => {
-                        setValue(newValue);
-                    }}
+
+                    // 
+                    // onChange = {(e, newValue) => {
+                    //     // onChangeHandle();
+                    //     setValue(newValue);
+                    // }}
+                    // When you select an item from Autocomplete list
                     onSelect = {(item) => {
                         setSelection(item);
-                        console.log(selection);
                     }}
+                    // onUpdateInput = {updateOptions}
                     // Need renderInput for Autocomplete tag. 
                     renderInput={(params) => (
-                        <TextField {...params} label='Search Tickers' color='' margin='normal' variant='outlined' />
+                        <TextField {...params} label='Search Tickers' margin='normal' variant='outlined' />
                         )}
                     style={{ width: 300 }}
-                    />
+                    /> */}
                 </Grid>
                 <Grid item xs={12} align='center'>
                     {/* How to increase size of button? */}
