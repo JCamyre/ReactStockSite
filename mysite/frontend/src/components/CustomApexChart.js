@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import Chart from 'react-apexcharts';
 
-export default function CustomApexCharts (seriesData) {
+export default function CustomApexChart (seriesData) {
 
     // seriesData = [Candlestock OHLC data]
     // Not going to use useState since not changing any of this stuff
     seriesData = seriesData['seriesData'];
 
-    all_options = {
+    // seriesDataLinear is for the Bar chart.
+    const seriesDataLinear = [];
+
+    const all_options = {
           
         series: [{
           data: seriesData
@@ -108,11 +111,11 @@ export default function CustomApexCharts (seriesData) {
     return (
         <div class='chart-box'>
             <div id='chart-candlestick'>
-                <Chart options={all_options.options} series={all_options.series} type='candlestick' height={290} />
+                <ReactApexChart background-color='white' options={all_options.options} series={all_options.series} type='candlestick' height={290} />
             </div>
-            <div id='chart-bar'>
-                <Chart options={all_options.optionsBar} series={all_options.seriesBar} type='bar' height={160} />
-            </div>
+            {/* <div id='chart-bar'>
+                <ReactApexChart options={all_options.optionsBar} series={all_options.seriesBar} type='bar' height={160} />
+            </div> */}
         </div>
     )
 

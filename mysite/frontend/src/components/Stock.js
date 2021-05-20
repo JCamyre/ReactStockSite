@@ -4,6 +4,7 @@ import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Table from './Table.js';
+import CustomApexChart from './CustomApexChart.js';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -29,6 +30,7 @@ export default function Stock(props) {
     const [data1, setData1] = useState([]);
     const [data2, setData2] = useState([]);
     const [data3, setData3] = useState([]);
+    const [seriesData, setSeriesData] = useState([]);
 
     // All columns for the different tables of data.
     const columns1 = Table1();
@@ -50,6 +52,7 @@ export default function Stock(props) {
                         setData2(data['data2']);
                         setData3(data['data3']);
                         setFetching(false);
+                        setSeriesData(data['seriesData']);
                         console.log(data['data1'], data['data2'], data['data3'], data);
                     } else {
                         console.log('Fetch bugged');
@@ -91,6 +94,11 @@ export default function Stock(props) {
             </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={columns3} data={[data1]} />
+            </Grid>
+            <Grid item xs={12} align='center'>
+                <CustomApexChart 
+                    seriesData = {seriesData}
+                />
             </Grid>            
         </Grid>
     );
