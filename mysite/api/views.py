@@ -83,6 +83,7 @@ class GetStock(APIView):
                 ohlc_data = [[timestamp, data[0], data[1], data[2], data[3]] for timestamp, data in zip(ohlc.index, ohlc.values.tolist())]
                 print(ohlc_data)
                 data['seriesData'] = ohlc_data
+                
                 # print(current_stock.get_month_data().tolist())
                 # data['news'] = current_stock.news_sentiments()
                 # data['short_selling'] = current_stock.short_selling()
