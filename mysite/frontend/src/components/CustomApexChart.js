@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import Chart from 'react-apexcharts';
 
+
 export default function CustomApexChart (seriesData) {
 
     // seriesData = [Candlestock OHLC data]
@@ -10,6 +11,10 @@ export default function CustomApexChart (seriesData) {
 
     // seriesDataLinear is for the Bar chart.
     const seriesDataLinear = [];
+
+    // Anyway to delete empty space (for the weekend)?
+
+    // Info box not working
 
     const all_options = {
           
