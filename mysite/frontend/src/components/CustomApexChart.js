@@ -70,7 +70,7 @@ export default function CustomApexChart (seriesData) {
             },
           },
           dataLabels: {
-            enabled: false
+            enabled: true
           },
           plotOptions: {
             bar: {
@@ -111,7 +111,7 @@ export default function CustomApexChart (seriesData) {
     return (
         <div class='chart-box'>
             <div id='chart-candlestick'>
-                <ReactApexChart background-color='white' options={all_options.options} series={all_options.series} type='candlestick' height={290} />
+                <ReactApexChart color='black' options={all_options.options} series={all_options.series} type='candlestick' height={290} />
             </div>
             {/* <div id='chart-bar'>
                 <ReactApexChart options={all_options.optionsBar} series={all_options.seriesBar} type='bar' height={160} />
