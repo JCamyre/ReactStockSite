@@ -69,7 +69,8 @@ class GetStock(APIView):
                 # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
                 
                 # Really janky fix for now, seemingly .financials() labels and values r random (sometimes swapped, sometimes not)
-                data_dict = {key : val for key, val in zip(due_diligence_data[0]['Label'], due_diligence_data[0]['Value'])}
+
+                data_dict = {key : val for key, val in due_diligence_data.values.tolist()}
                 try:
                     data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
                 except:

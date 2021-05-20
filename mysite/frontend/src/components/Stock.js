@@ -97,8 +97,8 @@ export default function Stock(props) {
                 <Table columns={columns3} data={[data1]} />
             </Grid>
             <Grid item xs={12} align='center'>
-                <CustomApexChart 
-                    seriesData = {seriesData}
+                <CustomStockChart 
+                    data = {seriesData}
                 />
             </Grid>            
         </Grid>
