@@ -32,6 +32,7 @@ export default function Stock(props) {
     const [data2, setData2] = useState([]);
     const [data3, setData3] = useState([]);
     const [seriesData, setSeriesData] = useState([]);
+    const [seriesDataDates, setSeriesDataDates] = useState([]);
 
     // All columns for the different tables of data.
     const columns1 = Table1();
@@ -52,7 +53,18 @@ export default function Stock(props) {
                         setData2(data['data2']);
                         setData3(data['data3']);
                         setFetching(false);
-                        setSeriesData(data['seriesData']);
+
+                        // Stuff for CustomStockChart data
+
+                        // To do: Loop through seriesDataDates, convert to new Date(val), merge both lists of dictionaries, glll
+                        // dates = data['seriesData'][]
+                        var seriesData = data['seriesData'];
+                        seriesData.forEach((x, i) => {
+                            seriesData[i] = new Date(x['date']);
+                        })
+                        console.log(seriesData);
+                        setSeriesData(seriesData);
+
                     } else {
                         console.log('Fetch bugged');
                     }
@@ -97,6 +109,7 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <CustomStockChart 
                     data = {seriesData}
+                    dates = {seriesDataDates}
                 />
             </Grid>            
         </Grid>
