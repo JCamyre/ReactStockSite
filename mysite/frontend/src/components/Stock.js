@@ -48,13 +48,11 @@ export default function Stock(props) {
                 .then((data) => {
                     if (data)
                     if (data !== null) {
-                        console.log(data);
                         setData1(data['data1']);
                         setData2(data['data2']);
                         setData3(data['data3']);
                         setFetching(false);
                         setSeriesData(data['seriesData']);
-                        console.log(data['data1'], data['data2'], data['data3'], data);
                     } else {
                         console.log('Fetch bugged');
                     }
@@ -66,7 +64,7 @@ export default function Stock(props) {
             })};
         fetchData();
     }, []);
-    if (data1 != null) {
+    if (data1 == null) {
         console.log(data1, data1['Short Float'], data1['Avg Volume']);
     }
 

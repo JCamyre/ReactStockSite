@@ -6,6 +6,7 @@ from .methods import reset_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
+import datetime
 
 
 # So the frontend.views handles the rendering of the index.html, which contains code for reactjs. 
@@ -80,8 +81,9 @@ class GetStock(APIView):
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
                 # dates = [date.timestamp() for date in current_stock.get_month_data().index]
-                ohlc = current_stock.get_month_data()[['Open', 'High', 'Low', 'Close']]
-                ohlc_data = [[timestamp, data[0], data[1], data[2], data[3]] for timestamp, data in zip(ohlc.index, ohlc.values.tolist())]
+                ohlc = current_stock.get_month_data()[['Open', 'High', 'Low', 'Close', 'Volume']]
+
+                ohlc_data = [{'date': timestamp, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for timestamp, data in zip([date.to_numpy() for date in ohlc.index], ohlc.values.tolist())]
                 print(ohlc_data)
                 data['seriesData'] = ohlc_data
                 
