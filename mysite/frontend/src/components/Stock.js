@@ -93,17 +93,18 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />
             </Grid>
+            <Grid item xs={12}>
+                <CustomStockChart 
+                    data = {seriesData}
+                />
+            </Grid> 
             <Grid item xs={12} align='center'>
                 <Table columns={columns2} data={[data1]} />
             </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={columns3} data={[data1]} />
             </Grid>
-            <Grid item xs={12} align='center'>
-                <CustomStockChart 
-                    data = {seriesData}
-                />
-            </Grid>            
+           
         </Grid>
     );
 }

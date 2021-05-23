@@ -51,7 +51,7 @@ export default function Home() {
     const [searchingFor, setsearchingFor] = React.useState('');
     const [selection, setSelection] = React.useState('');
     const [error, setError] = React.useState('');
-    const [data, setData] = React.useState(['A']);
+    const [data, setData] = React.useState(['Fetching...']);
 
     // Other variables
     const history = useHistory();
