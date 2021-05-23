@@ -52,10 +52,8 @@ export default function Stock(props) {
                         setData3(data['data3']);
                         setFetching(false);
 
-                        // Stuff for CustomStockChart data
+                        // CustomStockChart data
 
-                        // To do: Loop through seriesDataDates, convert to new Date(val), merge both lists of dictionaries, glll
-                        // dates = data['seriesData'][]
                         var seriesData = data['seriesData'];
                         seriesData.forEach((x, i) => {
                             seriesData[i]['date'] = new Date(x['date']);

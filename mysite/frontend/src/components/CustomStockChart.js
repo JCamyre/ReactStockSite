@@ -9,8 +9,6 @@ export default function ChartComponent (data, dates) {
         return <div>Loading</div>
     }
 
-    console.log(data['data'].length == 0, data, data['data']);
-
     return (
         <TypeChooser>
                 {(type) => <CandleStickChartWithHoverTooltip type={type} data={data['data']} />}
