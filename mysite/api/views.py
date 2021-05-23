@@ -81,7 +81,7 @@ class GetStock(APIView):
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
                 # dates = [date.timestamp() for date in current_stock.get_month_data().index]
-                ohlc = current_stock.get_month_data()[['Open', 'High', 'Low', 'Close', 'Volume']]
+                ohlc = current_stock.get_month_data(num=24)[['Open', 'High', 'Low', 'Close', 'Volume']]
 
                 # [date.to_numpy() for date in ohlc.index]
                 ohlc_data = [{'date': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
