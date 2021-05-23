@@ -32,7 +32,6 @@ export default function Stock(props) {
     const [data2, setData2] = useState([]);
     const [data3, setData3] = useState([]);
     const [seriesData, setSeriesData] = useState([]);
-    const [seriesDataDates, setSeriesDataDates] = useState([]);
 
     // All columns for the different tables of data.
     const columns1 = Table1();
@@ -47,7 +46,6 @@ export default function Stock(props) {
             fetch('/api/get-stock?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
-                    if (data)
                     if (data !== null) {
                         setData1(data['data1']);
                         setData2(data['data2']);
@@ -60,9 +58,9 @@ export default function Stock(props) {
                         // dates = data['seriesData'][]
                         var seriesData = data['seriesData'];
                         seriesData.forEach((x, i) => {
-                            seriesData[i] = new Date(x['date']);
-                        })
-                        console.log(seriesData);
+                            seriesData[i]['date'] = new Date(x['date']);
+                        });
+
                         setSeriesData(seriesData);
 
                     } else {
@@ -76,9 +74,6 @@ export default function Stock(props) {
             })};
         fetchData();
     }, []);
-    if (data1 == null) {
-        console.log(data1, data1['Short Float'], data1['Avg Volume']);
-    }
 
     return (
         <Grid container spacing={1}>
@@ -109,7 +104,6 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <CustomStockChart 
                     data = {seriesData}
-                    dates = {seriesDataDates}
                 />
             </Grid>            
         </Grid>

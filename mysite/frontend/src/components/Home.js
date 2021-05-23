@@ -90,14 +90,19 @@ export default function Home() {
             <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
-                    <Typography component='h4' variant='h4'>
+                    <Typography component='h2' variant='h2'>
                         Homepage
                     </Typography>
+                </Grid>
+                <Grid item xs={12} align='center'>
                     <VirtualizedAutocomplete 
                     // When you pass in a variable to a React component parameter, it is sent as a JSON object. 
                         data = {data}
                         setter = {setSelection}
                     />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <span>&nbsp;</span>
                 </Grid>
                 <Grid item xs={12} align='center'>
                     {/* How to increase size of button? */}
@@ -130,7 +135,7 @@ function stockButtonPressed(ticker, history, setError) {
             ticker: ticker,
         }),
     };
-    console.log(ticker);
+
     fetch("/api/find-stock", requestOptions)
     .then((response) => {
         if (response.ok) {
