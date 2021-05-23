@@ -170,7 +170,7 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 						yAccessor={d => d.rsi}
 						options={rsiCalculator.options()} />
 				</Chart>
-				<Chart id={8}
+				{/* <Chart id={8}
 					yExtents={atr14.accessor()}
 					height={125} origin={(w, h) => [0, h - 125]} padding={{ top: 10, bottom: 10 }}
 				>
@@ -191,10 +191,10 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 						yAccessor={atr14.accessor()}
 						yLabel={`ATR (${atr14.options().windowSize})`}
 						yDisplayFormat={format(".2f")}
-						/* valueStroke={atr14.stroke()} - optional prop */
-						/* labelStroke="#4682B4" - optional prop */
+						valueStroke={atr14.stroke()} - optional prop
+						labelStroke="#4682B4" - optional prop
 						origin={[-40, 15]}/>
-				</Chart>
+				</Chart> */}
 				<CrossHairCursor />
 			</ChartCanvas>
 		);
