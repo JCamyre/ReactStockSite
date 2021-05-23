@@ -56,7 +56,7 @@ class CandleStickChartWithCHMousePointer extends React.Component {
 						displayFormat={format(".2f")}
 					/>
 					<CandlestickSeries />
-					<OHLCTooltip forChart={1} origin={[-40, 0]} />
+					<OHLCTooltip forChart={1} origin={[-40, 0]} fontSize={16} />
 				</Chart>
 				<Chart
 					id={2}
