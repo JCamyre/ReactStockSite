@@ -77,11 +77,12 @@ class GetStock(APIView):
                 except:
                     data_dict = {key : val for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label'])}
                     data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
+                    
                 data['data1'] = data_dict
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
                 # dates = [date.timestamp() for date in current_stock.get_month_data().index]
-                ohlc = current_stock.get_month_data(num=24)[['Open', 'High', 'Low', 'Close', 'Volume']]
+                ohlc = current_stock.get_month_data(n=24)[['Open', 'High', 'Low', 'Close', 'Volume']]
 
                 # [date.to_numpy() for date in ohlc.index]
                 ohlc_data = [{'date': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]

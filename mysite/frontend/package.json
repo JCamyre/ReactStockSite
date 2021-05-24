@@ -27,6 +27,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "apexcharts": "^3.26.3",
+    "babel-preset-es2015": "^6.24.1",
     "material-auto-rotating-carousel": "^3.0.2",
     "react": ">=16.8.0",
     "react-apexcharts": "^1.3.9",

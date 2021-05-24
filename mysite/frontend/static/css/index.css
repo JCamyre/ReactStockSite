@@ -47,3 +47,8 @@ tr {
   padding: 25px;
   background: #FFD19B;  
 }
+
+.Body {
+  /* position: absolute; */
+  overflow-y: auto;
+}

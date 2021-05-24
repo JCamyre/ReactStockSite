@@ -134,6 +134,7 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 								windowSize: ema12.options().windowSize,
 							},
 						]}
+						fontSize={14}
 					/>
 
 				</Chart>
@@ -168,7 +169,8 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 
 					<RSITooltip origin={[-38, 15]}
 						yAccessor={d => d.rsi}
-						options={rsiCalculator.options()} />
+						options={rsiCalculator.options()}
+						fontSize={16} />
 				</Chart>
 				{/* <Chart id={8}
 					yExtents={atr14.accessor()}

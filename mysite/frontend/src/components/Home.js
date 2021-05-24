@@ -51,7 +51,7 @@ export default function Home() {
     const [searchingFor, setsearchingFor] = React.useState('');
     const [selection, setSelection] = React.useState('');
     const [error, setError] = React.useState('');
-    const [data, setData] = React.useState(['Fetching...']);
+    const [data, setData] = React.useState(['Loading...']);
 
     // Other variables
     const history = useHistory();
@@ -71,8 +71,6 @@ export default function Home() {
                         setData(tickers);
                         setSelection(tickers[0]);
                         setFetching(false);
-
-                        // setSeriesData(data['']);
                     } else {
                         console.log('Something bugged while accessing API');
                     }
@@ -114,7 +112,7 @@ export default function Home() {
                     </Button>
                 </Grid>
                 <Grid item xs={12} align='center'>
-                    <Typography component='h3' variant='h3'>{ fetching ? 'Fetching...' : '' }</Typography>
+                    <Typography component='h3' variant='h3'>{ fetching ? 'Loading stocks...' : '' }</Typography>
                 </Grid>
                 <Grid item xs={12} align='center'>
                     <CustomCarousel />

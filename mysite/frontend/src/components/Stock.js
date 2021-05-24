@@ -74,10 +74,10 @@ export default function Stock(props) {
     }, []);
 
     return (
-        <Grid container spacing={1}>
+        <Grid container spacing={1} className='Body'>
             <Grid item xs={12} align='center'>
                 <Typography component='h2' variant='h2'>
-                    Stock: { ticker }
+                    Stock: { data1['company_name'] }: { ticker }
                     {/* Get name of company */}
                 </Typography>
             </Grid>
@@ -103,9 +103,9 @@ export default function Stock(props) {
             </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={columns3} data={[data1]} />
-            </Grid>
-           
+            </Grid>           
         </Grid>
+
     );
 }
 
