@@ -1,10 +1,14 @@
+* {
+  font-family: 'Roboto', 'Georgia', 'sans-serif', 'serif'; 
+}
+
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: rgb(155, 140, 253);
-  color: rgba(255, 255, 255);
+  /* background-color: rgb(110, 88, 255); */
+  /* color: rgba(255, 255, 255); */
 }
 
 #main {
@@ -48,7 +52,3 @@ tr {
   background: #FFD19B;  
 }
 
-.Body {
-  /* position: absolute; */
-  overflow-y: auto;
-}

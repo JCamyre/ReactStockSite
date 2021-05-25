@@ -88,7 +88,7 @@ export default function Home() {
             <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
-                    <Typography component='h2' variant='h2'>
+                    <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
                         Homepage
                     </Typography>
                 </Grid>
