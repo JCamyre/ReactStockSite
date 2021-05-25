@@ -4,7 +4,6 @@ import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Table from './Table.js';
-import CustomApexChart from './CustomApexChart.js';
 import CustomStockChart from './CustomStockChart.js';
 
 // Change color of text depending on high/low
