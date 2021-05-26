@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HomePage from './components/HomePage';
+import Home from './components/Home';
+import Stock from './components/Stock';
 import Navbar from './components/Navbar';
 import About from './components/About';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 
+// Rename homepage to home, delete home.js?
 
 export default function App () {
     return (
@@ -21,9 +23,6 @@ export default function App () {
                     <Route path='/sign-up' component={SignUp} />
                 </Switch>
             </Router>
-            <div className='center'>
-                <HomePage />
-            </div>
         </>
     );
 }

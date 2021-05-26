@@ -84,8 +84,8 @@ export default function Home() {
 
     return (
         
-        <div>
-            <br />
+        <div className='center'>
+        <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
                     <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
