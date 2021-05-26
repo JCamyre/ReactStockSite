@@ -81,7 +81,7 @@ class CandleStickChartWithRSIIndicator extends React.Component {
 
 		return (
 			<ChartCanvas height={600}
-				width={width}
+				width={1200}
 				ratio={ratio}
 				margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
 				type={type}

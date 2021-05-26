@@ -4,8 +4,8 @@ import { TextField } from '@material-ui/core';
 import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
-import VirtualizedAutocomplete from './VirtualizedAutocomplete.js';
-import CustomCarousel from './CustomCarousel.js';
+import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
+import CustomCarousel from '../CustomCarousel.js';
 
 
 const useStyles = makeStyles((theme) => ({

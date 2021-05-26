@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Stock from './components/Stock';
+import Home from './components/pages/Home';
+import Stock from './components/pages/Stock';
 import Navbar from './components/Navbar';
-import About from './components/About';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
+import About from './components/pages/About';
+import SignIn from './components/pages/SignIn';
+import SignUp from './components/pages/SignUp';
 
 // Rename homepage to home, delete home.js?
 

@@ -24,7 +24,7 @@ export default function Navbar() {
     return (
         <nav className='navbar'>
             <div className='navbar-container'>
-                <Link to='/' className='navbar-logo'>
+                <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     yo <i className="fas fa-rocket" />
                 </Link>
                 <div className='menu-icon' onClick={handleClick}>
@@ -46,7 +46,7 @@ export default function Navbar() {
                     <li className='nav-item'>
                         {/* We don't want menu open once we click to go to a different page.  */}
                         <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                            Some other page
+                            Sign Up
                         </Link>
                     </li>
                 </ul>

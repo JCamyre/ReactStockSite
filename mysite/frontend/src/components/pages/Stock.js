@@ -3,8 +3,8 @@ import { Grid, Button, Typography, IconButton } from '@material-ui/core';
 import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import Table from './Table.js';
-import CustomStockChart from './CustomStockChart.js';
+import Table from '../Table.js';
+import CustomStockChart from '../CustomStockChart.js';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -92,7 +92,7 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} align='center'>
                 <CustomStockChart 
                     data = {seriesData}
                 />
