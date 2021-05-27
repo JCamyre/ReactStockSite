@@ -16,7 +16,7 @@ export default function App () {
             <Router>
                 <Navbar />
                 <Switch>
-                    <Route exact path='/' component={Home} />
+                    <Route path='/' exact component={Home} />
                     <Route path='/stock/:ticker' component={Stock} />
                     <Route path='/about' component={About} />
                     <Route path='/sign-in' component={SignIn} />

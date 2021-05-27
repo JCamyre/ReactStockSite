@@ -1,11 +1,10 @@
 import React from 'react';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { TextField } from '@material-ui/core';
 import { Grid, Button, Typography, IconButton, Link } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import { makeStyles } from '@material-ui/core/styles';
 import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 import CustomCarousel from '../CustomCarousel.js';
+import HeroSection from '../HeroSection.js';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -117,6 +116,7 @@ export default function Home() {
                 <Grid item xs={12} align='center'>
                     <CustomCarousel />
                 </Grid>
+                <HeroSection />
             </Grid>        
         </div>
     );

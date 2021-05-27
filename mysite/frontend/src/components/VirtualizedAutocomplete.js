@@ -32,7 +32,7 @@ const ListboxComponent = React.forwardRef(function ListboxComponent(
     )
 });
 
-export default function VirtualizedAutocomplete (data, setter) {
+export default function VirtualizedAutocomplete ({data, setter}) {
 
     return (
         <Autocomplete
@@ -40,12 +40,12 @@ export default function VirtualizedAutocomplete (data, setter) {
             style={{ width:300 }}
             disableListWrap
             ListboxComponent={ListboxComponent}
-            options = {data['data']}
+            options = {data}
             renderInput={(params) => (
                 <TextField {...params} variant='outlined' label='Stocks' fullWidth />
             )}
             onChange = {(e, ticker) => {
-                data['setter'](ticker);
+                setter(ticker);
             }}
         />
     )
