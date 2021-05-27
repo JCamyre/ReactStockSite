@@ -12,12 +12,32 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'url-loader', 'file-loader'],
+        use: {
+          loader: 'babel-loader'
+        },
       },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
-      }
+      },
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        include: /images/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'images/',
+              publicPath: 'images/',
+            }
+          }
+        ]
+      },
+      {
+        test: /\.mp4$/,
+        use: 'file-loader?name=videos/[name].[ext]',
+      },
     ],
   },
   optimization: {
