@@ -87,36 +87,8 @@ export default function Home() {
         <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
-                    <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
-                        Homepage
-                    </Typography>
+                    <HeroSection />
                 </Grid>
-                <Grid item xs={12} align='center'>
-                    <VirtualizedAutocomplete 
-                    // When you pass in a variable to a React component parameter, it is sent as a JSON object. 
-                        data = {data}
-                        setter = {setSelection}
-                    />
-                </Grid>
-                <Grid item xs={12} align='center'>
-                    <span>&nbsp;</span>
-                </Grid>
-                <Grid item xs={12} align='center'>
-                    {/* How to increase size of button? */}
-                    <Button color='primary' variant='contained' to='/create' component={ Link } 
-                    onClick={() => {
-                        stockButtonPressed(selection, history, setError)
-                    }}>
-                        Information （{selection})
-                    </Button>
-                </Grid>
-                <Grid item xs={12} align='center'>
-                    <Typography component='h3' variant='h3'>{ fetching ? 'Loading stocks...' : '' }</Typography>
-                </Grid>
-                <Grid item xs={12} align='center'>
-                    <CustomCarousel />
-                </Grid>
-                <HeroSection />
             </Grid>        
         </div>
     );

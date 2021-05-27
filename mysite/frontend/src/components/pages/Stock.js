@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Grid, Button, Typography, IconButton } from '@material-ui/core';
-import { NavigateBeforeIcon, NavigateNextIcon} from "@material-ui/icons";
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Table from '../Table.js';
@@ -76,7 +75,7 @@ export default function Stock(props) {
         <Grid container spacing={1} className='Body'>
             <Grid item xs={12} align='center'>
                 <Typography component='h2' variant='h2'>
-                    Stock: { data1['company_name'] }: { ticker }
+                    Stock: { fetching ? 'Loading...' : data1['company_name']} : { ticker }
                     {/* Get name of company */}
                 </Typography>
             </Grid>
