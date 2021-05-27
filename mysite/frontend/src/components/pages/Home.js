@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 import CustomCarousel from '../CustomCarousel.js';
 import HeroSection from '../HeroSection.js';
+import Cards from '../Cards.js';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +90,35 @@ export default function Home() {
                 <Grid item xs={12} align='center'>
                     <HeroSection />
                 </Grid>
+                <Cards />
+                {/* <Grid item xs={12} align='center'>
+                    <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
+                        Homepage
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <VirtualizedAutocomplete 
+                        data = {data}
+                        setter = {setSelection}
+                    />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <span>&nbsp;</span>
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <Button color='primary' variant='contained' to='/create' component={ Link } 
+                    onClick={() => {
+                        stockButtonPressed(selection, history, setError)
+                    }}>
+                        Information （{selection})
+                    </Button>
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <Typography component='h3' variant='h3'>{ fetching ? 'Loading stocks...' : '' }</Typography>
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <CustomCarousel />
+                </Grid> */}
             </Grid>        
         </div>
     );
