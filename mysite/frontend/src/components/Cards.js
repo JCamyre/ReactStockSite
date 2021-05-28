@@ -1,6 +1,8 @@
 import React from 'react'
 import './Cards.css';
 import CardItem from './CardItem';
+import image2 from '../images/img-2.jpg';
+import image9 from '../images/img-9.jpg';
 
 function Cards() {
     return (
@@ -10,13 +12,13 @@ function Cards() {
                 <div className='cards__wrapper'>
                     <ul className='cards__items'>
                         <CardItem 
-                            src='images/img-9.jpg'
+                            src={image9}
                             text='Explore the hidden waterfall deep inside the Amazon Jungle'
                             label='Adventure'
                             path='/services'
                         />
                         <CardItem 
-                            src='images/img-2.jpg'
+                            src={image2}
                             text='Travel through the Islands of Bali in a Private Cruise'
                             label='Luxury'
                             path='/services'
@@ -24,19 +26,19 @@ function Cards() {
                     </ul>
                     <ul className='cards__items'>
                         <CardItem 
-                            src='images/img-9.jpg'
+                            src={image9}
                             text='Explore the hidden waterfall deep inside the Amazon Jungle'
                             label='Adventure'
                             path='/services'
                         />
                         <CardItem 
-                            src='images/img-2.jpg'
+                            src={image2}
                             text='Travel through the Islands of Bali in a Private Cruise'
                             label='Luxury'
                             path='/services'
                         />
                         <CardItem 
-                            src='images/img-2.jpg'
+                            src={image2}
                             text='Travel through the Islands of Bali in a Private Cruise'
                             label='Luxury'
                             path='/services'
