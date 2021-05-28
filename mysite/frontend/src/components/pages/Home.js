@@ -84,7 +84,7 @@ export default function Home() {
 
     return (
         
-        <div className='center'>
+        <div>
         <br />
             <Grid container spacing={1}>
                 <Grid item xs={12} align='center'>
