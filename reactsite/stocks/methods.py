@@ -6,25 +6,26 @@ import concurrent.futures
 
 def add_stocks(): # Only run if you need to reset the Stock objects
     unique_stocks = []
-    for ticker in get_nasdaq()[:50]:
+    for ticker in get_nasdaq():
     	unique_stocks.append(ticker)
 
-    for ticker in get_nyse()[:50]:
+    for ticker in get_nyse():
         unique_stocks.append(ticker)
         
     for ticker in set(unique_stocks):
         Stock.objects.create(ticker=ticker, slug=ticker)
 
 # Only run once to load all Stock objects.
-# Add stocks with threads
+# add_stocks with threads. Would have to change py_trading
 def reset_stocks(n_threads):
     Stock.objects.all().delete()
     add_stocks()
-    # with concurrent.futures.ProcessPoolExecutor() as executor:
-    #     results = [executor.submit(test_stocks, i, n_threads) for i in range(n_threads)] # Can try executor.map()
+    
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        results = [executor.submit(test_stocks, i, n_threads) for i in range(n_threads)] # Can try executor.map()
         
-    #     for f in concurrent.futures.as_completed(results):
-    #         print(f.result())
+        for f in concurrent.futures.as_completed(results):
+            print(f.result())
     
 def test_stocks(index_of_thread, num_of_threads): # Divide # of stocks per thread / total stocks to be tested. Index_of_thread is which thread from 0 to n threads.
     n_stocks_per_thread = len(Stock.objects.all()) 

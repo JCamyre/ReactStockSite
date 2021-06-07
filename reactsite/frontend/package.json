@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": ".index.js",
-  "proxy": "http://localhost:8000", 
+  "proxy": "http://localhost:8000",
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -42,6 +42,8 @@
     "material-auto-rotating-carousel": "^3.0.2",
     "package.json": "^2.0.1",
     "react-router-dom": "^5.2.0",
+    "react-stockcharts": "^0.7.8",
+    "react-table": "^7.7.0",
     "react-virtualized": "^9.22.3",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.1",

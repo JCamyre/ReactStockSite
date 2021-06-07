@@ -137,10 +137,11 @@ function stockButtonPressed(ticker, history, setError) {
             ticker: ticker,
         }),
     };
-
-    fetch("stocks/api/find-stock", requestOptions)
+    // Must have http:// or https:// for cors request. CROSS ORIGIN RESOURCE SHARING
+    fetch("http://localhost:8000/stocks/api/find-stock", requestOptions)
     .then((response) => {
         if (response.ok) {
+            console.log(ticker['ticker']);
             history.push(`/stock/${ticker}`);
         } else {
             setError('Stock not found.');
