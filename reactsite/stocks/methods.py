@@ -28,12 +28,14 @@ def reset_stocks(n_threads):
             print(f.result())
     
 def test_stocks(index_of_thread, num_of_threads): # Divide # of stocks per thread / total stocks to be tested. Index_of_thread is which thread from 0 to n threads.
-    n_stocks_per_thread = len(Stock.objects.all()) 
-    portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
+    # n_stocks_per_thread = len(Stock.objects.all()) 
+    # portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
     
-    for stock in portion:
+    # HUGE ISSUE WITH THIS: THERE IS A LIMIT TO ACCESSING YAHOO API. I have to take breaks in between, idk how many i can do.
+    # Also, only stocks that cause the "An error has occurred" are the bad ones?
+    for stock in Stock.objects.all():
         try:
-            print(stock.ticker)
+            print(py_trading.Stock(stock.ticker))
         except:
             stock.delete()
             print(stock.ticker + ' is bad')

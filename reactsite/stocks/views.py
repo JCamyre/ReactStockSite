@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
 from .models import Portfolio, Stock
-from .methods import reset_stocks, add_stocks
+from .methods import reset_stocks, add_stocks, test_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
@@ -50,6 +50,7 @@ class GetStock(APIView):
         
         if ticker != None:
             stock = Stock.objects.filter(ticker=ticker)
+
             if len(stock) > 0:
                 stock = stock[0]
                 data = StockSerializer(stock).data
@@ -61,7 +62,7 @@ class GetStock(APIView):
                     current_stock = py_trading.Stock(current_stock)                
                 except:
                     return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)  
-                      
+
                 # If I have to generate all of this information everytime someone clicks on a stock, what's the point of having a database for these stocks? All I need is the GetAllStocks view for homepages and get the ticker string, and use py_trading.Stock(ticker)
                 # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
 
@@ -138,6 +139,9 @@ class FindStock(APIView):
 class GetAllStocks(APIView):
          
     def get(self, request, format=None):
+        # print('start')
+        # test_stocks(1, 2)
+        # print('done')
         all_stocks = Stock.objects.all()
         all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
         data = {}
