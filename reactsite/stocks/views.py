@@ -141,6 +141,8 @@ class FindStock(APIView):
 class GetAllStocks(APIView):
          
     def get(self, request, format=None):
+        print('Starting reset')
+        print('Done...')
         all_stocks = Stock.objects.all()
         all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
         data = {}
