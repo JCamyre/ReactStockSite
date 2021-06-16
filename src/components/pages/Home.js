@@ -6,7 +6,7 @@ import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 import HeroSection from '../HeroSection.js';
 import Cards from '../Cards.js';
 import jQuery from 'jquery';
-
+import StockChart from '../CustomStockChart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -90,6 +90,7 @@ export default function Home() {
                 <Grid item xs={12} align='center'>
                     <HeroSection />
                 </Grid>
+                <StockChart />
                 <Cards />
                 {/* <Grid item xs={12} align='center'>
                     <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
