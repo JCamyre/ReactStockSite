@@ -6,7 +6,8 @@ import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 import HeroSection from '../HeroSection.js';
 import Cards from '../Cards.js';
 import jQuery from 'jquery';
-import StockChart from '../CustomStockChart';
+import Chart from '../Chart';
+// import LandingPage from './LandingPage/LandingPage';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,22 +88,24 @@ export default function Home() {
         <div>
         <br />
             <Grid container spacing={1}>
-                <Grid item xs={12} align='center'>
+                {/* <Grid item xs={12} align='center'>
                     <HeroSection />
-                </Grid>
-                <StockChart />
-                <Cards />
+                </Grid> */}
+                {/* <Cards /> */}
+                {/* <LandingPage /> */}
                 {/* <Grid item xs={12} align='center'>
                     <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
                         Homepage
                     </Typography>
                 </Grid>
+                */}
                 <Grid item xs={12} align='center'>
                     <VirtualizedAutocomplete 
                         data = {data}
                         setter = {setSelection}
                     />
                 </Grid>
+                {/*
                 <Grid item xs={12} align='center'>
                     <span>&nbsp;</span>
                 </Grid>

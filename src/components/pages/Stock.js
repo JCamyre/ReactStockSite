@@ -3,7 +3,7 @@ import { Grid, Button, Typography, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Table from '../Table.js';
-import CustomStockChart from '../CustomStockChart.js';
+import CustomStockChart from '../Chart.js';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -41,7 +41,7 @@ export default function Stock(props) {
     // Once React is done rendering, receive the data for the specific Stock, which will be displayed with the tables. 
     useEffect(() => { 
         const fetchData = async () => {
-            fetch('/api/get-stock?ticker=' + ticker)
+            fetch('https://localhost:8000/api/get-stock?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data !== null) {
@@ -70,7 +70,8 @@ export default function Stock(props) {
             })};
         fetchData();
     }, []);
-
+    console.log(seriesData, data1);
+    
     return (
         <Grid container spacing={1} className='Body'>
             <Grid item xs={12} align='center'>

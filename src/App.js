@@ -6,8 +6,6 @@ import Navbar from './components/Navbar';
 import About from './components/pages/About';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
-import Testing from './components/pages/Testing';
-import NavBar from './components/Navbar';
 import './App.css';
 
 function App() {
@@ -16,7 +14,8 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' component={Home}/> 
+          <Route exact path='/' component={Home}/> 
+          <Route path='/stock/:ticker' component={Stock}/>
         </Switch>
       </Router>
     </>
