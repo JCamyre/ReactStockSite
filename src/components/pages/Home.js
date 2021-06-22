@@ -109,14 +109,17 @@ export default function Home() {
                 <Grid item xs={12} align='center'>
                     <span>&nbsp;</span>
                 </Grid>
+                */}
                 <Grid item xs={12} align='center'>
-                    <Button color='primary' variant='contained' to='/create' component={ Link } 
+                    {/* Could do route='/stock/$ticker' component={Stock} */}
+                    <Button color='primary' variant='contained'
                     onClick={() => {
                         stockButtonPressed(selection, history, setError)
                     }}>
                         Information （{selection})
                     </Button>
                 </Grid>
+                {/*
                 <Grid item xs={12} align='center'>
                     <Typography component='h3' variant='h3'>{ fetching ? 'Loading stocks...' : '' }</Typography>
                 </Grid>
@@ -140,7 +143,7 @@ function stockButtonPressed(ticker, history, setError) {
         }),
     };
 
-    fetch("/api/find-stock", requestOptions)
+    fetch("http://localhost:8000/stocks/find-stock", requestOptions)
     .then((response) => {
         if (response.ok) {
             history.push(`/stock/${ticker}`);
