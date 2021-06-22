@@ -61,7 +61,7 @@ export default function Home() {
     // Returns the full list of stocks from Django database from '/api/get-all-stocks' once React app finishes loading. 
     React.useEffect(() => {
         const fetchData = async () => {
-            fetch('/api/get-all-stocks')
+            fetch('http://localhost:8000/stocks/get-all-stocks')
                 .then((response) => response.json())
                 .then((data) => {
                     if (data['Stock not found']) {

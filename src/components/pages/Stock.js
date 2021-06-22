@@ -41,7 +41,7 @@ export default function Stock(props) {
     // Once React is done rendering, receive the data for the specific Stock, which will be displayed with the tables. 
     useEffect(() => { 
         const fetchData = async () => {
-            fetch('https://localhost:8000/api/get-stock?ticker=' + ticker)
+            fetch('https://localhost:8000/stocks/get-stock?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
                     if (data !== null) {
