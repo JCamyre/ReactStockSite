@@ -7,7 +7,7 @@ import HeroSection from '../HeroSection.js';
 import Cards from '../Cards.js';
 import jQuery from 'jquery';
 import Chart from '../Chart';
-// import LandingPage from './LandingPage/LandingPage';
+import LandingPage from './LandingPage/LandingPage.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -105,6 +105,7 @@ export default function Home() {
                         setter = {setSelection}
                     />
                 </Grid>
+                <LandingPage />
                 {/*
                 <Grid item xs={12} align='center'>
                     <span>&nbsp;</span>

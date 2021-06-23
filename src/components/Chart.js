@@ -11,9 +11,9 @@ export default function FinancialChartMultipleData(props) {
             <div className="container">
             <IgrFinancialChart
                 width="100%"
-                height="600px"
+                height="400px"
                 chartType="Candle"
-                thickness={2}
+                thickness={1}
                 chartTitle={props.ticker}
                 // subtitle="Between 2013 and 2017"
                 // yAxisMode="PercentChange"
