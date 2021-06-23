@@ -7,41 +7,108 @@ import HeroSection from '../HeroSection.js';
 import Cards from '../Cards.js';
 import jQuery from 'jquery';
 import Chart from '../Chart';
-import LandingPage from './LandingPage/LandingPage.js';
+import Parallax from '../Parallax';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
-            transform: 'translate(34px, 20px) scale(1);'
-        }
+// Stuff from landingPage.js (styles)
+const containerFluid = {
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    marginRight: "auto",
+    marginLeft: "auto",
+    width: "100%",
+  };
+
+const container = {
+    ...containerFluid,
+    "@media (min-width: 576px)": {
+      maxWidth: "540px",
     },
-    inputRoot: {
-        color: 'white',
-        '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
-            // Default left padding is 6px
-            paddingLeft: 26
-        },
+    "@media (min-width: 768px)": {
+      maxWidth: "720px",
     },
-    "& .MuiOutlinedInput-notchedOutline": {
-        borderColor: "white"
+    "@media (min-width: 992px)": {
+      maxWidth: "960px",
     },
-    "&:hover .MuiOutlinedInput-notchedOutline": {
-        borderColor: "white"
+    "@media (min-width: 1200px)": {
+      maxWidth: "1140px",
     },
-    "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-        borderColor: "white"
+  };
+const title = {
+  color: "#3C4858",
+  margin: "1.75rem 0 0.875rem",
+  textDecoration: "none",
+  fontWeight: "700",
+  fontFamily: `"Roboto Slab", "Times New Roman", serif`,
+};
+
+const styles = {
+    container: {
+      zIndex: "12",
+      color: "#FFFFFF",
+      ...container,
     },
-    option: {
-        '&[data-focus="true"]': {
-            backgroundColor: '#F8F8F8',
-            borderColor: 'transparent'
-        },
-        '&[aria-selected="true"]': {
-            backgroundColor: theme.palette.grey.A200,
-            borderColor: 'transparent',
-        }
-    }
-}));
+    title: {
+      ...title,
+      display: "inline-block",
+      position: "relative",
+      marginTop: "30px",
+      minHeight: "32px",
+      color: "#FFFFFF",
+      textDecoration: "none",
+    },
+    subtitle: {
+      fontSize: "1.313rem",
+      maxWidth: "500px",
+      margin: "10px auto 0",
+    },
+    main: {
+      background: "#FFFFFF",
+      position: "relative",
+      zIndex: "3",
+    },
+    mainRaised: {
+      margin: "-60px 30px 0px",
+      borderRadius: "6px",
+      boxShadow:
+        "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+    },
+  };
+  
+const useStyles = makeStyles(styles);
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         "& .MuiInputLabel-outlined:not(.MuiInputLabel-shrink)": {
+//             transform: 'translate(34px, 20px) scale(1);'
+//         }
+//     },
+//     inputRoot: {
+//         color: 'white',
+//         '&[class*="MuiOutlinedInput-root"] .MuiAutocomplete-input:first-child': {
+//             // Default left padding is 6px
+//             paddingLeft: 26
+//         },
+//     },
+//     "& .MuiOutlinedInput-notchedOutline": {
+//         borderColor: "white"
+//     },
+//     "&:hover .MuiOutlinedInput-notchedOutline": {
+//         borderColor: "white"
+//     },
+//     "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+//         borderColor: "white"
+//     },
+//     option: {
+//         '&[data-focus="true"]': {
+//             backgroundColor: '#F8F8F8',
+//             borderColor: 'transparent'
+//         },
+//         '&[aria-selected="true"]': {
+//             backgroundColor: theme.palette.grey.A200,
+//             borderColor: 'transparent',
+//         }
+//     }
+// }));
 
 export default function Home() {
     // All variables with React state.
@@ -56,7 +123,7 @@ export default function Home() {
 
     // Other variables
     const history = useHistory();
-    const classes = useStyles();
+    // const classes = useStyles();
 
     // Returns the full list of stocks from Django database from '/api/get-all-stocks' once React app finishes loading. 
     React.useEffect(() => {
@@ -83,6 +150,8 @@ export default function Home() {
         fetchData();
     }, []);
 
+    const classes = useStyles();
+
     return (
         
         <div>
@@ -99,27 +168,15 @@ export default function Home() {
                     </Typography>
                 </Grid>
                 */}
-                <Grid item xs={12} align='center'>
-                    <VirtualizedAutocomplete 
-                        data = {data}
-                        setter = {setSelection}
-                    />
-                </Grid>
-                <LandingPage />
-                {/*
-                <Grid item xs={12} align='center'>
-                    <span>&nbsp;</span>
-                </Grid>
-                */}
-                <Grid item xs={12} align='center'>
-                    {/* Could do route='/stock/$ticker' component={Stock} */}
-                    <Button color='primary' variant='contained'
-                    onClick={() => {
-                        stockButtonPressed(selection, history, setError)
-                    }}>
-                        Information （{selection})
-                    </Button>
-                </Grid>
+                <div style={{borderRadius: '6px', maxWidth: '1800px', minWidth: '800px', margin: '0px 25px 0px 25px', padding: '0px 35px 0px 35px', backgroundColor: 'rgb(110, 88, 255)'}}>
+                    <Typography component='h2' variant='h2'>
+                        Homepage
+                    </Typography>         
+                    <Cards style={{borderRadius: '6px'}} />
+                    <i class='fab fa-instagram' style={{fontSize: '48px'}}/>
+                    <i class="fab fa-github" style={{fontSize: '48px'}} />    
+                </div>  
+
                 {/*
                 <Grid item xs={12} align='center'>
                     <Typography component='h3' variant='h3'>{ fetching ? 'Loading stocks...' : '' }</Typography>
