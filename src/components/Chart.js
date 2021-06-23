@@ -16,8 +16,8 @@ export default function FinancialChartMultipleData(props) {
                 thickness={2}
                 chartTitle={props.ticker}
                 // subtitle="Between 2013 and 2017"
-                yAxisMode="PercentChange"
-                yAxisTitle="Percent Changed"
+                // yAxisMode="PercentChange"
+                // yAxisTitle="Percent Changed"
                 dataSource={props.data} />
             </div>
         </div>       

@@ -92,7 +92,7 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />
             </Grid>
-            <Grid item xs={12} justify='center'>
+            <Grid item xs={12} align='center'>
                 <CustomStockChart 
                     data = {seriesData}
                     ticker = {ticker}
