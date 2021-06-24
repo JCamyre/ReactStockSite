@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar style={{ transition: 'all 10000ms ease 0s', transitionProperty: 'all', transitionDuration: '10000ms', transitionTimingFunction: 'ease', transitionDelay: '0s'}}/>
         <Switch>
           <Route exact path='/' component={Home}/> 
           <Route path='/stock/:ticker' component={Stock}/>

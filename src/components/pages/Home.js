@@ -8,6 +8,8 @@ import Cards from '../Cards.js';
 import jQuery from 'jquery';
 import Chart from '../Chart';
 import Parallax from '../Parallax';
+import bg_img from '../../images/bg-img-1.jpg';
+import Footer from '../Footer';
 
 // Stuff from landingPage.js (styles)
 const containerFluid = {
@@ -152,30 +154,45 @@ export default function Home() {
 
     const classes = useStyles();
 
+    const image = require("../../images/bg-img-1.jpg").default;
     return (
         
         <div>
-        <br />
             <Grid container spacing={1}>
                 {/* <Grid item xs={12} align='center'>
                     <HeroSection />
-                </Grid> */}
-                {/* <Cards /> */}
-                {/* <LandingPage /> */}
-                {/* <Grid item xs={12} align='center'>
+                </Grid>
+                <Cards />
+                <LandingPage />
+                <Grid item xs={12} align='center'>
                     <Typography component='h2' variant='h2' style={{'color': 'rgb(110, 88, 255)'}}>
                         Homepage
                     </Typography>
                 </Grid>
                 */}
-                <div style={{borderRadius: '6px', maxWidth: '1800px', minWidth: '800px', margin: '0px 25px 0px 25px', padding: '0px 35px 0px 35px', backgroundColor: 'rgb(110, 88, 255)'}}>
-                    <Typography component='h2' variant='h2'>
-                        Homepage
-                    </Typography>         
-                    <Cards style={{borderRadius: '6px'}} />
-                    <i class='fab fa-instagram' style={{fontSize: '48px'}}/>
-                    <i class="fab fa-github" style={{fontSize: '48px'}} />    
-                </div>  
+                <div className="container" style={{margin: 'auto'}}>
+                {/* , width: '70%', minWidth: '800px', */}
+                    <div style={{borderRadius: '6px', backgroundImage: "url(" + image + ")", backgroundSize: 'auto', 
+                        boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
+                        minWidth: '1200px', minHeight: '675px', padding: '0px 35px 0px 35px', 
+                        backgroundColor: 'rgb(110, 88, 255)'}}>
+                        <Grid item xs={12} align='center'>
+                            <Typography component='h2' variant='h2' style={{color: '#FFFFFF'}}>
+                                Homepage
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} align='center'>
+                            <VirtualizedAutocomplete
+                                data = {data}
+                                setter = {setSelection}
+                                color='#FFFFFF'
+                            />
+                        </Grid>
+                        {/* <Cards style={{borderRadius: '6px'}} /> */}   
+                    </div>    
+                    <Footer />
+                </div>
+
 
                 {/*
                 <Grid item xs={12} align='center'>
