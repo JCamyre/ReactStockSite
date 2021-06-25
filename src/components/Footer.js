@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Footer() {
     return (
-        <footer>
-            <div style={{alignItems: 'center', padding: '25px 25px 25px 25px', }}>
+        <footer style={{position: 'relative', backgroundColor: '#e5e5e5', display: 'flex', width: 'auto'}}>
+            <div style={{alignItems: 'center', padding: '25px 25px 25px 25px'}}>
                 {/* <div>
                     <Button>
                         <p>About us</p>

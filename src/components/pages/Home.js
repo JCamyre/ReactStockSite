@@ -157,7 +157,7 @@ export default function Home() {
     const image = require("../../images/bg-img-1.jpg").default;
     return (
         
-        <div style={{backgroundColor: '#e5e5e5'}}>
+        <div>
             <Grid container spacing={1}>
                 {/* <Grid item xs={12} align='center'>
                     <HeroSection />
@@ -169,34 +169,62 @@ export default function Home() {
                         Homepage
                     </Typography>
                 </Grid>
-                */}
-                <div className="container" style={{margin: 'auto', color: '#3c4858', fontWeight: '300px', fontFamily: ['Roboto', 'Helvetica'],
-                    lineHeight: '1.5em', backgroundColor: '#e5e5e5'}}>
-                    <div style={{backgroundColor: 'rgb(0, 0, 0)', position: 'absolute', width: '1600px', height: '800px', 
+                 color: '#3c4858',
+                */} 
+                
+
+                    {/* <div style={{backgroundColor: 'rgb(255, 255, 255)', position: 'absolute', width: '1200px', height: '800px', 
                     boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)'}}>
                         
-                    </div>
+                    </div> */}
                 {/* , width: '70%', minWidth: '800px', */}
+                <Grid item align='center' style={{margin: 'auto'}}>
                     <div style={{borderRadius: '6px', backgroundImage: "url(" + image + ")", backgroundSize: 'auto', 
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
-                        minWidth: '1200px', minHeight: '675px', padding: '0px 35px 0px 35px', position: 'relative',
-                        backgroundColor: 'rgb(110, 88, 255)'}}>
-                        <Grid item xs={12} align='center'>
+                        width: '200%', height: '100%', padding: '0px 35px 0px 35px', position: 'relative'}}>
+                        {/* <Grid item xs={12} align='center'>
                             <Typography component='h2' variant='h2' style={{color: '#FFFFFF'}}>
                                 Homepage
                             </Typography>
-                        </Grid>
-                        <Grid item xs={12} align='center'>
+                        </Grid> */}
+
+                        {/* <Cards style={{borderRadius: '6px'}} /> */}   
+                    </div>
+                </Grid>
+                <Grid item xs={12} align='center'>
                             <VirtualizedAutocomplete
                                 data = {data}
                                 setter = {setSelection}
                                 color='#FFFFFF'
                             />
+                </Grid>
+                <Grid item xs={12} align='center' style={{padding: '0px 75px'}}>
+                    <div className="container" style={{margin: 'auto', fontWeight: '300px', fontFamily: ['Roboto', 'Helvetica'],
+                        lineHeight: '1.5em', backgroundColor: '#e5e5e5', borderRadius: '6px', backgroundColor: 'rgb(255, 255, 255)', 
+                        boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)'}}>
+                        <p>Product info here.</p>
+                        <Grid item xs={12} align='center'>
+                            <h2>YO</h2>
                         </Grid>
-                        {/* <Cards style={{borderRadius: '6px'}} /> */}   
-                    </div>    
+                        <Grid item xs={12} align='center'>
+                            <h5>YO</h5>
+                        </Grid>
+                        <Grid item xs={12} align='center'>
+                            <h3>Every landing page needs a small description after the big bold title, 
+                                that's why we added this text here. Add here all the information that 
+                                can make you or your product create the first impression.
+                            </h3>                        
+                        </Grid>
+                        <Grid item xs={12} align='center'>
+                            <img style={{height: 'auto', width: '100%'}}src='https://im-media.voltron.voanews.com/Drupal/01live-166/styles/sourced/s3/2019-04/3ED6FCAB-D280-4197-8B02-BCCD9846076A.jpg?itok=EKczHCGX' />
+                        </Grid>
+                    </div>
+                </Grid>
+
+
+                <Grid item xs={12} align='center'>
                     <Footer />
-                </div>
+                </Grid>
 
 
                 {/*
@@ -210,6 +238,8 @@ export default function Home() {
         </div>
     );
 }
+// div doesn't cover full screen?? want it to be the grey
+// 
 
 function stockButtonPressed(ticker, history, setError) {
     const requestOptions = {
