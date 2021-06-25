@@ -181,7 +181,7 @@ export default function Home() {
                 <Grid item align='center' style={{margin: 'auto'}}>
                     <div style={{backgroundImage: "url(" + image + ")", backgroundSize: 'auto', 
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
-                        width: '1903px', height: '800px',padding: '0px 35px 0px 35px', position: 'relative',
+                        width: '1903px', height: '750px',padding: '0px 35px 0px 35px', position: 'relative',
                         filter: 'brightness(50%)'}}>
                         {/* <Grid item xs={12} align='center'>
                             <Typography component='h2' variant='h2' style={{color: '#FFFFFF'}}>
