@@ -42,7 +42,7 @@ export default function VirtualizedAutocomplete (props) {
             ListboxComponent={ListboxComponent}
             options = {props.data}
             renderInput={(params) => (
-                <TextField {...params} variant='outlined' label='Stocks' fullWidth />
+                <TextField {...params} variant='filled' label='Enter a stock...' fullWidth />
             )}
             onChange = {(e, ticker) => {
                 props.setter(ticker);

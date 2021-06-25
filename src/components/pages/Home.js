@@ -154,7 +154,7 @@ export default function Home() {
 
     const classes = useStyles();
 
-    const image = require("../../images/bg-img-1.jpg").default;
+    const image = require("../../images/bg-img-3.jpg").default;
     return (
         
         <div>
@@ -179,9 +179,10 @@ export default function Home() {
                     </div> */}
                 {/* , width: '70%', minWidth: '800px', */}
                 <Grid item align='center' style={{margin: 'auto'}}>
-                    <div style={{borderRadius: '6px', backgroundImage: "url(" + image + ")", backgroundSize: 'auto', 
+                    <div style={{backgroundImage: "url(" + image + ")", backgroundSize: 'auto', 
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
-                        width: '200%', height: '100%', padding: '0px 35px 0px 35px', position: 'relative'}}>
+                        width: '1903px', height: '800px',padding: '0px 35px 0px 35px', position: 'relative',
+                        filter: 'brightness(50%)'}}>
                         {/* <Grid item xs={12} align='center'>
                             <Typography component='h2' variant='h2' style={{color: '#FFFFFF'}}>
                                 Homepage
@@ -189,18 +190,19 @@ export default function Home() {
                         </Grid> */}
 
                         {/* <Cards style={{borderRadius: '6px'}} /> */}   
-                    </div>
-                </Grid>
-                <Grid item xs={12} align='center'>
+                        <Grid item xs={12} justify='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '350px'}}>
                             <VirtualizedAutocomplete
                                 data = {data}
                                 setter = {setSelection}
                                 color='#FFFFFF'
                             />
+                        </Grid>
+                    </div>
                 </Grid>
+
                 <Grid item xs={12} align='center' style={{padding: '0px 75px'}}>
-                    <div className="container" style={{margin: 'auto', fontWeight: '300px', fontFamily: ['Roboto', 'Helvetica'],
-                        lineHeight: '1.5em', backgroundColor: '#e5e5e5', borderRadius: '6px', backgroundColor: 'rgb(255, 255, 255)', 
+                    <div className="container" style={{margin: 'auto', fontWeight: '300px', fontFamily: ['Roboto', 'Helvetica'], padding: '40px 60px',
+                        lineHeight: '1.5em', borderRadius: '6px', backgroundColor: 'rgb(255, 255, 255)', 
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)'}}>
                         <p>Product info here.</p>
                         <Grid item xs={12} align='center'>

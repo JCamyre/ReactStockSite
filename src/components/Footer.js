@@ -17,10 +17,10 @@ function Footer() {
                 </div> */}
                 <div>
                     <a href='https://www.instagram.com/realmizkif/' target='_blank' rel='noreferrer noopener'>
-                        <i class='fab fa-instagram' style={{fontSize: '48px'}}/>
+                        <i class='fab fa-instagram' style={{fontSize: '48px', color: 'rgb(0, 0, 0)'}}/>
                     </a>
                     <a target='_blank' rel="noreferrer noopener" href='https://github.com/JCamyre'>
-                        <i class="fab fa-github" style={{fontSize: '48px'}} />
+                        <i class="fab fa-github" style={{fontSize: '48px', color: 'rgb(0, 0, 0)'}} />
                     </a>
                 </div>
             </div>
