@@ -147,7 +147,7 @@ class GetSearchedStock(APIView):
         # add_stocks()
         ticker = request.data.get(self.lookup_url_kwarg)
         print(ticker)
-        queried_stocks = Stock.objects.filter(ticker__startswith='t')
+        queried_stocks = Stock.objects.filter(ticker__startswith=ticker)
         queried_stocks = [{'ticker': StockSerializer(stock).data['ticker']} for stock in queried_stocks]
         data = {}
         data['queried_ticker'] = queried_stocks
