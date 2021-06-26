@@ -5,11 +5,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 import HeroSection from '../HeroSection.js';
 import Cards from '../Cards.js';
-import jQuery from 'jquery';
+import jQuery from 'jQuery';
 import Chart from '../Chart';
 import Parallax from '../Parallax';
 import bg_img from '../../images/bg-img-1.jpg';
 import Footer from '../Footer';
+import SearchBar from '../SearchBar';
 
 // Stuff from landingPage.js (styles)
 const containerFluid = {
@@ -128,29 +129,29 @@ export default function Home() {
     // const classes = useStyles();
 
     // Returns the full list of stocks from Django database from '/api/get-all-stocks' once React app finishes loading. 
-    React.useEffect(() => {
-        const fetchData = async () => {
-            fetch('http://localhost:8000/stocks/get-all-stocks')
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data['Stock not found']) {
-                        console.log('uh ohhh');
-                    }
-                    else if (data!==null) {
-                        const tickers = data['all_tickers'].sort()
-                        setData(tickers);
-                        setSelection(tickers[0]);
-                        setFetching(false);
-                    } else {
-                        console.log('Something bugged while accessing API');
-                    }
-                }, [])
-            .catch(e => {
-                console.log(e);
-                setFetching(false);
-            })}
-        fetchData();
-    }, []);
+    // React.useEffect(() => {
+    //     const fetchData = async () => {
+    //         fetch('http://localhost:8000/stocks/get-all-stocks')
+    //             .then((response) => response.json())
+    //             .then((data) => {
+    //                 if (data['Stock not found']) {
+    //                     console.log('uh ohhh');
+    //                 }
+    //                 else if (data!==null) {
+    //                     const tickers = data['all_tickers'].sort()
+    //                     setData(tickers);
+    //                     setSelection(tickers[0]);
+    //                     setFetching(false);
+    //                 } else {
+    //                     console.log('Something bugged while accessing API');
+    //                 }
+    //             }, [])
+    //         .catch(e => {
+    //             console.log(e);
+    //             setFetching(false);
+    //         })}
+    //     fetchData();
+    // }, []);
 
     const classes = useStyles();
 
@@ -158,6 +159,7 @@ export default function Home() {
     return (
         
         <div>
+            <SearchBar />
             <Grid container spacing={1}>
                 {/* <Grid item xs={12} align='center'>
                     <HeroSection />
@@ -191,11 +193,12 @@ export default function Home() {
 
                         {/* <Cards style={{borderRadius: '6px'}} /> */}   
                         <Grid item xs={12} justify='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '350px'}}>
-                            <VirtualizedAutocomplete
+                            {/* <VirtualizedAutocomplete
                                 data = {data}
                                 setter = {setSelection}
                                 color='#FFFFFF'
-                            />
+                            /> */}
+                            <SearchBar />
                         </Grid>
                     </div>
                 </Grid>
