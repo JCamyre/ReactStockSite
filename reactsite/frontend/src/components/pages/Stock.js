@@ -3,7 +3,7 @@ import { Grid, Button, Typography, IconButton } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Table from '../Table.js';
-import CustomStockChart from '../CustomStockChart.js';
+import CustomStockChart from '../Chart.js';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -40,34 +40,38 @@ export default function Stock(props) {
 
     // Once React is done rendering, receive the data for the specific Stock, which will be displayed with the tables. 
     useEffect(() => { 
-        fetch('http://localhost:8000/stocks/api/get-stock?ticker=' + ticker)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data !== null && data['Stock not found'] == null) {
-                    setData1(data['data1']);
-                    setData2(data['data2']);
-                    setData3(data['data3']);
+        const fetchData = async () => {
+            fetch('http://localhost:8000/stocks/get-stock?ticker=' + ticker)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data !== null) {
+                        setData1(data['data1']);
+                        setData2(data['data2']);
+                        setData3(data['data3']);
+                        setFetching(false);
+
+                        // CustomStockChart data
+
+                        var seriesData = data['seriesData'];
+                        seriesData.forEach((x, i) => {
+                            seriesData[i]['date'] = new Date(x['date']);
+                        });
+
+                        setSeriesData(seriesData);
+
+                    } else {
+                        console.log('Fetch bugged');
+                    }
+                    }, [])
+                .catch(e => {
+                    console.log(e);
                     setFetching(false);
-
-                    // CustomStockChart data
-
-                    var seriesData = data['seriesData'];
-                    seriesData.forEach((x, i) => {
-                        seriesData[i]['date'] = new Date(x['date']);
-                    });
-
-                    setSeriesData(seriesData);
-
-                } else {
-                    console.log('Fetch bugged');
-                }
-                }, [])
-            .catch(e => {
-                console.log(e);
-                setFetching(false);
-                setNotFound(true);
-        })}, []);
-
+                    setNotFound(true);
+            })};
+        fetchData();
+    }, []);
+    console.log(seriesData, data1);
+    
     return (
         <Grid container spacing={1} className='Body'>
             <Grid item xs={12} align='center'>
@@ -88,11 +92,12 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <Table columns={columns1} data={[data1]} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} align='center'>
                 <CustomStockChart 
                     data = {seriesData}
+                    ticker = {ticker}
                 />
-            </Grid> 
+            </Grid>
             <Grid item xs={12} align='center'>
                 <Table columns={columns2} data={[data1]} />
             </Grid>

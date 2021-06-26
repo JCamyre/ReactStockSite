@@ -1,0 +1,146 @@
+Paper trading?
+make sure to mention that you are using compnoents from material kit react main
+Is having to see React from localhost:3000 a problem for final build? Will I have to do frontend.urls?
+Credit: https://www.creative-tim.com/product/material-kit-react
+
+I want to make a signin/signup page. 
+
+For the other site I want to do, signin/signup, main page for the blog style, a lot of account logic. 
+
+MAKE PORTFOLIO SITE AND PROJECTS WEBSITE
+
+Split up homepage into sections (like navbar, searchbar + parallax image, additional info, footer, etc)
+
+CSS stuff:
+Margin: auto for centering divs
+Box shadow + making background color of container div light grey to give effect of float rectangle
+Border radius for curved edges
+
+Transition: transition: padding 550ms cubic-bezier(.45,1,.32,1);
+    transition-property: padding;
+    transition-duration: 550ms;
+    transition-timing-function: cubic-bezier(0.45, 1, 0.32, 1);
+    transition-delay: 0s;
+
+padding: 1rem 0;
+
+display: block;
+
+    font: 14px/1.8 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+    text-rendering: optimizeLegibility;
+
+color: #505061; 
+
+Buy call: 3-12 months, inthe money, ~70 delta (for your first time), lower IV. So the delta is the number of shares that the call functions as? 70 delta, 
+Sell call: 30-45 day expiration (can do closer to expiration for less profit but less risk), ~30 delta, high IV
+So delta is basically change of being in money (delta is actually how much option price changes for every 1 dollar of underlying stock price action). The lower the delta, the cheaper the option, but the lower chance of in the money. 
+Buy low IV, sell high IV
+
+Buy cheap call, DON'T chase high premium - calls that will increase in value the most when stock goes up a little bit. I think he means calls that are just in the money (not too much).
+"Don't get the call that lets you collect the most premium (idk what that means). Get the least." THAT MEANS BUY THE 3-12 MONTH CALL WITH LOW IV. that means the calls we sell will also be relatively low IV, which is fine because the calls we sell are meant to hedge against our long call (the money maker)
+Make sure the long call you buy is cheap, good odds, and something you would buy even without selling calls against it.
+Make sure to consider IV.
+We abuse theta decay to make money selling calls (the amount an option loses in extrensinc value (time premium in option price) per day increases exponentially near expiration). That's why we buy 3-12 month calls, since theta decay next to nothing. Around a month is when theta decay goes crazy.
+
+Sell the long call about 21-30 days away from expiration (when theta decay goes crazy).
+
+Buy IV below 252 day average (prob will go back up to average)
+
+Tip when selling option: If half way point between when selling option and expiration date (around 10-15 days away), your short call reaches 50% profit (does that mean 50% to strike price?), best to close that position (buy back call), take profit and sell another call. 
+50% of option time left, >50% option profit left. That means too much time for stock to get to strike price relative to amount of profit you can make (theta making option price lower, so that you can buy back at lower price and profit)
+If you get assigned (where sold option is in the money at expiration), cover short call by exercising long call. YOU HAVE TO COVER SHORT CALL TO KEEP LONG CALL. 
+
+Rolling - closing your short call and selling a new call.
+Rolling down - buying back, selling call at lower strike price (same expiration date). DO WHEN: Stock price is dropping, and your short call is reaching max profit, maybe close short call, sell call at lower strike price near 30 delta. 
+Rolling up - higher strike price (same expiration) date. DO WHEN: You think short call will be in money at expiration, buy back short call, sell new call at higher price.
+Rolling out - same strike price but later expiration date
+
+Want to pretty much always sell long call 21-30 days from expiration unless you are certain a cataylst will make stock go crazy.
+
+This strat op for long term growth, but short term sideways or down.
+
+SAY YOU THINK APPLE IS GOING TO RECOVER FROM DIP: BUY THE LONG CALL FOR 3-12 MONTHS AWAY IN THE MONEY. THEN WHEN IT REACHES A CEILING, SELL THE CALL AGAINST YOUR CALL. Get the good deal on the long call, scam people on your short call.
+
+Poor man's puts: 
+Buy -70 delta put, sell -30 delta put
+If stock go down.
+What if short call out of money, but confident it will go back down.
+
+What's the difference between covered calls and other spreads where you buy and sell calls? Covered calls are for when bullish long term, not short term, so you buy a 
+In option spreads, both calls/puts are same expiration date, sideways movement is best case scenario. You aren't bullish/bearish, just neutral. 
+
+Vertical spread: 
+Long option + short option (same expiration date, different prices)
+Short vertical spread: A lot less risk than naked option, but less profit.
+If stock at $90, we believe won't go above $100, but want some risk management.
+Sell $100 call for 3.00, meaning we get $300, and if expires out of the money, we keep all $300. But, if stock skyrockets, we will have to cover (buy back call) for a lot, huge risk.
+So we buy the $105 call for 1.20 (since a lot less chance of reaching 105 before expiration).
+IF EXPIRES OUT OF MONEY: Our vertical spread nets us $1.80 if below $100 at expiration, $180 profit, since both options are worthless, and don't have to buyback short call. 
+STOCK GOES ABOVE $100 to $130: Our short call is worth $30.00 intrinsicially (3000 - 300 -> $2700 loss), our long call is worth $25.00 (130-105) intrinsicially (2500 - 120 -> $2380 profit). So net loss is $320 (2380 - 2700: $320)
+The good thing about vertical spread is there is max loss, which is $320 in this case. If stock is $200, $300, $400000, max loss is $320 since we have $105 call hedging position.
+Net loss calculation: Difference in strike price - entry price (credit we got from spread)
+Net loss: $(105 - 100) - $1.80 = $3.20, $320 max loss
+Stock price between $100 and $105: Then the $105 call we bought is worthless/out of the money, and $100 call we sold is in the money. If $101, then short call is worth $1.00, meaning we have to buy it back, so our total profit is $0.80, or $80. 
+Calculation: (Stock price at expiration - 100) - credit from spread.
+($101 - 100) - $1.80 = $80 profit.
+Breakeven is short call strike price + credit from selling spread.
+$100 + 1.80 = 101.80 breakeven stock price.
+Max loss is also capital requirement (if you need to buy back short call in worst case scenario)
+High probability of success, smaller wins.
+
+Sell put vertical spreads if bullish/neutral on stock
+
+Either way, always sell expensive in the money option, buy cheap out of the money option for hedge. 
+
+Start off with a vertical spread, then in charlesschwab do covered call.
+
+Why does a super long call have a higher delta than an expiring call.
+
+LEAPS (long-term equity anticipation securities)
+
+Experiment with blue chip, TSM, AAPL, etc.
+AAPL 7/2 Vertical Spread: I think it will go above $135 by 7/2. 
+Sell $135 Put for $2.42. Buy $130 Put for $0.45. 
+Max profit: Both puts expire worthless, $197 profitttt.
+Max loss: (135-130) - 1.97 = $3.03, $303 losssss.
+Breakeven price: 135 - 1.97 = $133.03 breakeven price. This is because at $133.03 stock price, the short put ($135) is worth $1.97 in intrinsic value, so you would have to buy back for $1.97, leaving you with $0 profit.
+
+TSM 7/2: $122. I'm think it is not going above $122 (trading in a range):
+Sell $122 Call @ $0.35, Buy $125 Call @ 0.14.
+Max profit: $0.21
+Max loss: (125-122) - 0.21 = $2.79
+Breakeven: 125 + 0.21 = $125.21
+
+
+Links:
+https://www.optionsprofitcalculator.com
+https://marketchameleon.com/Overview/AAPL/IV/
+Robinhood for greeks/info
+
+Make sure long call is in the money.
+12/17/21 $125 $14.22 (that's 133-125, 8 dollars intrinsinc, 6 extrinsic) 25.70% IV 0.6710 delta, 7/23/21 sell $137 1.46 19.34% 0.3213 DELTA
+
+Don't you want to buy low IV sell high IV?
+
+WHEN BUYING OPTIONS, CHECK IV FOR THE OPTIONS NEAR THE ONE YOU WANT, IF IV DRASTICALLY LOWER, BUY THOSE ONES SINCE BETTER VALUE.(ask if you want to buy high iv)
+
+Selling cash covered puts, rolling down in the price because of theta decay.
+
+"option sweep"
+Learn what a lot of options is considered (obv cheaper stock will have more options compared to more expensive stock)
+
+SEARCHBAR NOTES:
+Don't know what ref does
+Which is more efficient? You load the full list of tickers at once w react virtualized or query database every time input is updated...
+I'll try their way of accessing api everytime you search. 
+
+When animating anything, think about the different states.
+If you want to animate a searchbar expanding when you click on it, there are two states.
+isExpanded = true when clicked on, isExpanded = false when not.
+Have different CSS for both states. 
+Buttons can change the state of objects to create effect of animation
+Transitions good for this.
+
+Not sure what things like this do: {isExpanded && <LineSeperator />} Maybe shows only if expanded?
+Would make sense

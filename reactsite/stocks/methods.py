@@ -5,22 +5,22 @@ import concurrent.futures
 
 
 def add_stocks(): # Only run if you need to reset the Stock objects
-    unique_stocks = []
+    unique_stocks = set()
     for ticker in get_nasdaq():
-    	unique_stocks.append(ticker)
+    	unique_stocks.add(ticker)
 
     for ticker in get_nyse():
-        unique_stocks.append(ticker)
+        unique_stocks.add(ticker)
         
-    for ticker in set(unique_stocks):
-        Stock.objects.create(ticker=ticker, slug=ticker)
+    for ticker in unique_stocks:
+        # NEED TO HAVE TICKER + COMPANY NAME FOR get_nasdaq() and get_nyse()
+        Stock.objects.create(ticker=ticker, name=ticker, slug=ticker)
 
 # Only run once to load all Stock objects.
-# add_stocks with threads. Would have to change py_trading
+
 def reset_stocks(n_threads):
     Stock.objects.all().delete()
     add_stocks()
-    
     with concurrent.futures.ProcessPoolExecutor() as executor:
         results = [executor.submit(test_stocks, i, n_threads) for i in range(n_threads)] # Can try executor.map()
         
@@ -28,14 +28,12 @@ def reset_stocks(n_threads):
             print(f.result())
     
 def test_stocks(index_of_thread, num_of_threads): # Divide # of stocks per thread / total stocks to be tested. Index_of_thread is which thread from 0 to n threads.
-    # n_stocks_per_thread = len(Stock.objects.all()) 
-    # portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
+    n_stocks_per_thread = len(Stock.objects.all()) 
+    portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
     
-    # HUGE ISSUE WITH THIS: THERE IS A LIMIT TO ACCESSING YAHOO API. I have to take breaks in between, idk how many i can do.
-    # Also, only stocks that cause the "An error has occurred" are the bad ones?
-    for stock in Stock.objects.all():
+    for stock in portion:
         try:
-            print(py_trading.Stock(stock.ticker))
+            print(stock.ticker)
         except:
             stock.delete()
             print(stock.ticker + ' is bad')

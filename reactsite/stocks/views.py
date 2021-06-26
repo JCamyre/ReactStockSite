@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
 from .models import Portfolio, Stock
-from .methods import reset_stocks, add_stocks, test_stocks
+from .methods import add_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
@@ -50,7 +50,6 @@ class GetStock(APIView):
         
         if ticker != None:
             stock = Stock.objects.filter(ticker=ticker)
-
             if len(stock) > 0:
                 stock = stock[0]
                 data = StockSerializer(stock).data
@@ -61,8 +60,7 @@ class GetStock(APIView):
                     current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
                     current_stock = py_trading.Stock(current_stock)                
                 except:
-                    return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)  
-
+                    return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
                 # If I have to generate all of this information everytime someone clicks on a stock, what's the point of having a database for these stocks? All I need is the GetAllStocks view for homepages and get the ticker string, and use py_trading.Stock(ticker)
                 # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
 
@@ -119,7 +117,11 @@ class FindStock(APIView):
         # Get the value of ticker (lookup_url_kwarg) from the POST request from the user. 
         # THIS IS THE ISSUE
         ticker = request.data.get(self.lookup_url_kwarg)
-      
+
+        # print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
+        
+        print(ticker)
+
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
             if len(stock_result) > 0: # If the stock exists
@@ -136,16 +138,18 @@ class FindStock(APIView):
         
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
-class GetAllStocks(APIView):
+class GetSearchedStock(APIView):
+    lookup_url_kwarg = 'queried_ticker'
          
     def get(self, request, format=None):
-        # print('start')
-        # test_stocks(1, 2)
-        # print('done')
-        all_stocks = Stock.objects.all()
-        all_stocks = [StockSerializer(stock).data['ticker'] for stock in all_stocks]
+        # if not self.request.session.exists(self.request.session.session_key):
+        #     self.request.session.create()
+        # add_stocks()
+        ticker = request.data.get(self.lookup_url_kwarg)
+        queried_stocks = Stock.objects.all(query=ticker)
+        queried_stocks = [{'ticker': StockSerializer(stock).data['ticker']} for stock in queried_stocks]
         data = {}
-        data['all_tickers'] = all_stocks
+        data['queried_ticker'] = queried_stocks
 
         return Response(data, status=status.HTTP_200_OK)
 

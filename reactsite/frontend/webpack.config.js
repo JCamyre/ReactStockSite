@@ -13,15 +13,6 @@ module.exports = {
                 test: /\.(js)$/, 
                 exclude: '/node_modules/',
                 use: 'babel-loader',
-                // options: {
-                //   // presets: [
-                //   //   '@babel/preset-env',
-                //   //   '@babel/preset-react'
-                //   // ],
-                //   plugins: [
-                //     '@babel/transform-runtime'
-                //   ]
-                // }
             },
             { 
                 test: /\.css$/, 
@@ -51,10 +42,15 @@ module.exports = {
             minimize: true,
     },
     mode: 'development',
+    devServer: {
+      historyApiFallback: true,
+      contentBase: './',
+      hot: true
+    },
     plugins: [
 
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: 'templates/frontend/index.html'
         })
     ]
 }

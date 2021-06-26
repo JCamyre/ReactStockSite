@@ -3,17 +3,23 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import Stock from './components/pages/Stock';
 import Navbar from './components/Navbar';
+import About from './components/pages/About';
+import SignIn from './components/pages/SignIn';
+import SignUp from './components/pages/SignUp';
+import './App.css';
 
-export default function App() {
-    return (
-        <>
-        <Router>
-            <Navbar />
-            <Switch>
-                <Route exact path='/' component={Home}/> 
-                <Route path='/stock/:ticker' component={Stock}/>
-            </Switch>
-        </Router>
-        </>
-    );
+function App() {
+  return (
+    <>
+      <Router>
+        <Navbar style={{ transition: 'all 10000ms ease 0s', transitionProperty: 'all', transitionDuration: '10000ms', transitionTimingFunction: 'ease', transitionDelay: '0s'}}/>
+        <Switch>
+          <Route exact path='/' component={Home}/> 
+          <Route path='/stock/:ticker' component={Stock}/>
+        </Switch>
+      </Router>
+    </>
+  );
 }
+
+export default App;
