@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 import HeroSection from '../HeroSection.js';
 import Cards from '../Cards.js';
-import jQuery from 'jquery';
+import jQuery from 'jQuery';
 import Chart from '../Chart';
 import Parallax from '../Parallax';
 import bg_img from '../../images/bg-img-1.jpg';

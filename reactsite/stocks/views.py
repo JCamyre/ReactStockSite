@@ -139,14 +139,13 @@ class FindStock(APIView):
         return Response({'Bad Request': 'Invalid post data, did not find a ticker'}, status=status.HTTP_400_BAD_REQUEST)
         
 class GetSearchedStock(APIView):
-    lookup_url_kwarg = 'queried_ticker'
-         
+        
     def get(self, request, format=None):
         # if not self.request.session.exists(self.request.session.session_key):
         #     self.request.session.create()
         # add_stocks()
-        ticker = request.data.get(self.lookup_url_kwarg)
-        print(ticker)
+        ticker = request.GET['queried_ticker']
+        print(request.GET)
         queried_stocks = Stock.objects.filter(ticker__startswith=ticker)
         queried_stocks = [{'ticker': StockSerializer(stock).data['ticker']} for stock in queried_stocks]
         data = {}
