@@ -157,7 +157,7 @@ export default function SearchBar() {
   }, [isClickedOutside]);
 
   const prepareSearchQuery = (query) => {
-    const url = `http://localhost:8000/stocks/queried_ticker?=${query}`;
+    const url = `http://localhost:8000/stocks/get-searched-stock?queried_ticker=${query}`;
 
     return encodeURI(url); // string -> URI
   };

@@ -14,7 +14,8 @@ def add_stocks(): # Only run if you need to reset the Stock objects
         
     for ticker in unique_stocks:
         # NEED TO HAVE TICKER + COMPANY NAME FOR get_nasdaq() and get_nyse()
-        Stock.objects.create(ticker=ticker, name=ticker, slug=ticker)
+        # name=ticker.name
+        Stock.objects.create(ticker=ticker, slug=ticker)
 
 # Only run once to load all Stock objects.
 
