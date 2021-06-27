@@ -184,7 +184,7 @@ export default function Home() {
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
                         width: '1903px', height: '750px',padding: '0px 35px 0px 35px', position: 'relative',
                         filter: 'brightness(90%)'}}>
-                        <Grid item xs={12} justify='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '345px'}}>
+                        <Grid item xs={12} align='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '345px'}}>
                             <SearchBar />
                         </Grid>
                     </div>

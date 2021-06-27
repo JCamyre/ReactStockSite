@@ -1,11 +1,11 @@
 import React from 'react'
 
-function About() {
+function ContactUs() {
     return (
         <div>
-            
+            <p>yo</p>
         </div>
     )
 }
 
-export default About
+export default ContactUs

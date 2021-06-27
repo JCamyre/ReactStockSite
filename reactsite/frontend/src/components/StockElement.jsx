@@ -20,7 +20,7 @@ const Ticker = styled.h2`
 `;
 
 const Name = styled.h3`
-  font-size: 30px;
+  font-size: 24px;
   color: #000;
   margin-left: 10px;
   flex: 2;
