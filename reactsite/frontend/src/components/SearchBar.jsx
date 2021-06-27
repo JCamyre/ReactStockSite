@@ -9,10 +9,11 @@ import { useRef } from "react";
 import MoonLoader from "react-spinners/MoonLoader";
 import { useDebounce } from "../hooks/debounceHook";
 import StockElement from './StockElement';
+import axios from 'axios';
 
 // Credit: https://www.youtube.com/watch?v=IlnmWntmUns
 
-const SearchBarContainer = styled.div`
+const SearchBarContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     width: 34em;
@@ -170,21 +171,20 @@ export default function SearchBar() {
 
     const URL = prepareSearchQuery(searchQuery);
 
-    const response = await fetch(URL)     
-      .catch((error) => {
-        console.log('Error: ', error);
-      });
+    const response = await axios.get(URL).catch((err) => {
+      console.log("Error: ", err);
+    });
 
     if (response) {
+      console.log("Response: ", response.data);
       if (response.data && response.data.length === 0) setNoTickers(true);
 
-      // response.data vs response.json()?
-      console.log(response.json());
       setTickers(response.data);
     }
 
     setLoading(false);
-  }
+
+  };
 
   useDebounce(searchQuery, 500, searchTicker);
 
@@ -234,9 +234,14 @@ export default function SearchBar() {
               <WarningMessage>Start typing to Search</WarningMessage>
             </LoadingWrapper>
           )}
-          {!isLoading && !noTickers && (
+          {!isLoading && noTickers && (
+            <LoadingWrapper>
+              <WarningMessage>No Tv Shows or Series found!</WarningMessage>
+            </LoadingWrapper>
+          )}
+          {!isLoading && !isEmpty && (
             <>
-              {tickers.map(({ stock }) => (
+              {tickers.queried_ticker.map((stock) => (
                 <StockElement
                   ticker={stock.ticker}
                   name='company'
@@ -247,5 +252,5 @@ export default function SearchBar() {
         </SearchContent>
       )}
     </SearchBarContainer>
-  )
+  );
 }
