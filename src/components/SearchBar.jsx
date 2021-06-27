@@ -13,7 +13,7 @@ import axios from 'axios';
 
 // Credit: https://www.youtube.com/watch?v=IlnmWntmUns
 
-const SearchBarContainer = styled.div`
+const SearchBarContainer = styled(motion.div)`
     display: flex;
     flex-direction: column;
     width: 34em;
@@ -167,7 +167,6 @@ export default function SearchBar() {
     if (!searchQuery || searchQuery.trim() === "") return;
 
     setLoading(true);
-    console.log('Start loading tickers');
     setNoTickers(false);
 
     const URL = prepareSearchQuery(searchQuery);
@@ -180,16 +179,10 @@ export default function SearchBar() {
       console.log("Response: ", response.data);
       if (response.data && response.data.length === 0) setNoTickers(true);
 
-      console.log(response.data.queried_ticker);
-      response.data.queried_ticker.map((stock) => {
-      console.log(stock.ticker);
-      });
-      console.log(response.data);
       setTickers(response.data);
     }
 
     setLoading(false);
-    console.log('Finished loading');
 
   };
 
@@ -241,7 +234,12 @@ export default function SearchBar() {
               <WarningMessage>Start typing to Search</WarningMessage>
             </LoadingWrapper>
           )}
-          {!isLoading && !noTickers && (
+          {!isLoading && noTickers && (
+            <LoadingWrapper>
+              <WarningMessage>No Tv Shows or Series found!</WarningMessage>
+            </LoadingWrapper>
+          )}
+          {!isLoading && !isEmpty && (
             <>
               {tickers.queried_ticker.map((stock) => (
                 <StockElement
@@ -254,5 +252,5 @@ export default function SearchBar() {
         </SearchContent>
       )}
     </SearchBarContainer>
-  )
+  );
 }

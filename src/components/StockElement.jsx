@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const StockContainer = styled.div`
   width: 100%;
@@ -32,7 +33,9 @@ function StockElement(props) {
 
     return (
         <StockContainer>
-          <Ticker>{ticker}</Ticker>
+          <Link to={`/stock/${ticker}`}>
+            <Ticker>{ticker}</Ticker>
+          </Link>
           <Name>{name}</Name>            
         </StockContainer>
     );
