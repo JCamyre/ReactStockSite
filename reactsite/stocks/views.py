@@ -43,10 +43,9 @@ class StockView(generics.ListAPIView): # A Specific stock's detailed info page w
     
 class GetStock(APIView):
     serializer_class = StockSerializer
-    lookup_url_kwarg = 'ticker' # localhost:8000/api/get-stock?ticker=TSM
       
     def get(self, request, format=None):
-        ticker = request.GET.get(self.lookup_url_kwarg)
+        ticker = request.GET['ticker'].upper()
         
         if ticker != None:
             stock = Stock.objects.filter(ticker=ticker)
@@ -77,7 +76,7 @@ class GetStock(APIView):
                 except:
                     data_dict = {key : val for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label'])}
                     data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
-                    
+
                 data['data1'] = data_dict
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 

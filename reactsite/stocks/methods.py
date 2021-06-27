@@ -2,20 +2,17 @@ from .models import Stock, Portfolio
 import py_trading
 from py_trading.download_tickers import get_nasdaq, get_nyse
 import concurrent.futures
+import pandas as pd
 
 
 def add_stocks(): # Only run if you need to reset the Stock objects
-    unique_stocks = set()
-    for ticker in get_nasdaq():
-    	unique_stocks.add(ticker)
-
-    for ticker in get_nyse():
-        unique_stocks.add(ticker)
-        
-    for ticker in unique_stocks:
-        # NEED TO HAVE TICKER + COMPANY NAME FOR get_nasdaq() and get_nyse()
-        # name=ticker.name
-        Stock.objects.create(ticker=ticker, slug=ticker)
+    # unique_stocks = set()
+    nasdaqStocks = get_nasdaq()
+    nyseStocks = get_nyse()
+    allStocks = pd.concat([nasdaqStocks, nyseStocks])
+    
+    for i, row in allStocks.iterrows():
+        Stock.objects.create(ticker=row['ticker'], name=row['name'], slug=row['ticker'])
 
 # Only run once to load all Stock objects.
 
@@ -28,17 +25,24 @@ def reset_stocks(n_threads):
         for f in concurrent.futures.as_completed(results):
             print(f.result())
     
-def test_stocks(index_of_thread, num_of_threads): # Divide # of stocks per thread / total stocks to be tested. Index_of_thread is which thread from 0 to n threads.
-    n_stocks_per_thread = len(Stock.objects.all()) 
-    portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
+# def test_stocks(index_of_thread, num_of_threads): # Divide # of stocks per thread / total stocks to be tested. Index_of_thread is which thread from 0 to n threads.
+#     n_stocks_per_thread = len(Stock.objects.all()) 
+#     portion = Stock.objects.all()[index_of_thread*n_stocks_per_thread:(index_of_thread+1)*n_stocks_per_thread]
     
-    for stock in portion:
-        try:
-            print(stock.ticker)
+#     for stock in portion:
+#         try:
+#             print(stock.ticker)
+#         except:
+#             stock.delete()
+#             print(stock.ticker + ' is bad')
+def test_stocks():
+    stocks = Stock.objects.all()
+    for stock in stocks:
+        try: 
+            current_stock = py_trading.Stock(stock.ticker)
         except:
+            print(f'${stock} is bad!!!')
             stock.delete()
-            print(stock.ticker + ' is bad')
-            
     
 def delete_duplicate_stocks():
     all_stocks = Stock.objects.all()
