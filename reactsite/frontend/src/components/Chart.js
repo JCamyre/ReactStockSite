@@ -7,11 +7,11 @@ IgrFinancialChartModule.register();
 export default function FinancialChartMultipleData(props) {
 
     return (
-        <div className="container sample" style={{height: "100%"}}>
+        <div className="container sample">
             <div className="container">
             <IgrFinancialChart
-                width="100%"
-                height="400px"
+                width="60%"
+                height="575px"
                 chartType="Candle"
                 thickness={1}
                 chartTitle={props.ticker}

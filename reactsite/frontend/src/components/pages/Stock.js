@@ -44,10 +44,10 @@ export default function Stock(props) {
             fetch('http://localhost:8000/stocks/get-stock?ticker=' + ticker)
                 .then((response) => response.json())
                 .then((data) => {
-                    if (data['Stock not found'] !== null){
-                        setNotFound(true);
-                    }
-                    else if (data !== null) {
+                    // if (data['Stock not found'] !== null){
+                    //     setNotFound(true);
+                    // }
+                    if (data !== null) {
                         console.log(data);
                         setData1(data['data1']);
                         setData2(data['data2']);

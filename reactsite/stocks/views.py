@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
 from .models import Portfolio, Stock
-from .methods import add_stocks
+from .methods import add_stocks, delete_duplicate_stocks, test_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
@@ -85,7 +85,6 @@ class GetStock(APIView):
 
                 # [date.to_numpy() for date in ohlc.index]
                 ohlc_data = [{'date': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
-                print(ohlc_data)
 
                 data['seriesData'] = ohlc_data
                 
@@ -97,10 +96,8 @@ class GetStock(APIView):
                 # data['social_media'] = current_stock.social_media_sentiment()
                 # data['big_money'] = current_stock.big_money()
                 
-                print(data)            
                 return Response(data, status=status.HTTP_200_OK)
                 
-            print('yo')
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
                 
 
@@ -119,8 +116,6 @@ class FindStock(APIView):
 
         # print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
         
-        print(ticker)
-
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
             if len(stock_result) > 0: # If the stock exists
@@ -140,15 +135,11 @@ class FindStock(APIView):
 class GetSearchedStock(APIView):
         
     def get(self, request, format=None):
-        # if not self.request.session.exists(self.request.session.session_key):
-        #     self.request.session.create()
-        # add_stocks()
         ticker = request.GET['queried_ticker']
         queried_stocks = Stock.objects.filter(ticker__startswith=ticker)
-        queried_stocks = [{'ticker': StockSerializer(stock).data['ticker']} for stock in queried_stocks]
+        queried_stocks = [{'ticker': StockSerializer(stock).data['ticker'], 'name': StockSerializer(stock).data['name']} for stock in queried_stocks]
         data = {}
-        data['queried_ticker'] = queried_stocks
-        print(data)
+        data['queried_ticker'] = sorted(queried_stocks, key=lambda x: x['ticker'])
 
         return Response(data, status=status.HTTP_200_OK)
 

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "react-click-outside-hook";
 import { useEffect } from "react";
 import { useRef } from "react";
-import MoonLoader from "react-spinners/MoonLoader";
+import DotLoader from 'react-spinners/DotLoader';
 import { useDebounce } from "../hooks/debounceHook";
 import StockElement from './StockElement';
 import axios from 'axios';
@@ -226,7 +226,7 @@ export default function SearchBar() {
         <SearchContent>
           {isLoading && (
             <LoadingWrapper>
-              <MoonLoader loading color='#000' size={20} />
+              <DotLoader loading color='#000' size={35} />
             </LoadingWrapper>
           )}
           {!isLoading && isEmpty && !noTickers && (
@@ -244,7 +244,7 @@ export default function SearchBar() {
               {tickers.queried_ticker.map((stock) => (
                 <StockElement
                   ticker={stock.ticker}
-                  name='company'
+                  name={stock.name}
                 />
               ))}
             </>

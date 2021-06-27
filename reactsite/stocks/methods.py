@@ -7,12 +7,15 @@ import pandas as pd
 
 def add_stocks(): # Only run if you need to reset the Stock objects
     # unique_stocks = set()
+    Stock.objects.all().delete()
     nasdaqStocks = get_nasdaq()
     nyseStocks = get_nyse()
     allStocks = pd.concat([nasdaqStocks, nyseStocks])
     
     for i, row in allStocks.iterrows():
         Stock.objects.create(ticker=row['ticker'], name=row['name'], slug=row['ticker'])
+        
+    print('Done adding stocks')
 
 # Only run once to load all Stock objects.
 
@@ -43,6 +46,8 @@ def test_stocks():
         except:
             print(f'${stock} is bad!!!')
             stock.delete()
+            
+    print('Done testing stocks!')
     
 def delete_duplicate_stocks():
     all_stocks = Stock.objects.all()
@@ -51,3 +56,5 @@ def delete_duplicate_stocks():
         duplicates = Stock.objects.filter(ticker=stock)
         if duplicates.count() > 1:
             [duplicate.delete() for duplicate in duplicates[1:]]
+            
+    print('Done deleting duplicate stocks!')
