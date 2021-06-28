@@ -39,7 +39,7 @@ export default function Navbar() {
                     </li>
                     <li className='nav-item'>
                         {/* We don't want menu open once we click to go to a different page.  */}
-                        <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                        <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
                             About Us
                         </Link>
                     </li>

@@ -136,7 +136,7 @@ export default function SearchBar() {
     e.preventDefault();
     if (e.target.value.trim() === "") setNoTickers(false);
 
-    setSearchQuery(e.target.value);
+    setSearchQuery(e.target.value.toUpperCase());
   };
 
   const expandContainer = () => {
