@@ -7,6 +7,7 @@ import About from './components/pages/About';
 import SignIn from './components/pages/SignIn';
 import SignUp from './components/pages/SignUp';
 import ContactUs from './components/pages/ContactUs';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path='/about' component={About}/>
           <Route path='/contactus' component={ContactUs}/>
         </Switch>
+        <Footer />
       </Router>
     </>
   );

@@ -85,29 +85,39 @@ export default function Stock(props) {
                 </Typography>
             </Grid>
             <Grid item xs={12} align='center'>
+                <div style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
+                            padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', backgroundColor: '#fff'}}>
+                    <CustomStockChart 
+                        data = {seriesData}
+                        ticker = {ticker}
+                    />
+                </div>
+            </Grid>
+            {/* <Grid item xs={12} align='center'>
                 <Button color='secondary' variant='contained' to='/' component={Link}>
                     Back
                 </Button>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>{ fetching ? 'Fetching data...' : ''}</Typography>
                 <Typography component='h2' variant='h4'>{ stockNotFound ? 'Sorry, that stock could not be accessed at this time!' : ''}</Typography>
             </Grid>
-            <Grid item xs={12} align='center'>
-                <Table columns={columns1} data={[data1]} />
-            </Grid>
-            <Grid item xs={12} align='center'>
-                <CustomStockChart 
-                    data = {seriesData}
-                    ticker = {ticker}
-                />
-            </Grid>
-            <Grid item xs={12} align='center'>
-                <Table columns={columns2} data={[data1]} />
-            </Grid>
-            <Grid item xs={12} align='center'>
-                <Table columns={columns3} data={[data1]} />
-            </Grid>           
+            <div style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
+                            padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', margin: 'auto', backgroundColor: '#fff'}}>
+                <Typography component='h1'>
+                    Table:
+                </Typography>
+                <Grid item xs={12} align='center'>
+                    <Table columns={columns1} data={[data1]} />
+                </Grid>
+
+                <Grid item xs={12} align='center'>
+                    <Table columns={columns2} data={[data1]} />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <Table columns={columns3} data={[data1]} />
+                </Grid>           
+            </div>
         </Grid>
 
     );

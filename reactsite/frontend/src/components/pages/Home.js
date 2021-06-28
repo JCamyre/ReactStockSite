@@ -9,7 +9,6 @@ import jQuery from 'jQuery';
 import Chart from '../Chart';
 import Parallax from '../Parallax';
 import bg_img from '../../images/bg-img-1.jpg';
-import Footer from '../Footer';
 import SearchBar from '../SearchBar';
 
 // Stuff from landingPage.js (styles)
@@ -212,12 +211,6 @@ export default function Home() {
                         </Grid>
                     </div>
                 </Grid>
-
-
-                <Grid item xs={12} align='center'>
-                    <Footer />
-                </Grid>
-
 
                 {/*
                 <Grid item xs={12} align='center'>
