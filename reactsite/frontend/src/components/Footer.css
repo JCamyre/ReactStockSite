@@ -1,3 +1,16 @@
+a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+
+i {
+    color: rgb(0, 0, 0);
+}
+
+a:focus, a:hover, i:focus, i:hover {
+    color: #89229b;
+}
+
 .footer {
     height: 80px;
     display: flex;
@@ -17,6 +30,12 @@
     height: 80px;
     max-width: 1500px;
   }
+
+.footer-item {
+    height: 60px;
+    width: 40px;
+}
+
 
 .footer-logo {
     color: #fff;
@@ -38,7 +57,18 @@
     height: 100%;
   }
   
-.nav-links:hover {
+.footer-links:hover {
     border-bottom: 4px solid #fff;
     transition: all 0.2s ease-out;
+}
+
+.footer-menu {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 60vw;
+    justify-content: end;
+    margin-right: 2rem;
 }
