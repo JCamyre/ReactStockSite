@@ -9,7 +9,6 @@ import jQuery from 'jQuery';
 import Chart from '../Chart';
 import Parallax from '../Parallax';
 import bg_img from '../../images/bg-img-1.jpg';
-import Footer from '../Footer';
 import SearchBar from '../SearchBar';
 
 // Stuff from landingPage.js (styles)
@@ -184,15 +183,15 @@ export default function Home() {
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
                         width: '1903px', height: '750px',padding: '0px 35px 0px 35px', position: 'relative',
                         filter: 'brightness(90%)'}}>
-                        <Grid item xs={12} justify='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '345px'}}>
+                        <Grid item xs={12} align='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '345px'}}>
                             <SearchBar />
                         </Grid>
                     </div>
                 </Grid>
 
-                <Grid item xs={12} align='center' style={{padding: '0px 75px'}}>
+                <Grid item xs={12} align='center' style={{padding: '0px 75px', zIndex: 1}}>
                     <div className="container" style={{margin: 'auto', fontWeight: '300px', fontFamily: ['Roboto', 'Helvetica'], padding: '40px 60px',
-                        lineHeight: '1.5em', borderRadius: '6px', backgroundColor: 'rgb(255, 255, 255)', 
+                        lineHeight: '1.5em', borderRadius: '6px', backgroundColor: 'rgb(255, 255, 255)',
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)'}}>
                         <p>Product info here.</p>
                         <Grid item xs={12} align='center'>
@@ -212,12 +211,6 @@ export default function Home() {
                         </Grid>
                     </div>
                 </Grid>
-
-
-                <Grid item xs={12} align='center'>
-                    <Footer />
-                </Grid>
-
 
                 {/*
                 <Grid item xs={12} align='center'>

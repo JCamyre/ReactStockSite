@@ -12,7 +12,7 @@ const StockContainer = styled.div`
 `;
 
 const Ticker = styled.h2`
-  font-size: 15px;
+  font-size: 30px;
   color: #000;
   margin-left: 10px;
   flex: 2;
@@ -20,7 +20,7 @@ const Ticker = styled.h2`
 `;
 
 const Name = styled.h3`
-  font-size: 15px;
+  font-size: 24px;
   color: #000;
   margin-left: 10px;
   flex: 2;
@@ -30,11 +30,11 @@ const Name = styled.h3`
 
 function StockElement(props) {
   const { ticker, name } = props;
-
+  // Get rid of underline and increase font-size
     return (
         <StockContainer>
-          <Link to={`/stock/${ticker}`}>
-            <Ticker>{ticker}</Ticker>
+          <Link style={{textDecoration: 'none'}} to={`/stock/${ticker}`}>
+            <Ticker>${ticker}</Ticker>
           </Link>
           <Name>{name}</Name>            
         </StockContainer>

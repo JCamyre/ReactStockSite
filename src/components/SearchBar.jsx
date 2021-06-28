@@ -6,12 +6,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useClickOutside } from "react-click-outside-hook";
 import { useEffect } from "react";
 import { useRef } from "react";
-import MoonLoader from "react-spinners/MoonLoader";
+import DotLoader from 'react-spinners/DotLoader';
 import { useDebounce } from "../hooks/debounceHook";
 import StockElement from './StockElement';
 import axios from 'axios';
 
-// Credit: https://www.youtube.com/watch?v=IlnmWntmUns
+// Credit: https://github.com/ipenywis/react-candy-searchbar
 
 const SearchBarContainer = styled(motion.div)`
     display: flex;
@@ -136,7 +136,7 @@ export default function SearchBar() {
     e.preventDefault();
     if (e.target.value.trim() === "") setNoTickers(false);
 
-    setSearchQuery(e.target.value);
+    setSearchQuery(e.target.value.toUpperCase());
   };
 
   const expandContainer = () => {
@@ -177,8 +177,8 @@ export default function SearchBar() {
 
     if (response) {
       console.log("Response: ", response.data);
-      if (response.data && response.data.length === 0) setNoTickers(true);
-
+      if (response.data && response.data.length) setNoTickers(true);
+      console.log(response.data, response.data.length, response.data && response.data.length);
       setTickers(response.data);
     }
 
@@ -226,7 +226,7 @@ export default function SearchBar() {
         <SearchContent>
           {isLoading && (
             <LoadingWrapper>
-              <MoonLoader loading color='#000' size={20} />
+              <DotLoader loading color='#000' size={35} />
             </LoadingWrapper>
           )}
           {!isLoading && isEmpty && !noTickers && (
@@ -243,8 +243,9 @@ export default function SearchBar() {
             <>
               {tickers.queried_ticker.map((stock) => (
                 <StockElement
+                  key={stock.ticker}
                   ticker={stock.ticker}
-                  name='company'
+                  name={stock.name}
                 />
               ))}
             </>
