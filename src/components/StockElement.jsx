@@ -34,9 +34,11 @@ function StockElement(props) {
     return (
         <StockContainer>
           <Link style={{textDecoration: 'none'}} to={`/stock/${ticker}`}>
-            <Ticker>${ticker}</Ticker>
+            <span>
+              <Ticker>${ticker}</Ticker>
+              <Name>{name}</Name>           
+            </span>
           </Link>
-          <Name>{name}</Name>            
         </StockContainer>
     );
 }

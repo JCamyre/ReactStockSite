@@ -7064,6 +7064,11 @@
   "resolved" "https://registry.npmjs.org/extsprintf/-/extsprintf-1.3.0.tgz"
   "version" "1.3.0"
 
+"fancy-canvas@0.2.2":
+  "integrity" "sha512-50qi8xA0QkHbjmb8h7XQ6k2fvD7y/yMfiUw9YTarJ7rWrq6o5/3CCXPouYk+XSLASvvxtjyiQLRBFt3qkE3oyA=="
+  "resolved" "https://registry.npmjs.org/fancy-canvas/-/fancy-canvas-0.2.2.tgz"
+  "version" "0.2.2"
+
 "fast-deep-equal@^1.0.0":
   "integrity" "sha1-wFNHeBfIa1HaqFPIHgWbcz0CNhQ="
   "resolved" "https://registry.npmjs.org/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz"
@@ -10084,6 +10089,13 @@
   dependencies:
     "prelude-ls" "^1.2.1"
     "type-check" "~0.4.0"
+
+"lightweight-charts@^3.3.0":
+  "integrity" "sha512-W5jeBrXcHG8eHnIQ0L2CB9TLkrrsjNPlQq5SICPO8PnJ3dJ8jZkLCAwemZ7Ym7ZGCfKCz6ow1EPbyzNYxblnkw=="
+  "resolved" "https://registry.npmjs.org/lightweight-charts/-/lightweight-charts-3.3.0.tgz"
+  "version" "3.3.0"
+  dependencies:
+    "fancy-canvas" "0.2.2"
 
 "limit-it@^3.0.0":
   "integrity" "sha512-T0NK99pHnkimldr1WUqvbGV1oWDku/xC9J/OqzJFsV1jeOS6Bwl8W7vkeQIBqwiON9dTALws+rX/XPMQqWerDQ=="

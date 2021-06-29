@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { Grid, Button, Typography, IconButton } from '@material-ui/core';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Grid, Typography } from '@material-ui/core';
 import Table from '../Table.js';
-import CustomStockChart from '../Chart.js';
+import Chart from '../Chart.js';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -21,7 +19,6 @@ const ShortF = ({ value }) => {
 export default function Stock(props) {
     // Variables to access the stock ticker for specific webpage and navigate to different webpages. 
     const ticker = props.match.params.ticker;
-    const history = useHistory();
 
     // React state variables
     const [fetching, setFetching] = useState(true);
@@ -48,21 +45,13 @@ export default function Stock(props) {
                     //     setNotFound(true);
                     // }
                     if (data !== null) {
-                        console.log(data);
                         setData1(data['data1']);
                         setData2(data['data2']);
                         setData3(data['data3']);
                         setFetching(false);
 
-                        // CustomStockChart data
-
                         var seriesData = data['seriesData'];
-                        seriesData.forEach((x, i) => {
-                            seriesData[i]['date'] = new Date(x['date']);
-                        });
-
                         setSeriesData(seriesData);
-
                     } else {
                         console.log('Fetch bugged');
                     }
@@ -74,7 +63,6 @@ export default function Stock(props) {
             })};
         fetchData();
     }, []);
-    console.log(seriesData, data1);
     
     return (
         <Grid container spacing={1} className='Body'>
@@ -87,9 +75,8 @@ export default function Stock(props) {
             <Grid item xs={12} align='center'>
                 <div style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
                             padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', backgroundColor: '#fff'}}>
-                    <CustomStockChart 
+                    <Chart 
                         data = {seriesData}
-                        ticker = {ticker}
                     />
                 </div>
             </Grid>
@@ -117,10 +104,10 @@ export default function Stock(props) {
                 </Grid>
                 <Grid item xs={12} align='center'>
                     <Table columns={columns3} data={[data1]} />
-                </Grid>           
+                </Grid>
+                <p>NEWS</p>          
             </div>
         </Grid>
-
     );
 }
 
