@@ -4,7 +4,7 @@ import { createChart } from 'lightweight-charts';
 // https://jsfiddle.net/TradingView/537kjtfg/
 
 export default function Chart(props) {
-    const chart = createChart(document.body, { width: 400, height: 300 });
+    const chart = createChart(document.getElementById('chart'), { width: 400, height: 300 });
     var candleSeries = chart.addCandlestickSeries();
     candleSeries.setData(props.data);
 
@@ -14,9 +14,9 @@ export default function Chart(props) {
         lineWidth: 2,
     });
     smaLine.setData(smaData);
-    console.log(props.data);
     return (
-        <chart />
+        // <chart />
+        <p>yo</p>
     )
 }
 

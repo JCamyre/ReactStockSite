@@ -1,8 +1,5 @@
 import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
-import { useHistory } from 'react-router';
-import { makeStyles } from '@material-ui/core/styles';
-// import VirtualizedAutocomplete from '../VirtualizedAutocomplete.js';
 // import HeroSection from '../HeroSection.js';
 // import Cards from '../Cards.js';
 // import Chart from '../Chart';
@@ -11,90 +8,75 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchBar from '../SearchBar';
 
 // Stuff from landingPage.js (styles)
-const containerFluid = {
-    paddingRight: "15px",
-    paddingLeft: "15px",
-    marginRight: "auto",
-    marginLeft: "auto",
-    width: "100%",
-  };
+// const containerFluid = {
+//     paddingRight: "15px",
+//     paddingLeft: "15px",
+//     marginRight: "auto",
+//     marginLeft: "auto",
+//     width: "100%",
+//   };
 
-const container = {
-    ...containerFluid,
-    "@media (min-width: 576px)": {
-      maxWidth: "540px",
-    },
-    "@media (min-width: 768px)": {
-      maxWidth: "720px",
-    },
-    "@media (min-width: 992px)": {
-      maxWidth: "960px",
-    },
-    "@media (min-width: 1200px)": {
-      maxWidth: "1140px",
-    },
-  };
-const title = {
-  color: "#3C4858",
-  margin: "1.75rem 0 0.875rem",
-  textDecoration: "none",
-  fontWeight: "700",
-  fontFamily: `"Roboto Slab", "Times New Roman", serif`,
-};
+// const container = {
+//     ...containerFluid,
+//     "@media (min-width: 576px)": {
+//       maxWidth: "540px",
+//     },
+//     "@media (min-width: 768px)": {
+//       maxWidth: "720px",
+//     },
+//     "@media (min-width: 992px)": {
+//       maxWidth: "960px",
+//     },
+//     "@media (min-width: 1200px)": {
+//       maxWidth: "1140px",
+//     },
+//   };
+// const title = {
+//   color: "#3C4858",
+//   margin: "1.75rem 0 0.875rem",
+//   textDecoration: "none",
+//   fontWeight: "700",
+//   fontFamily: `"Roboto Slab", "Times New Roman", serif`,
+// };
 
-const styles = {
-    container: {
-      zIndex: "12",
-      color: "#FFFFFF",
-      ...container,
-    },
-    title: {
-      ...title,
-      display: "inline-block",
-      position: "relative",
-      marginTop: "30px",
-      minHeight: "32px",
-      color: "#FFFFFF",
-      textDecoration: "none",
-    },
-    subtitle: {
-      fontSize: "1.313rem",
-      maxWidth: "500px",
-      margin: "10px auto 0",
-    },
-    main: {
-      background: "#FFFFFF",
-      position: "relative",
-      zIndex: "3",
-    },
-    mainRaised: {
-      margin: "-60px 30px 0px",
-      borderRadius: "6px",
-      boxShadow:
-        "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
-    },
-  };
+// const styles = {
+//     container: {
+//       zIndex: "12",
+//       color: "#FFFFFF",
+//       ...container,
+//     },
+//     title: {
+//       ...title,
+//       display: "inline-block",
+//       position: "relative",
+//       marginTop: "30px",
+//       minHeight: "32px",
+//       color: "#FFFFFF",
+//       textDecoration: "none",
+//     },
+//     subtitle: {
+//       fontSize: "1.313rem",
+//       maxWidth: "500px",
+//       margin: "10px auto 0",
+//     },
+//     main: {
+//       background: "#FFFFFF",
+//       position: "relative",
+//       zIndex: "3",
+//     },
+//     mainRaised: {
+//       margin: "-60px 30px 0px",
+//       borderRadius: "6px",
+//       boxShadow:
+//         "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
+//     },
+//   };
   
-const useStyles = makeStyles(styles);
+// const useStyles = makeStyles(styles);
 
 export default function Home() {
-    // All variables with React state.
-    const [allTickers, setAllTickers] = React.useState([]);
-    const [value, setValue] = React.useState([]);
-    const [fetching, setFetching] = React.useState(true);
-
-    const [searchingFor, setsearchingFor] = React.useState('');
-    const [selection, setSelection] = React.useState('');
-    const [error, setError] = React.useState('');
-    const [data, setData] = React.useState(['Loading...']);
-
-    // Other variables
-    const history = useHistory();
-    // const classes = useStyles();
-
-    const classes = useStyles();
-
     const image = require("../../images/bg-img-3.jpg").default;
+
     return (
         
         <div>
