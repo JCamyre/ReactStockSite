@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Table from '../Table.js';
 // import Chart from '../Chart.js';
+import News from '../News';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -101,8 +102,9 @@ export default function Stock(props) {
                 <Grid item xs={12} align='center'>
                     <Table columns={columns3} data={[data1]} />
                 </Grid>
-                <p>NEWS</p>
-
+                <News 
+                    ticker={ticker}
+                />
             </div>
         </Grid>
     );

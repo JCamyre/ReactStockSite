@@ -178,7 +178,6 @@ export default function SearchBar() {
     if (response) {
       console.log("Response: ", response.data);
       if (response.data && response.data.length) setNoTickers(true);
-      console.log(response.data, response.data.length, response.data && response.data.length);
       setTickers(response.data);
     }
 
@@ -186,6 +185,7 @@ export default function SearchBar() {
 
   };
 
+  // Only sets value to searchTicker when searchQuery hasn't been updated in 500 ms (to prevent lag, executed too frequently)
   useDebounce(searchQuery, 500, searchTicker);
 
   return (

@@ -12,6 +12,6 @@ urlpatterns = [
     path('update-portfolio', UpdatePortfolioView.as_view()),
     path('get-stock', GetStockInfo.as_view()),
     path('get-searched-stock', GetSearchedStock.as_view()),
-    path('get-stock-technicals', StockTechnicals.as_view()),
-    path('get-stock-news', StockNews.as_view())
+    path('get-technicals', StockTechnicals.as_view()),
+    path('get-news', StockNews.as_view())
 ]

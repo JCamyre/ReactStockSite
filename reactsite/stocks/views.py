@@ -124,9 +124,11 @@ class StockTechnicals(APIView):
                 
         return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'})       
      
-class StockNews(APIView):
+class StockNews(APIView): # Do it so news is related to sector, not just ticker.
+    
     def get(self, request, format=None):
-        ticker = request.GET['queried_ticker']
+        ticker = request.GET['ticker']
+        print(ticker)
         
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
