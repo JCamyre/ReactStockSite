@@ -11,7 +11,7 @@ import { useDebounce } from "../hooks/debounceHook";
 import StockElement from './StockElement';
 import axios from 'axios';
 
-// Credit: https://www.youtube.com/watch?v=IlnmWntmUns
+// Credit: https://github.com/ipenywis/react-candy-searchbar
 
 const SearchBarContainer = styled(motion.div)`
     display: flex;
@@ -177,8 +177,8 @@ export default function SearchBar() {
 
     if (response) {
       console.log("Response: ", response.data);
-      if (response.data && response.data.length === 0) setNoTickers(true);
-
+      if (response.data && response.data.length) setNoTickers(true);
+      console.log(response.data, response.data.length, response.data && response.data.length);
       setTickers(response.data);
     }
 
@@ -243,6 +243,7 @@ export default function SearchBar() {
             <>
               {tickers.queried_ticker.map((stock) => (
                 <StockElement
+                  key={stock.ticker}
                   ticker={stock.ticker}
                   name={stock.name}
                 />

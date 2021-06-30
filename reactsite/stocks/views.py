@@ -41,7 +41,7 @@ class StockView(generics.ListAPIView): # A Specific stock's detailed info page w
     # print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).financials())
     
     
-class GetStock(APIView):
+class GetStockInfo(APIView):
     serializer_class = StockSerializer
       
     def get(self, request, format=None):
@@ -84,9 +84,10 @@ class GetStock(APIView):
                 ohlc = current_stock.get_month_data(n=24)[['Open', 'High', 'Low', 'Close', 'Volume']]
 
                 # [date.to_numpy() for date in ohlc.index]
-                ohlc_data = [{'date': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
+                ohlc_data = [{'time': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
 
                 data['seriesData'] = ohlc_data
+                print(data)
                 
                 
                 # print(current_stock.get_month_data().tolist())
@@ -100,32 +101,67 @@ class GetStock(APIView):
                 
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
                 
+class StockTechnicals(APIView):
+    def get(self, request, format=None):
+        ticker = request.GET['queried_ticker']
+        
+        if ticker != None:
+            stock_result = Stock.objects.filter(ticker=ticker)
+            if len(stock_result) > 0:
+                stock = stock_result[0]
+                
+                try: 
+                    stock = py_trading.Stock(stock.ticker)
+                except:
+                    return Response({'Stock not supported by exchange': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
+
+                data = {}
+                data['techincals'] = stock.ta_indictators()
+                data['activity'] = stock.big_money()
+                data['short-selling'] = stock.short_selling()
+                
+                return Response(data, status=status.HTTP_200_OK)         
+                
+        return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'})       
+     
+class StockNews(APIView):
+    def get(self, request, format=None):
+        ticker = request.GET['queried_ticker']
+        
+        if ticker != None:
+            stock_result = Stock.objects.filter(ticker=ticker)
+            if len(stock_result) > 0:
+                stock = stock_result[0]
+                
+                try: 
+                    stock = py_trading.Stock(stock.ticker)
+                except:
+                    return Response({'Stock not supported by exchange': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)  
+                
+                data = {}
+                data['news-sentiment'] = stock.news_sentiments()                
+                data['social-media'] = stock.social_media()
+                
+                return Response(data, status=status.HTTP_200_OK)
+            
+        return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'})       
+
 
 class FindStock(APIView):
-    # Since I have to convert serialize object to JSON to send it to React, have to automatically update every minute or so (Stock.update_stock)
     lookup_url_kwarg = 'ticker'
         
     def post(self, request, format=None):
-        # Check to see if user already has an existing session key
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
-        
-        # Get the value of ticker (lookup_url_kwarg) from the POST request from the user. 
-        # THIS IS THE ISSUE
-        ticker = request.data.get(self.lookup_url_kwarg)
 
-        # print(self.lookup_url_kwarg, request.data, ticker, 'from api/views.py')
-        
+        ticker = request.data.get(self.lookup_url_kwarg)
+       
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
             if len(stock_result) > 0: # If the stock exists
                 stock = stock_result[0]
-                # Not sure the significance or how I access the 'stock_ticker' variable from a session of the website
-                # I havew to make a session thing because self.requestion.session dictionary is how I "cache" information (such as what stock they are current looking for) for the current user on the website. 
+
                 self.request.session['ticker'] = stock.ticker
-                # Have to make due_diligence output JSON serializable. 
-                # self.request.session['stock_dd'] = stock.due_diligence() 
-                # Would have the session keep what stock you want to look at be best, or just write after you press search, get taken to /stock/TSMz
                 return Response({'message': 'You are viewing the stock!'}, status=status.HTTP_200_OK)
 
             return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'}, status=status.HTTP_404_NOT_FOUND)
