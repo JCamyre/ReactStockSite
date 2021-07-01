@@ -33,13 +33,7 @@ class CreatePortfolioView(APIView):
 
 class UpdatePortfolioView(APIView):
     pass 
-
-class StockView(generics.ListAPIView): # A Specific stock's detailed info page with Due diligence
-    queryset = Stock.objects.all()
-    serializer_class = StockSerializer
       
-    # print(py_trading.Stock(Stock.objects.all().filter(ticker='TSM')[0].ticker).financials())
-    
     
 class GetStockInfo(APIView):
     serializer_class = StockSerializer
@@ -64,8 +58,6 @@ class GetStockInfo(APIView):
                 # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
 
                 due_diligence_data = current_stock.financials() # Should I convert to dictionary?
-                # print(ticker, due_diligence_data[0][['Label', 'Value']], due_diligence_data[1], due_diligence_data[2])
-                # print(due_diligence_data[0])
                 # I'M PRETTY SURE THE LABEL AND VALUE IN THE DF CHANGE SOMETIMES, IDK WHY
                 
                 # Really janky fix for now, seemingly .financials() labels and values r random (sometimes swapped, sometimes not)
@@ -87,7 +79,6 @@ class GetStockInfo(APIView):
                 ohlc_data = [{'time': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
 
                 data['seriesData'] = ohlc_data
-                print(data)
                 
                 
                 # print(current_stock.get_month_data().tolist())
@@ -128,8 +119,7 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
     
     def get(self, request, format=None):
         ticker = request.GET['ticker']
-        print(ticker)
-        
+
         if ticker != None:
             stock_result = Stock.objects.filter(ticker=ticker)
             if len(stock_result) > 0:
@@ -141,9 +131,9 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                     return Response({'Stock not supported by exchange': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)  
                 
                 data = {}
-                data['news-sentiment'] = stock.news_sentiments()                
-                data['social-media'] = stock.social_media()
-                
+                data['news-sentiment'] = stock.news_sentiments()[4]                
+                # data['social-media'] = stock.social_media_sentiment()
+                print(data)
                 return Response(data, status=status.HTTP_200_OK)
             
         return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'})       
