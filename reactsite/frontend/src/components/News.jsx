@@ -33,7 +33,7 @@ function News(ticker) {
     useDebounce(ticker, 500, getNews);
 
     return (
-        <div>
+        <div style={{padding: '40px 40px'}}>
             {!isLoading && !isNews && (
                 <h3>Sorry, there is no news!</h3>
             )}
