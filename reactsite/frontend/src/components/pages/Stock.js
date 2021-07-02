@@ -113,6 +113,7 @@ export default function Stock(props) {
                 <Grid item xs={12} align='center'>
                     <Table columns={columns3} data={[data1]} />
                 </Grid>
+                {/* Add rel volume, today's volume */}
                 <News 
                     ticker={ticker}
                 />

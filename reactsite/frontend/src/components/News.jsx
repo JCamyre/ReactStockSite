@@ -41,7 +41,7 @@ function News(ticker) {
                 <>
                     {news.map((article) => (
                         <NewsArticle 
-                            url={article.url}
+                            link={article.link}
                             title={article.title}
                             date={article.date}
                             img={article.img}
