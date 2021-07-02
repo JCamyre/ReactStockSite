@@ -6,6 +6,7 @@ import './Navbar.css';
 export default function Navbar() {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
+    const [navbar, setNavbar] = useState(false);
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -21,8 +22,19 @@ export default function Navbar() {
     // When ever the screen is resized, run showButton to check to see window's width. If less than or equal to 960, don't show button. 
     window.addEventListener('resize', showButton);
 
+    const changeBackground = () => {
+        if(window.scrollY > 200){
+            setNavbar(true);
+        } else {
+            setNavbar(false);
+        }
+    }
+
+    // "Listens" for when user scrolls. When they scroll, run changeBackground.
+    window.addEventListener('scroll', changeBackground);
+
     return (
-        <nav className='navbar'>
+        <nav className={navbar ? 'navbar active' : 'navbar'}>
             <div className='navbar-container'>
                 <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
                     yo <i className="fas fa-rocket" style={{color: '#fff'}} />
