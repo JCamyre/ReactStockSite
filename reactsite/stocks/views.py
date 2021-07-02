@@ -131,7 +131,13 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                     return Response({'Stock not supported by exchange': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)  
                 
                 data = {}
-                data['news-sentiment'] = stock.news_sentiments()[4]                
+                # Get the img, get the 'src' and put that at the start: <img src=img/> Website: <a href=url>Title</a>
+                news = stock.news_sentiments()[4]
+                print(news)
+                for article in news:
+                    article['date'] = article['datetime'].strftime('%m %d %Y')
+                data['news-sentiment'] = news
+                
                 # data['social-media'] = stock.social_media_sentiment()
                 print(data)
                 return Response(data, status=status.HTTP_200_OK)
