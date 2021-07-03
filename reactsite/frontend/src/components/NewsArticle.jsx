@@ -6,7 +6,7 @@ function NewsArticle(props) {
             <h4>{props.date}</h4>
             <img src={props.img} alt={props.title} />
             <h2>{props.site}</h2>
-            <a href={props.link} target='_blank' rel="noreferrer">
+            <a href={'//' + props.link} target='_blank' rel="noreferrer">
                 <h3>{props.title}</h3>
             </a>
         </div>
