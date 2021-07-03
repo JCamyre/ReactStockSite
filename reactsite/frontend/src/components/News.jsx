@@ -5,7 +5,8 @@ import { useDebounce } from "../hooks/debounceHook";
 import axios from 'axios';
 
 function News(ticker) {
-    const [news, setNews] = useState([]);
+    const [stockNews, setStockNews] = useState([]);
+    const [sectorsNews, setSectorsNews] = useState([]);
     const [isLoading, setLoading] = useState(false); 
     const [isNews, setIsNews] = useState(false);
     
@@ -24,7 +25,8 @@ function News(ticker) {
 
             if(response.data && response.data.length) setIsNews(false);
 
-            setNews(response.data['news-sentiment']);
+            setStockNews(response.data['stock-news-sentiment']);
+            setSectorsNews(response.data['sectors-news-sentiment']);
             setIsNews(true);
         }
         setLoading(false);
@@ -39,7 +41,7 @@ function News(ticker) {
             )}
             {!isLoading && (
                 <>
-                    {news.map((article) => (
+                    {stockNews.map((article) => (
                         <NewsArticle 
                             link={article.link}
                             title={article.title}

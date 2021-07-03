@@ -132,14 +132,21 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                 
                 data = {}
                 # Get the img, get the 'src' and put that at the start: <img src=img/> Website: <a href=url>Title</a>
-                news = stock.news_sentiments()[4]
-                print(news)
-                for article in news:
+                stock_news = stock.news_sentiments()[4] 
+                # Why so many sets of articles, sorted by date
+                for article in stock_news:
                     article['date'] = article['datetime'].strftime('%m %d %Y')
-                data['news-sentiment'] = news
+                print(stock_news)
+                    
+                sectors_news = stock.news_sentiments()[3] 
+                for sector in sectors_news:
+                    for article in sector:
+                            article['date'] = article['datetime'].strftime('%m %d %Y')
+
+                data['stock-news-sentiment'] = stock_news
+                data['sectors-news-sentiment'] = sectors_news
                 
                 # data['social-media'] = stock.social_media_sentiment()
-                print(data)
                 return Response(data, status=status.HTTP_200_OK)
             
         return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'})       
