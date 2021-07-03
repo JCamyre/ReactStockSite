@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Table from '../Table.js';
 // import Chart from '../Chart.js';
+import News from '../News';
+import DotLoader from 'react-spinners/DotLoader';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -64,9 +66,19 @@ export default function Stock(props) {
     return (
         <Grid container spacing={1} className='Body'>
             <Grid item xs={12} align='center'>
-                <Typography component='h2' variant='h2'>
-                    ${ ticker }, { fetching ? 'Loading...' : data1['company_name']}
-                </Typography>
+                { fetching && (
+                    <DotLoader />
+                )}
+                { !fetching && (
+                    <div>
+                        <Typography component='h2' variant='h2'>
+                            ${ ticker }
+                        </Typography>
+                        <Typography component='h4' variant='h4'>
+                            {data1['company_name']}
+                        </Typography>
+                    </div>
+                )}
             </Grid>
             <Grid item xs={12} align='center'>
                 <div id='chart' style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
@@ -101,8 +113,10 @@ export default function Stock(props) {
                 <Grid item xs={12} align='center'>
                     <Table columns={columns3} data={[data1]} />
                 </Grid>
-                <p>NEWS</p>
-
+                {/* Add rel volume, today's volume */}
+                <News 
+                    ticker={ticker}
+                />
             </div>
         </Grid>
     );
