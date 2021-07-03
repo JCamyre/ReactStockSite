@@ -133,9 +133,10 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                 data = {}
                 # Get the img, get the 'src' and put that at the start: <img src=img/> Website: <a href=url>Title</a>
                 stock_news = stock.news_sentiments()[4] 
-                # Why so many sets of articles, sorted by date
+                # Why so many sets of articles, sorted by date yet they are in grouped and sorted.
                 for article in stock_news:
                     article['date'] = article['datetime'].strftime('%m %d %Y')
+                stock_news = sorted(stock_news, key=lambda x: x['datetime'], reverse=True)
                 print(stock_news)
                     
                 sectors_news = stock.news_sentiments()[3] 

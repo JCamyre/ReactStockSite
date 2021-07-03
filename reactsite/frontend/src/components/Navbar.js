@@ -23,7 +23,7 @@ export default function Navbar() {
     window.addEventListener('resize', showButton);
 
     const changeBackground = () => {
-        if(window.scrollY > 200){
+        if(window.scrollY > 150){
             setNavbar(true);
         } else {
             setNavbar(false);

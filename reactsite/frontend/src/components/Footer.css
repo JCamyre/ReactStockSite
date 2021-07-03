@@ -13,6 +13,7 @@ a:focus, a:hover, i:focus, i:hover {
 
 .footer {
     height: 80px;
+    width: 1800px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +22,7 @@ a:focus, a:hover, i:focus, i:hover {
     top: 0;
     z-index: 999;
     border-radius: 2px;
+    margin: 20px 0px;
 }
 
 .footer-container {
@@ -28,7 +30,8 @@ a:focus, a:hover, i:focus, i:hover {
     justify-content: center;
     align-items: center;
     height: 80px;
-    max-width: 1500px;
+    max-width: 1800px;
+    min-width: 800px;
   }
 
 .footer-item {
