@@ -1,5 +1,8 @@
+/* Going to test a different type of navbar css */
 .navbar {
-    background: transparent;
+    /* background: transparent; */
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    background-color: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
     height: 80px;
     display: flex;
     justify-content: center;
@@ -13,8 +16,7 @@
   }
 
 .navbar.active {
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-  background-color: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  height: 60px;
 }
   
   .navbar-container {
