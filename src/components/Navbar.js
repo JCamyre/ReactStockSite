@@ -45,13 +45,13 @@ export default function Navbar() {
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li className='nav-item'>
                         {/* We don't want menu open once we click to go to a different page.  */}
-                        <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                        <Link to='/' className={navbar ? 'nav-links active' : 'nav-links'} onClick={closeMobileMenu}>
                             Home
                         </Link>
                     </li>
                     <li className='nav-item'>
                         {/* We don't want menu open once we click to go to a different page.  */}
-                        <Link to='/about' className='nav-links' onClick={closeMobileMenu}>
+                        <Link to='/about' className={navbar ? 'nav-links active' : 'nav-links'} onClick={closeMobileMenu}>
                             About Us
                         </Link>
                     </li>

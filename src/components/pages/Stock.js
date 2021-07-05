@@ -4,6 +4,8 @@ import Table from '../Table.js';
 // import Chart from '../Chart.js';
 import News from '../News';
 import DotLoader from 'react-spinners/DotLoader';
+import Signals from '../Signals';
+
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -79,6 +81,11 @@ export default function Stock(props) {
                         </Typography>
                     </div>
                 )}
+            </Grid>
+            <Grid item xs={12} align='center'>
+                <Signals 
+                    data={data1}
+                />
             </Grid>
             <Grid item xs={12} align='center'>
                 <div id='chart' style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
