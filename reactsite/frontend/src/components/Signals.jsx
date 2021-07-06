@@ -4,6 +4,7 @@ import SignalButton from './SignalButton';
 
 function Signals(props) {
     const data = props.data;
+    console.log(data);
     // Idea to increase efficiency: have dictionary of values to check, then dictionary.map((val) => { if val > whatever then <SignalButton>something something</SignalButton> }
     return (
         <div>
