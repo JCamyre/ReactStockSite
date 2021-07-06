@@ -144,3 +144,9 @@ Transitions good for this.
 
 Not sure what things like this do: {isExpanded && <LineSeperator />} Maybe shows only if expanded?
 Would make sense
+
+Ned's declassified option survival guide:
+
+Don't buy options on fridays
+Look for low iv as possible
+One more dollar out of money for much lower iv worth it
