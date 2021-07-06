@@ -69,6 +69,7 @@ class GetStockInfo(APIView):
                     data_dict = {key : val for key, val in zip(due_diligence_data[0]['Value'], due_diligence_data[0]['Label'])}
                     data['data2'] = data_dict['Insider Own'], data_dict['Shs Float'], data_dict['RSI (14)']
 
+                data_dict['Shs Float'] = data_dict['Shs Float'][:-1]
                 data['data1'] = data_dict
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
@@ -78,7 +79,7 @@ class GetStockInfo(APIView):
                 # [date.to_numpy() for date in ohlc.index]
                 ohlc_data = [{'time': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
 
-                data['seriesData'] = ohlc_data
+                data['ohlcData'] = ohlc_data
                 
                 
                 # print(current_stock.get_month_data().tolist())

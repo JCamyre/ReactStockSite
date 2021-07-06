@@ -28,7 +28,7 @@ export default function Stock(props) {
     const [fetching, setFetching] = useState(true);
     const [stockNotFound, setNotFound] = useState(false);
     const [data1, setData1] = useState([]);
-    const [seriesData, setSeriesData] = useState([]);
+    const [ohlcData, setOhlcData] = useState([]);
 
     // All columns for the different tables of data.
     const columns1 = Table1();
@@ -50,7 +50,7 @@ export default function Stock(props) {
                         setData1(data['data1']);
                         setFetching(false);
 
-                        setSeriesData(data['seriesData']);
+                        setOhlcData(data['ohlcData']);
 
                         // Maybe make News.jsx component. But then would have to have separate views for each piece of information...
                     } else {
@@ -91,7 +91,7 @@ export default function Stock(props) {
                 <div id='chart' style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
                             padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', backgroundColor: '#fff'}}>
                     {/* <Chart 
-                        data={seriesData}    
+                        data={ohlcData}    
                     /> */}
                 </div>
             </Grid>
