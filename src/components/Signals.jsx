@@ -4,32 +4,36 @@ import SignalButton from './SignalButton';
 
 function Signals(props) {
     const data = props.data;
+    console.log(data);
     // Idea to increase efficiency: have dictionary of values to check, then dictionary.map((val) => { if val > whatever then <SignalButton>something something</SignalButton> }
     return (
         <div>
-            {(data['short_float'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['Short Float']) > 20.0) && (
+                <SignalButton>Short Float</SignalButton>
             )}
-            {(data['relative_volume'] > 3) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['Rel Volume']) > 3.0) && (
+                <SignalButton>Rel Volume</SignalButton>
             )}
-            {(data['rsi'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['RSI (14)']) > 60.0) && (
+                <SignalButton>RSI</SignalButton>
             )}
-            {(data['SMA20'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['SMA20']) > 1.0) && (
+                <SignalButton>SMA20</SignalButton>
             )}
-            {(data['SMA200'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['SMA200']) > 1.0) && (
+                <SignalButton>SMA200</SignalButton>
             )}
-            {(data['Shs_float'] / data['shs_outstand'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {((parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand'])) < 50) && (
+                <SignalButton>Shs Float percentage</SignalButton>
             )}
-            {(data['inst_own'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['Inst Own']) > 20.0) && (
+                <SignalButton>Inst Own</SignalButton>
             )}
-            {(data['insider_trans'] > 20) && (
-                <SignalButton>yo</SignalButton>
+            {(parseFloat(data['Inst Trans']) > 5.0) && (
+                <SignalButton>Inst Trans</SignalButton>
+            )}
+            {(parseFloat(data['Insider Trans']) > 5.0) && (
+                <SignalButton>Insider Trans</SignalButton>
             )}
         </div>
     )

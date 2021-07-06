@@ -8,14 +8,14 @@ a.button1{
   text-decoration:none;
   font-family:'Roboto',sans-serif;
   font-weight:300;
-  color:#FFFFFF;
+  color:#000000;
   text-align:center;
   transition: all 0.2s;
 }
 
   a.button1:hover{
-  color:#000000;
-  background-color:#FFFFFF;
+  color:#ffffff;
+  background-color:#000000;
 }
 
   @media all and (max-width:30em){

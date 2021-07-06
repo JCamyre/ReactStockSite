@@ -18,7 +18,7 @@ function Footer() {
                         </Link>
                     </li>
                     <div class='wrapper'>
-                        <li className='footer-item'>
+                        <li className='footer-item' style={{padding: '0px 10px'}}>
                             <div class='icon instagram'>
                                 <div class='tooltip'>Instagram</div>
                                     <span>
@@ -28,7 +28,7 @@ function Footer() {
                                     </span>
                             </div>
                         </li>
-                        <li className='footer-item'>
+                        <li className='footer-item' style={{padding: '0px 10px'}}>
                             <div class='icon github'>
                                 <div class='tooltip'>Github</div>
                                     <span>

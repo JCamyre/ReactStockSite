@@ -1,4 +1,5 @@
 import React from 'react'
+import './NewsArticle.css';
 
 function NewsArticle(props) {
     return (

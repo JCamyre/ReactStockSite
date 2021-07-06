@@ -42,6 +42,10 @@ height: 60px;
   align-items: center;
 }
 
+.navbar-logo:hover {
+  color: rgb(175, 0, 175);
+}
+
 .fa-typo3 {
   margin-left: 0.5rem;
   font-size: 1.8rem;
@@ -82,6 +86,7 @@ height: 60px;
 
 .nav-links-mobile {
   display: none;
+  border-radius: 6px;
 }
 
 .menu-icon {

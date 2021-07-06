@@ -42,12 +42,13 @@ function News(ticker) {
             {!isLoading && (
                 <>
                     {stockNews.map((article) => (
-                        <NewsArticle 
+                        <NewsArticle
                             link={article.link}
                             title={article.title}
                             date={article.date}
                             img={article.img}
                             site={article.site}
+                            key={article.link}
                         />
                     ))}
                 </>
