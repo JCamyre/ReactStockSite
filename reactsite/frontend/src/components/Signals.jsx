@@ -35,6 +35,9 @@ function Signals(props) {
             {(parseFloat(data['Insider Trans']) > 5.0) && (
                 <SignalButton>Insider Trans</SignalButton>
             )}
+            {(parseFloat(data['Market Cap']) < 50000000) && (
+                <SignalButton>Low market cap</SignalButton>
+            )}            
         </div>
     )
 }

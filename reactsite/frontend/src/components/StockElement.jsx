@@ -32,14 +32,14 @@ function StockElement(props) {
   const { ticker, name } = props;
   // Get rid of underline and increase font-size
     return (
+      <Link style={{textDecoration: 'none'}} to={`/stock/${ticker}`}>
         <StockContainer>
-          <Link style={{textDecoration: 'none'}} to={`/stock/${ticker}`}>
             <span>
               <Ticker>${ticker}</Ticker>
               <Name>{name}</Name>           
             </span>
-          </Link>
         </StockContainer>
+      </Link>
     );
 }
 

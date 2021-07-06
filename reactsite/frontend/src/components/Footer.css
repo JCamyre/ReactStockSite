@@ -106,6 +106,8 @@ body {
   /* background: linear-gradient(315deg, #ffffff, #d7e1ec); */
 }
 
+
+
 /* https://codepen.io/abdelrhmansaid/pen/OJRNOpQ */
 
 .wrapper {
@@ -182,3 +184,6 @@ body {
   color: #ffffff;
 }
 
+.github:hover #github {
+  color: white;
+}
