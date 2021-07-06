@@ -8,14 +8,17 @@ a.button1{
   text-decoration:none;
   font-family:'Roboto',sans-serif;
   font-weight:300;
-  color:#000000;
+  color:#ffffff;
+  background-color: #08fb00;
   text-align:center;
   transition: all 0.2s;
+  border-radius: 6px;
 }
 
   a.button1:hover{
-  color:#ffffff;
-  background-color:#000000;
+  color: #08fb00;
+  background-color:#ffffff;
+  border: 0.1em solid #08fb00;
 }
 
   @media all and (max-width:30em){

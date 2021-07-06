@@ -33,7 +33,7 @@ function Footer() {
                                 <div class='tooltip'>Github</div>
                                     <span>
                                         <a className='footer-logo' target='_blank' rel="noreferrer noopener" href='https://github.com/JCamyre'>
-                                            <i className="fab fa-github" style={{fontSize: '24px'}} />
+                                            <i id='github' className="fab fa-github" style={{fontSize: '24px'}} />
                                         </a>
                                     </span>
                             </div>
