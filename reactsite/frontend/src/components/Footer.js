@@ -17,19 +17,30 @@ function Footer() {
                             <p>Contact us!</p>
                         </Link>
                     </li>
-                    <li className='footer-item'>
-                        <a className='footer-logo' href='https://www.instagram.com/realmizkif/' target='_blank' rel='noreferrer noopener'>
-                            <i className='fab fa-instagram' style={{fontSize: '48px'}}/>
-                        </a>
-                    </li>
-                    <li className='footer-item'>
-                        <a className='footer-logo' target='_blank' rel="noreferrer noopener" href='https://github.com/JCamyre'>
-                            <i className="fab fa-github" style={{fontSize: '48px'}} />
-                        </a>
-                    </li>
+                    <div class='wrapper'>
+                        <li className='footer-item'>
+                            <div class='icon instagram'>
+                                <div class='tooltip'>Instagram</div>
+                                    <span>
+                                        <a className='footer-logo' href='https://www.instagram.com/realmizkif/' target='_blank' rel='noreferrer noopener'>
+                                            <i className='fab fa-instagram' style={{fontSize: '24px'}}/>
+                                        </a>
+                                    </span>
+                            </div>
+                        </li>
+                        <li className='footer-item'>
+                            <div class='icon github'>
+                                <div class='tooltip'>Github</div>
+                                    <span>
+                                        <a className='footer-logo' target='_blank' rel="noreferrer noopener" href='https://github.com/JCamyre'>
+                                            <i className="fab fa-github" style={{fontSize: '24px'}} />
+                                        </a>
+                                    </span>
+                            </div>
+                        </li>
+                    </div>
                 </ul>
             </div>
-
         </footer>
     )
 }

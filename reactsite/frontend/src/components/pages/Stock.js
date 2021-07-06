@@ -4,7 +4,7 @@ import Table from '../Table.js';
 // import Chart from '../Chart.js';
 import News from '../News';
 import DotLoader from 'react-spinners/DotLoader';
-import Signals from 'Signals';
+import Signals from '../Signals';
 
 
 // Change color of text depending on high/low
