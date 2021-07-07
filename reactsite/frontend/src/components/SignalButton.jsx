@@ -7,7 +7,18 @@ import './SignalButton.css';
 
 function SignalButton(props) {
     return (
-        <a href="something" class="button1">{props.children}</a>
+        <div className='wrapper'>
+            <div className='icon signal'>
+                <div class='tooltip'>
+                    {props.signal}
+                </div>
+                <span>
+                    <a href="something" class="button1">
+                        {props.children}
+                    </a>
+                </span>
+            </div>
+        </div>
     )
 }
 

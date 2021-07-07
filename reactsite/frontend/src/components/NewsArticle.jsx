@@ -1,6 +1,7 @@
 import React from 'react'
 import './NewsArticle.css';
 
+// Get articles only from whitelisted sites, pref w an api so randoms new articles aren't returned
 function NewsArticle(props) {
     return (
         <div style={{alignItems: 'center'}}>

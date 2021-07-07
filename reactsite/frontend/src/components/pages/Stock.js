@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Table from '../Table.js';
-// import Chart from '../Chart.js';
+import Chart from '../Chart.js';
 import News from '../News';
 import DotLoader from 'react-spinners/DotLoader';
 import Signals from '../Signals';
@@ -88,12 +88,9 @@ export default function Stock(props) {
                 />
             </Grid>
             <Grid item xs={12} align='center'>
-                <div id='chart' style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
-                            padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', backgroundColor: '#fff'}}>
-                    {/* <Chart 
-                        data={ohlcData}    
-                    /> */}
-                </div>
+                {/* <Chart 
+                    data={ohlcData}
+                /> */}
             </Grid>
             {/* <Grid item xs={12} align='center'>
                 <Button color='secondary' variant='contained' to='/' component={Link}>

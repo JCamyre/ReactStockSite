@@ -15,13 +15,17 @@ function Signals(props) {
                 <SignalButton>Rel Volume</SignalButton>
             )}
             {(parseFloat(data['RSI (14)']) > 60.0) && (
-                <SignalButton>RSI</SignalButton>
+                <SignalButton
+                    signal={data['RSI (14)']}
+                >
+                    RSI
+                </SignalButton>
             )}
             {(parseFloat(data['SMA20']) > 1.0) && (
                 <SignalButton>SMA20</SignalButton>
             )}
             {(parseFloat(data['SMA200']) > 1.0) && (
-                <SignalButton>SMA200</SignalButton>
+                <SignalButton signal={data['SMA200']}>SMA200</SignalButton>
             )}
             {((parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand'])) < 50) && (
                 <SignalButton>Shs Float percentage</SignalButton>

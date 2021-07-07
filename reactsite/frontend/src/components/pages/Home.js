@@ -45,7 +45,7 @@ export default function Home() {
                             </h3>                        
                         </Grid>
                         <Grid item xs={12} align='center'>
-                            <img style={{height: 'auto', width: '100%'}} alt='panda'
+                            <img style={{height: 'auto', width: '100%', borderRadius: '6px'}} alt='panda'
                             src='https://im-media.voltron.voanews.com/Drupal/01live-166/styles/sourced/s3/2019-04/3ED6FCAB-D280-4197-8B02-BCCD9846076A.jpg?itok=EKczHCGX' />
                         </Grid>
                     </div>
