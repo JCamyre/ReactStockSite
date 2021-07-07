@@ -88,9 +88,9 @@ export default function Stock(props) {
                 />
             </Grid>
             <Grid item xs={12} align='center'>
-                <Chart 
+                {/* <Chart 
                     data={ohlcData}
-                />
+                /> */}
             </Grid>
             {/* <Grid item xs={12} align='center'>
                 <Button color='secondary' variant='contained' to='/' component={Link}>
