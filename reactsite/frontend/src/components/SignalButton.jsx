@@ -7,7 +7,7 @@ import './SignalButton.css';
 
 function SignalButton(props) {
     return (
-        <div className='wrapper'>
+        <div className='wrapper' style={{margin: '0px 30px'}}>
             <div className='icon signal'>
                 <div class='tooltip'>
                     {props.signal}

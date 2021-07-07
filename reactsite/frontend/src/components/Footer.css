@@ -159,7 +159,7 @@ body {
 }
 
 .wrapper .icon:hover .tooltip {
-  top: -45px;
+  top: -35px;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;

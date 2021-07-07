@@ -9,38 +9,70 @@ function Signals(props) {
     return (
         <div>
             {(parseFloat(data['Short Float']) > 20.0) && (
-                <SignalButton>Short Float</SignalButton>
+                <SignalButton
+                    signal={data['Short Float']}>
+                        Short Float
+                </SignalButton>
             )}
             {(parseFloat(data['Rel Volume']) > 3.0) && (
-                <SignalButton>Rel Volume</SignalButton>
+                <SignalButton
+                    signal={data['Rel Volume']}>
+                        Rel Volume
+                </SignalButton>
+            )}
+            {(parseFloat(data['Volume']) > 500000.0) && (
+                <SignalButton
+                    signal={data['Volume']}>
+                        This stock is liquid
+                </SignalButton>
             )}
             {(parseFloat(data['RSI (14)']) > 60.0) && (
                 <SignalButton
-                    signal={data['RSI (14)']}
-                >
-                    RSI
+                    signal={data['RSI (14)']}>
+                        RSI
                 </SignalButton>
             )}
             {(parseFloat(data['SMA20']) > 1.0) && (
-                <SignalButton>SMA20</SignalButton>
+                <SignalButton
+                    signal={"+" + data['SMA20']}>
+                        SMA20
+                </SignalButton>
             )}
             {(parseFloat(data['SMA200']) > 1.0) && (
-                <SignalButton signal={data['SMA200']}>SMA200</SignalButton>
+                <SignalButton 
+                    signal={"+" + data['SMA200']}>
+                        SMA200
+                </SignalButton>
             )}
             {((parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand'])) < 50) && (
-                <SignalButton>Shs Float percentage</SignalButton>
+                <SignalButton
+                    signal={(parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand'])).toFixed(2)}>
+                        Shs Float to Shs Outstand
+                </SignalButton>
             )}
             {(parseFloat(data['Inst Own']) > 20.0) && (
-                <SignalButton>Inst Own</SignalButton>
+                <SignalButton
+                    signal={data['Inst Own']}>
+                        Inst Own
+                </SignalButton>
             )}
             {(parseFloat(data['Inst Trans']) > 5.0) && (
-                <SignalButton>Inst Trans</SignalButton>
+                <SignalButton
+                    signal={data['Inst Trans']}>
+                        Inst Trans
+                </SignalButton>
             )}
             {(parseFloat(data['Insider Trans']) > 5.0) && (
-                <SignalButton>Insider Trans</SignalButton>
+                <SignalButton
+                    signal={data['Insider Trans']}>
+                        Insider Trans
+                </SignalButton>
             )}
             {(parseFloat(data['Market Cap']) < 50000000) && (
-                <SignalButton>Low market cap</SignalButton>
+                <SignalButton
+                    signal={data['Market Cap']}>
+                        Low market cap
+                </SignalButton>
             )}            
         </div>
     )

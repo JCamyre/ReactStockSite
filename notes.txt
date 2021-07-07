@@ -1,3 +1,5 @@
+Instead of stealing technical indictators from other websites, get the equations for them and put them in py_trading.
+
 Paper trading?
 make sure to mention that you are using compnoents from material kit react main
 Is having to see React from localhost:3000 a problem for final build? Will I have to do frontend.urls?
