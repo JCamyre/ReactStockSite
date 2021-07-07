@@ -17,7 +17,13 @@ function Signals(props) {
             {(parseFloat(data['Rel Volume']) > 3.0) && (
                 <SignalButton
                     signal={data['Rel Volume']}>
-                        Rel Volume
+                        High Rel Volume
+                </SignalButton>
+            )}
+            {(parseFloat(data['Volume']) > 500000.0) && (
+                <SignalButton
+                    signal={data['Volume']}>
+                        This stock is liquid
                 </SignalButton>
             )}
             {(parseFloat(data['RSI (14)']) > 60.0) && (
@@ -28,19 +34,19 @@ function Signals(props) {
             )}
             {(parseFloat(data['SMA20']) > 1.0) && (
                 <SignalButton
-                    signal={data['SMA20']}>
+                    signal={"+" + data['SMA20']}>
                         SMA20
                 </SignalButton>
             )}
             {(parseFloat(data['SMA200']) > 1.0) && (
                 <SignalButton 
-                    signal={data['SMA200']}>
+                    signal={"+" + data['SMA200']}>
                         SMA200
                 </SignalButton>
             )}
             {((parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand'])) < 50) && (
                 <SignalButton
-                    signal={(parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand']))}>
+                    signal={(parseFloat(data['Shs Float']) / parseFloat(data['Shs Outstand'])).toFixed(2)}>
                         Shs Float to Shs Outstand
                 </SignalButton>
             )}
@@ -62,12 +68,12 @@ function Signals(props) {
                         Insider Trans
                 </SignalButton>
             )}
-            {(parseFloat(data['Market Cap']) < 50000000) && (
+            {/* {((parseFloat(if 'b' in data['Market Cap'])*1000000000) < 10000000000) && (
                 <SignalButton
                     signal={data['Market Cap']}>
                         Low market cap
                 </SignalButton>
-            )}            
+            )}             */}
         </div>
     )
 }
