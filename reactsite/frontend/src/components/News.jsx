@@ -34,6 +34,10 @@ function News(ticker) {
 
     useDebounce(ticker, 500, getNews);
 
+    const sectors = stockNews.map((sector) => {
+        return sector
+    })
+
     return (
         <div style={{padding: '40px 40px'}}>
             {!isLoading && !isNews && (
@@ -50,6 +54,21 @@ function News(ticker) {
                             site={article.site}
                             key={article.link}
                         />
+                    ))}
+                </>
+            )}
+            <h1>Sector(s) news:</h1>
+            {!isLoading && (
+                <>
+                    {sectors.map((article) => (
+                        <NewsArticle
+                            link={article.link}
+                            title={article.title}
+                            date={article.date}
+                            img={article.img}
+                            site={article.site}
+                            key={article.link}
+                        />     
                     ))}
                 </>
             )}
