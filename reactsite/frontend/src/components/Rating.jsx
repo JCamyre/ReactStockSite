@@ -11,25 +11,27 @@ function Rating(props) {
         const sma20 = data['SMA20'] > 0;
         const sma200 = data['SMA200'] > 0;
         // increasing volume/accumlation
-        return rsi;
+        return rsi.toFixed(2);
     };
+    
 
     const Deal = (data) => {
         const rsi = data['RSI (14)'] / 40; // lower the better
         const sma20 = data['SMA20'] > 0;
         const sma200 = data['SMA200'] > 0;
         // increasing volume/accumlation
-        return rsi;
+        return rsi.toFixed(2);
     };
+    
 
     return (
         <div>
-            <div>
-                <h2>{Momentum}</h2>
+            <div class='ratingbutton'>
+                <h2>{Momentum(props.data)}</h2>
                 <h4>/10</h4>
             </div>
-            <div>
-                <h2>{Deal}</h2>
+            <div class='ratingbutton'>
+                <h2>{Deal(props.data)}</h2>
                 <h4>/10</h4>
             </div>
         </div>

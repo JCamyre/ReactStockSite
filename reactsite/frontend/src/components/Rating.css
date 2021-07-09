@@ -1,5 +1,5 @@
-div {
+.ratingbutton {
     border-radius: 50%;
-    color; 
-    
+    background-color: #ff2121; 
+    width: 50px;
 }

@@ -145,8 +145,8 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                     for article in sector:
                             article['date'] = article['datetime'].strftime('%m %d %Y')
 
-                data['stock-news-sentiment'] = stock_news
-                data['sectors-news-sentiment'] = sectors_news
+                data['stock-news-sentiment'] = stock_news[:5]
+                data['sectors-news-sentiment'] = [sector_news[:3] for sector_news in sectors_news]
                 
                 # data['social-media'] = stock.social_media_sentiment()
                 return Response(data, status=status.HTTP_200_OK)

@@ -5,7 +5,7 @@ import Chart from '../Chart.js';
 import News from '../News';
 import DotLoader from 'react-spinners/DotLoader';
 import Signals from '../Signals';
-
+import Rating from '../Rating';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -81,6 +81,11 @@ export default function Stock(props) {
                         </Typography>
                     </div>
                 )}
+            </Grid>
+            <Grid item xs={12} align='center'>
+                <Rating
+                    data={data1} 
+                />
             </Grid>
             <Grid item xs={12} align='center'>
                 <Signals 
