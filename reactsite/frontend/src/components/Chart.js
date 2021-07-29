@@ -24,6 +24,16 @@ export default function Chart(props) {
         id='chart'
       />
     )
+    // return (
+    //   <div>
+    //     <Chart (made for HTML)
+    //       symbol={props.ticker}
+    //     />
+    //   </div>
+    // )
+    
+    // Try using dummy data and see if that fixes.
+    // Try as much from sample code as possible.
 }
 
 function calculateSMA(data, count){

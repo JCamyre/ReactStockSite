@@ -41,6 +41,8 @@ class GetStockInfo(APIView):
     def get(self, request, format=None):
         ticker = request.GET['ticker'].upper()
         
+        print(py_trading.Stock('AAPL'))
+        
         if ticker != None:
             stock = Stock.objects.filter(ticker=ticker)
             if len(stock) > 0:
@@ -48,12 +50,16 @@ class GetStockInfo(APIView):
                 data = StockSerializer(stock).data
                 data['ticker'] = stock.ticker # Idk how to access data likes this
                 # Have to have attribute for Stock models for the due_diligence information
-                
                 try:
                     current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
-                    current_stock = py_trading.Stock(current_stock)                
+                    print('$' + current_stock, 'yo this ain\'t working')
+                    current_stock = py_trading.Stock(current_stock)
+                    print('yo second time')                
                 except:
-                    return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
+                    return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)     
+                
+                print('yo we made it!!')
+   
                 # If I have to generate all of this information everytime someone clicks on a stock, what's the point of having a database for these stocks? All I need is the GetAllStocks view for homepages and get the ticker string, and use py_trading.Stock(ticker)
                 # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
 
@@ -71,15 +77,19 @@ class GetStockInfo(APIView):
 
                 data_dict['Shs Float'] = data_dict['Shs Float'][:-1]
                 data['data1'] = data_dict
+                print(data_dict)
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
                 # dates = [date.timestamp() for date in current_stock.get_month_data().index]
-                ohlc = current_stock.get_month_data(n=24)[['Open', 'High', 'Low', 'Close', 'Volume']]
+                ohlc = current_stock.get_month_data()[['Open', 'High', 'Low', 'Close', 'Volume']]
 
                 # [date.to_numpy() for date in ohlc.index]
                 ohlc_data = [{'time': date, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} for date, data in zip(ohlc.index, ohlc.values.tolist())]
 
                 data['ohlcData'] = ohlc_data
+                
+                # data['adl'] = stock.adl()
+                # print(data['adl'])
                 
                 
                 # print(current_stock.get_month_data().tolist())
@@ -108,9 +118,14 @@ class StockTechnicals(APIView):
                     return Response({'Stock not supported by exchange': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)        
 
                 data = {}
-                data['techincals'] = stock.ta_indictators()
+                data['technicals'] = stock.ta_indictators()
                 data['activity'] = stock.big_money()
                 data['short-selling'] = stock.short_selling()
+                
+                # adl calculation: ((Close - Low) - (High - Close))/(High - Low) * period's volume. We'll do it for one month.
+                data['adl'] = stock.adl()
+                print(data['adl'])
+                
                 
                 return Response(data, status=status.HTTP_200_OK)         
                 
@@ -138,12 +153,11 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                 for article in stock_news:
                     article['date'] = article['datetime'].strftime('%m %d %Y')
                 stock_news = sorted(stock_news, key=lambda x: x['datetime'], reverse=True)
-                print(stock_news)
                     
                 sectors_news = stock.news_sentiments()[3] 
                 for sector in sectors_news:
                     for article in sector:
-                            article['date'] = article['datetime'].strftime('%m %d %Y')
+                        article['date'] = article['datetime'].strftime('%m %d %Y')
 
                 data['stock-news-sentiment'] = stock_news[:5]
                 data['sectors-news-sentiment'] = [sector_news[:3] for sector_news in sectors_news]
