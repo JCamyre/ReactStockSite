@@ -92,15 +92,10 @@ export default function Stock(props) {
                     data={data1}
                 />
             </Grid>
-            <Grid item xs={12} align='center'>
+            {/* <Grid item xs={12} align='center'>
                 <Chart 
                     data={ohlcData}
                 />
-            </Grid>
-            {/* <Grid item xs={12} align='center'>
-                <Button color='secondary' variant='contained' to='/' component={Link}>
-                    Back
-                </Button>
             </Grid> */}
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>{ fetching ? 'Fetching data...' : ''}</Typography>

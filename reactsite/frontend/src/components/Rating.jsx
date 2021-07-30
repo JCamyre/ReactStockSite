@@ -2,7 +2,6 @@ import React from 'react';
 import './Rating.css';
 
 function Rating(props) {
-    console.log(props.data);
     // Different categories of ratings: Overall rating, breakdown categories. I'll have two ratings, one for momentum play (slightly high RSI, above all SMA's, increasing volume), one for good deal (more volume on good days than bad, below 45 RSI, oversold, etc)
     // Momentum rating: , Good buy rating: , Value rating (fundamentals)
 

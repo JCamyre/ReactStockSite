@@ -22,7 +22,6 @@ function News(ticker) {
 
         if(response){
             console.log(response.data);
-
             if(response.data && response.data.length) setIsNews(false);
 
             setStockNews(response.data['stock-news-sentiment']);
@@ -34,7 +33,7 @@ function News(ticker) {
 
     useDebounce(ticker, 500, getNews);
 
-    const sectors = stockNews.map((sector) => {
+    const sectors = sectorsNews.map((sector) => {
         return sector
     })
 
