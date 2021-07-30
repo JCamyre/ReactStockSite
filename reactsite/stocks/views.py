@@ -40,9 +40,7 @@ class GetStockInfo(APIView):
       
     def get(self, request, format=None):
         ticker = request.GET['ticker'].upper()
-        
-        print(py_trading.Stock('AAPL'))
-        
+             
         if ticker != None:
             stock = Stock.objects.filter(ticker=ticker)
             if len(stock) > 0:
@@ -52,14 +50,12 @@ class GetStockInfo(APIView):
                 # Have to have attribute for Stock models for the due_diligence information
                 try:
                     current_stock = Stock.objects.all().filter(ticker=stock.ticker)[0].ticker
-                    print('$' + current_stock, 'yo this ain\'t working')
                     current_stock = py_trading.Stock(current_stock)
-                    print('yo second time')                
                 except:
+                    print('ERROR')
                     return Response({'Stock not found': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)     
                 
-                print('yo we made it!!')
-   
+  
                 # If I have to generate all of this information everytime someone clicks on a stock, what's the point of having a database for these stocks? All I need is the GetAllStocks view for homepages and get the ticker string, and use py_trading.Stock(ticker)
                 # IDK, SOMETIMES RANDOMLY DOESN'T WORK... SOMETHING IN THIS TRY STATEMENT IS FAILING.
 
@@ -77,7 +73,6 @@ class GetStockInfo(APIView):
 
                 data_dict['Shs Float'] = data_dict['Shs Float'][:-1]
                 data['data1'] = data_dict
-                print(data_dict)
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
 
                 # dates = [date.timestamp() for date in current_stock.get_month_data().index]
@@ -90,14 +85,6 @@ class GetStockInfo(APIView):
                 
                 # data['adl'] = stock.adl()
                 # print(data['adl'])
-                
-                
-                # print(current_stock.get_month_data().tolist())
-                # data['news'] = current_stock.news_sentiments()
-                # data['short_selling'] = current_stock.short_selling()
-                # data['put_call_ratio'] = current_stock.put_call_ratio()
-                # data['social_media'] = current_stock.social_media_sentiment()
-                # data['big_money'] = current_stock.big_money()
                 
                 return Response(data, status=status.HTTP_200_OK)
                 
@@ -131,7 +118,7 @@ class StockTechnicals(APIView):
                 
         return Response({'Bad Request': 'This stock does not exist or is not part of our database, sorry!'})       
      
-class StockNews(APIView): # Do it so news is related to sector, not just ticker.
+class StockNews(APIView): # Inform users they have to wait because have to wait for api to load
     
     def get(self, request, format=None):
         ticker = request.GET['ticker']
@@ -144,12 +131,11 @@ class StockNews(APIView): # Do it so news is related to sector, not just ticker.
                 try: 
                     stock = py_trading.Stock(stock.ticker)
                 except:
+                    print('ERROR with ticker not loading, prob api related')
                     return Response({'Stock not supported by exchange': 'Not supported exchange.'}, status=status.HTTP_404_NOT_FOUND)  
                 
                 data = {}
-                # Get the img, get the 'src' and put that at the start: <img src=img/> Website: <a href=url>Title</a>
                 stock_news = stock.news_sentiments()[4] 
-                # Why so many sets of articles, sorted by date yet they are in grouped and sorted.
                 for article in stock_news:
                     article['date'] = article['datetime'].strftime('%m %d %Y')
                 stock_news = sorted(stock_news, key=lambda x: x['datetime'], reverse=True)
