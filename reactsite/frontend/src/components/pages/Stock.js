@@ -92,11 +92,11 @@ export default function Stock(props) {
                     data={data1}
                 />
             </Grid>
-            {/* <Grid item xs={12} align='center'>
+            <Grid item xs={12} align='center'>
                 <Chart 
                     data={ohlcData}
                 />
-            </Grid> */}
+            </Grid>
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>{ fetching ? 'Fetching data...' : ''}</Typography>
                 <Typography component='h2' variant='h4'>{ stockNotFound ? 'Sorry, that stock could not be accessed at this time!' : ''}</Typography>
@@ -104,9 +104,6 @@ export default function Stock(props) {
             <div style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
                             padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', margin: 'auto', backgroundColor: '#fff',
                             zIndex: 1}}>
-                <Typography component='h1'>
-                    Table:
-                </Typography>
                 <Grid item xs={12} align='center'>
                     <Table columns={columns1} data={[data1]} />
                 </Grid>

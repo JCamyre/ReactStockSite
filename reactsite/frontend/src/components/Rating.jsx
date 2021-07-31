@@ -28,13 +28,13 @@ function Rating(props) {
 
     return (
         <div>
-            <h3>Momentum:</h3>
             <div class='ratingbutton'>
+                <h3>Momentum:</h3>
                 <h2>{Momentum(props.data)}</h2>
                 <h4>/10</h4>
             </div>
-            <h3>Deal:</h3>
             <div class='ratingbutton'>
+                <h3>Deal:</h3>
                 <h2>{Deal(props.data)}</h2>
                 <h4>/10</h4>
             </div>

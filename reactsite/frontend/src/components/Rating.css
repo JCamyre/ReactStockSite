@@ -1,6 +1,12 @@
+.flex-container {
+    display: flex;
+}
+
 .ratingbutton {
     border-radius: 50%;
     background-color: #ff2121; 
     width: 65px;
     height: 100%;
+    float: center;
+    flex: 1;
 }

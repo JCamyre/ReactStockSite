@@ -6,17 +6,42 @@ import { createChart } from 'lightweight-charts';
 export default function Chart(props) {
   // Maybe five different div's because this Chart is ran five times during rendering, so five divvs
     useEffect(() => {
-      const chart = createChart('chart', { width: 400, height: 300 });
-      // const barSeries = addBarSeries({})
-      var candleSeries = chart.addCandlestickSeries();
-      candleSeries.setData(props.data);
-  
-      var smaData = calculateSMA(props.data, 10);
-      var smaLine = chart.addLineSeries({
-          color: 'rgba(4, 111, 232, 1)',
-          lineWidth: 2,
-      });
-      smaLine.setData(smaData);
+      if (props.data.length > 1) {
+        const data = [{
+          close: 79.93115804663,
+          high: 81.1073314140418,
+          low: 71.1792197675323,
+          open: 75.40992523302856,
+          time: {
+            day: 1,
+            month: 1,
+            year: 2018
+          }
+        }, {
+          close: 85.83485380506657,
+          high: 85.83485380506657,
+          low: 66.70379042371442,
+          open: 73.1473266397836,
+          time: {
+            day: 2,
+            month: 1,
+            year: 2018
+          }
+        }];
+
+        console.log(props.data);
+        const chart = createChart('chart', { width: 400, height: 300 });
+        // const barSeries = addBarSeries({})
+        var candleSeries = chart.addCandlestickSeries();
+        candleSeries.setData(data);
+    
+        var smaData = calculateSMA(data, 10);
+        var smaLine = chart.addLineSeries({
+            color: 'rgba(4, 111, 232, 1)',
+            lineWidth: 2,
+        });
+        smaLine.setData(smaData);
+      }
     })
 
     return (
