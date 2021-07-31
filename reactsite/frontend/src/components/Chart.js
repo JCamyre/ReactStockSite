@@ -33,9 +33,9 @@ export default function Chart(props) {
         const chart = createChart('chart', { width: 400, height: 300 });
         // const barSeries = addBarSeries({})
         var candleSeries = chart.addCandlestickSeries();
-        candleSeries.setData(data);
+        candleSeries.setData(props.data);
     
-        var smaData = calculateSMA(data, 10);
+        var smaData = calculateSMA(props.data, 10);
         var smaLine = chart.addLineSeries({
             color: 'rgba(4, 111, 232, 1)',
             lineWidth: 2,
