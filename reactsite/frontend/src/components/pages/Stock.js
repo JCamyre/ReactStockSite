@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Table from '../Table.js';
-import Chart from '../Chart.js';
+import StockChart from '../Chart.js';
 import News from '../News';
 import DotLoader from 'react-spinners/DotLoader';
 import Signals from '../Signals';
@@ -93,9 +93,7 @@ export default function Stock(props) {
                 />
             </Grid>
             <Grid item xs={12} align='center'>
-                <Chart 
-                    data={ohlcData}
-                />
+                <StockChart />
             </Grid>
             <Grid item xs={12} align='center'>
                 <Typography component='h4' variant='h4'>{ fetching ? 'Fetching data...' : ''}</Typography>

@@ -79,7 +79,7 @@ class GetStockInfo(APIView):
                 ohlc = current_stock.get_month_data()[['Open', 'High', 'Low', 'Close', 'Volume']]
 
                 # [date.to_numpy() for date in ohlc.index]
-                ohlc_data = [{'time': {'day': date.day, 'month': date.month, 'year': date.year}, 'open': data[0], 'high': data[1], 'low': data[2], 'close': data[3], 'volume': data[4]} 
+                ohlc_data = [{'time': {'day': date.day, 'month': date.month, 'year': date.year}, 'open': float(data[0]), 'high': float(data[1]), 'low': float(data[2]), 'close': float(data[3]), 'volume': float(data[4])} 
                               for date, data in zip(ohlc.index, ohlc.values.tolist())]
                 print(ohlc_data)
                 data['ohlcData'] = ohlc_data
