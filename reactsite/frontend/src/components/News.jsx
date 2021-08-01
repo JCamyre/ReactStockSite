@@ -42,7 +42,7 @@ function News(ticker) {
             {!isLoading && !isNews && (
                 <h3>Sorry, there is no news!</h3>
             )}
-            <h1>${ typeof(ticker) === 'string' ? ticker : ''}</h1>
+            <h1>${ typeof(ticker) === 'string' ? (ticker + ' News:') : ''}</h1>
             {!isLoading && (
                 <>
                     {stockNews.map((article) => (

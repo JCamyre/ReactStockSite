@@ -74,19 +74,7 @@ class GetStockInfo(APIView):
                 data_dict['Shs Float'] = data_dict['Shs Float'][:-1]
                 data['data1'] = data_dict
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']    
-
-                # dates = [date.timestamp() for date in current_stock.get_month_data().index]
-                ohlc = current_stock.get_month_data()[['Open', 'High', 'Low', 'Close', 'Volume']]
-
-                # [date.to_numpy() for date in ohlc.index]
-                ohlc_data = [{'time': {'day': date.day, 'month': date.month, 'year': date.year}, 'open': float(data[0]), 'high': float(data[1]), 'low': float(data[2]), 'close': float(data[3]), 'volume': float(data[4])} 
-                              for date, data in zip(ohlc.index, ohlc.values.tolist())]
-                print(ohlc_data)
-                data['ohlcData'] = ohlc_data
-                
-                # data['adl'] = stock.adl()
-                # print(data['adl'])
-                
+              
                 return Response(data, status=status.HTTP_200_OK)
                 
             return Response({'Stock not found': 'Invalid Ticker.'}, status=status.HTTP_404_NOT_FOUND)
