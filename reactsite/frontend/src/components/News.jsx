@@ -21,7 +21,6 @@ function News(ticker) {
             })
 
         if(response){
-            console.log(response.data);
             if(response.data && response.data.length) setIsNews(false);
 
             setStockNews(response.data['stock-news-sentiment']);
@@ -35,7 +34,9 @@ function News(ticker) {
 
     const sectors = sectorsNews.map((sector) => {
         return sector
-    })
+    });
+
+    console.log(sectors);
 
     return (
         <div style={{padding: '40px 40px'}}>
@@ -74,16 +75,18 @@ function News(ticker) {
             )}
             {!isLoading && (
                 <>
-                    {sectors.map((article) => (
-                        <NewsArticle
-                            link={article.link}
-                            title={article.title}
-                            date={article.date}
-                            img={article.img}
-                            site={article.site}
-                            key={article.link}
-                        />     
-                    ))}
+                    {sectorsNews.map((sector) => (
+                        sector.map((article) => (
+                            <NewsArticle
+                                link={article.link}
+                                title={article.title}
+                                date={article.date}
+                                img={article.img}
+                                site={article.site}
+                                key={article.link}
+                            />     
+            ))))})
+                    )
                 </>
             )}
         </div>
