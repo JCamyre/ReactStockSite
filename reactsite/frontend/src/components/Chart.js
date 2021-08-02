@@ -7,12 +7,14 @@ import TradingViewWidget, { Themes, BarStyles } from 'react-tradingview-widget';
 function StockChart(props) {
 
   return (
-    <TradingViewWidget 
-      // symbol='NASDAQ:AAPL'
-      symbol={`${props.ticker}`}
-      theme={Themes.DARK}
-      // barstyle={BarStyles.HEIKIN_ASHI}
-    />
+    <div>
+      <TradingViewWidget 
+        // symbol='NASDAQ:AAPL'
+        symbol={`${props.ticker}`}
+        theme={Themes.DARK}
+        // barstyle={BarStyles.HEIKIN_ASHI}
+      />
+    </div>
   );
 };
 

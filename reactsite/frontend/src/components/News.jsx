@@ -43,6 +43,13 @@ function News(ticker) {
                 <h3>Sorry, there is no news!</h3>
             )}
             <h1>${ typeof(ticker) === 'string' ? (ticker + ' News:') : ''}</h1>
+            {isLoading && (
+                <>
+                    <div style={{height: '100px', padding:'40px 0px'}}>
+                        <DotLoader loading color='#000' size={35} />
+                    </div>
+                </>
+            )}
             {!isLoading && (
                 <>
                     {stockNews.map((article) => (
@@ -58,6 +65,13 @@ function News(ticker) {
                 </>
             )}
             <h1>Sector(s) news:</h1>
+            {isLoading && (
+                <>
+                    <div style={{height: '100px', padding:'40px 0px'}}>
+                        <DotLoader loading color='#000' size={35} />
+                    </div>
+                </>
+            )}
             {!isLoading && (
                 <>
                     {sectors.map((article) => (
@@ -71,9 +85,6 @@ function News(ticker) {
                         />     
                     ))}
                 </>
-            )}
-            {isLoading && (
-              <DotLoader loading color='#000' size={35} />
             )}
         </div>
     )
