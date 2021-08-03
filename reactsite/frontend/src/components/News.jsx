@@ -75,8 +75,9 @@ function News(ticker) {
             )}
             {!isLoading && (
                 <>
-                    {sectorsNews.map((sector) => (
-                        sector.map((article) => (
+                    {sectorsNews.map((articles) => (
+
+                        articles.map((article) => (
                             <NewsArticle
                                 link={article.link}
                                 title={article.title}

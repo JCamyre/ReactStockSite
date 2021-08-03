@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import theme from 'styled-theming';
 import { Button } from './Button';
+import ToggleMode from './ToggleMode';
 import './Navbar.css';
 
-export default function Navbar() {
+export default function Navbar(props) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [navbar, setNavbar] = useState(false);
@@ -55,12 +57,25 @@ export default function Navbar() {
                             About Us
                         </Link>
                     </li>
+                    
                     <li className='nav-item'>
                         {/* We don't want menu open once we click to go to a different page.  */}
                         <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
                             Sign Up
                         </Link>
                     </li>
+                    <li className='nav-item'>
+                        <ToggleMode />
+                    </li>
+                    {/* <button
+                        onClick={e =>
+                        theme.setTheme(
+                            theme.textZoom === 'normal'
+                            ? { ...theme, textZoom: 'magnify' }
+                            : { ...theme, textZoom: 'normal' }
+                        )
+                        }
+                    > */}
                 </ul>
                 {button && <Button buttonStyle='btn--outline'>Sign Up</Button>}
             </div>
