@@ -25,13 +25,23 @@ const getForeground = style('mode', {
   dark: '#EEE'
 });
 
+// const getBackgroundSecondary = style('mode', {
+//   dark: '#EEE',
+//   light: '#111'
+// });
+
+// const getForegroundSecondary = style('mode', {
+//   dark: '#111',
+//   light: '#EEE'
+// });
+
 const getFontSize = style('textZoom', {
   normal: '1em',
   textZoom: '1.2em'
 });
 
 const GlobalStyle = createGlobalStyle`
-body, Navbar, Stock {
+Navbar, Stock, .container, .footer {
   background-color: ${getBackground};
   color: ${getForeground};
   font-size: ${getFontSize};

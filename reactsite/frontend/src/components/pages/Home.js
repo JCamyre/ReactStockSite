@@ -29,7 +29,7 @@ export default function Home() {
 
                 <Grid item xs={12} align='center' style={{padding: '0px 75px', zIndex: 1}}>
                     <div className="container" style={{margin: 'auto', fontWeight: '300px', fontFamily: ['Roboto', 'Helvetica'], padding: '40px 60px',
-                        lineHeight: '1.5em', borderRadius: '6px', backgroundColor: 'rgb(255, 255, 255)',
+                        lineHeight: '1.5em', borderRadius: '6px',
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)'}}>
                         <p>Product info here.</p>
                         <Grid item xs={12} align='center'>

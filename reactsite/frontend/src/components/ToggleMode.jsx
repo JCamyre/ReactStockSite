@@ -1,6 +1,7 @@
 import React from 'react';
 import {ThemeConsumer} from 'styled-components';
 import ToggleButton from './ToggleButton';
+import './ToggleButton.css';
 
 export default function ToggleMode() {
     return (
