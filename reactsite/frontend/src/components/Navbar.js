@@ -67,15 +67,17 @@ export default function Navbar(props) {
                     <li className='nav-item'>
                         <ToggleMode />
                     </li>
-                    {/* <button
+                    <button
                         onClick={e =>
-                        theme.setTheme(
-                            theme.textZoom === 'normal'
+                        props.theme.setTheme(
+                            props.theme.textZoom === 'normal'
                             ? { ...theme, textZoom: 'magnify' }
                             : { ...theme, textZoom: 'normal' }
                         )
                         }
-                    > */}
+                    >
+                        Toggle text size
+                    </button>
                 </ul>
                 {button && <Button buttonStyle='btn--outline'>Sign Up</Button>}
             </div>

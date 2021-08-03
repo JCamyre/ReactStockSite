@@ -4,6 +4,16 @@ import ToggleButton from './ToggleButton';
 
 export default function ToggleMode() {
     return (
-        <button onClick={(e) => props.theme_setter(props.theme.mode === 'dark' ? {...theme, mode: 'light'} : {...theme, mode: 'dark'})}>yo</button>
+        <ThemeConsumer>
+            {theme => (
+                <ToggleButton
+                    variant='primary'
+                    onClick = {(e) => 
+                        theme.setTheme(theme.mode === 'dark' ? {...theme, mode: 'light' } : {...theme, mode: 'dark' })
+                    }>
+                Toggle Theme
+                </ToggleButton>
+            )}
+        </ThemeConsumer>
     )
 }

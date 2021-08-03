@@ -47,7 +47,6 @@ function App() {
       <GlobalStyle />
       <Router>
         <Navbar style={{ transition: 'all 10000ms ease 0s', transitionProperty: 'all', transitionDuration: '10000ms', transitionTimingFunction: 'ease', transitionDelay: '0s'}}
-          theme_setter={theme.setTheme}
           theme={theme}
         />
         <Switch>
