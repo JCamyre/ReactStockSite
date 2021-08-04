@@ -21,25 +21,26 @@ export default function InfoTable(props){
 
     useEffect(() => {
         setTableData(props.data);
+        console.log(props.data);
         setIsLoading(false);
-    })
+    }, [props.data]);
 
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        <TableCell align='right'>Label</TableCell>
-                        <TableCell align='right'>Value</TableCell>
+                        <TableCell align='center'>Label</TableCell>
+                        <TableCell align='center'>Value</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {!isLoading && (
                         <>
                             {tableData.map((row) => (
-                                <TableRow key={row[1]}>
-                                    <TableCell align='right'>{row[0]}</TableCell>
-                                    <TableCell align='right'>{row[1]}</TableCell>
+                                <TableRow key={row[0]}>
+                                    <TableCell align='center'>{row[0]}</TableCell>
+                                    <TableCell align='center'>{row[1]}</TableCell>
                                 </TableRow>
                             ))}
                         </>
