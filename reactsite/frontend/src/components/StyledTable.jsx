@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -16,32 +16,34 @@ const useStyles = makeStyles({
 
 export default function InfoTable(props){
     const classes = useStyles();
-    const table_data = props.data;
+    const [isLoading, setIsLoading] = useState(true);
+    const [tableData, setTableData] = useState([]);
+
+    useEffect(() => {
+        setTableData(props.data);
+        setIsLoading(false);
+    })
 
     return (
-        <TableContainer>
-            <Table>
+        <TableContainer component={Paper}>
+            <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
-                        <TableCell>
-                            Label
-                        </TableCell>
-                        <TableCell>
-                            Value
-                        </TableCell>
+                        <TableCell align='right'>Label</TableCell>
+                        <TableCell align='right'>Value</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {table_data.map((row) => (
-                        <TableRow>
-                            <TableCell>
-                                {row[0]}
-                            </TableCell>
-                            <TableCell>
-                                {row[1]}
-                            </TableCell>
-                        </TableRow>
-                    ))}
+                    {!isLoading && (
+                        <>
+                            {tableData.map((row) => (
+                                <TableRow key={row[1]}>
+                                    <TableCell align='right'>{row[0]}</TableCell>
+                                    <TableCell align='right'>{row[1]}</TableCell>
+                                </TableRow>
+                            ))}
+                        </>
+                    )}
                 </TableBody>
             </Table>
         </TableContainer>

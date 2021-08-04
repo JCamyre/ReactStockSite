@@ -6,6 +6,7 @@ import News from '../News';
 import DotLoader from 'react-spinners/DotLoader';
 import Signals from '../Signals';
 import Rating from '../Rating';
+import InfoTable from '../StyledTable';
 
 // Change color of text depending on high/low
 const ShortF = ({ value }) => {
@@ -105,12 +106,16 @@ export default function Stock(props) {
                 <Grid item xs={12} align='center'>
                     <Table columns={columns1} data={[data1]} />
                 </Grid>
-
                 <Grid item xs={12} align='center'>
                     <Table columns={columns2} data={[data1]} />
                 </Grid>
                 <Grid item xs={12} align='center'>
                     <Table columns={columns3} data={[data1]} />
+                </Grid>
+                <Grid item xs={12} align='center'>
+                    <InfoTable 
+                        data={data1}
+                    />
                 </Grid>
                 {/* Add rel volume, today's volume */}
                 <News 
