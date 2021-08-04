@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
+    maxWidth: 850
   },
 });
 
@@ -29,10 +30,10 @@ export default function InfoTable(props){
         <TableContainer component={Paper}>
             <Table className={classes.table}>
                 <TableHead>
-                    <TableRow>
+                    {/* <TableRow>
                         <TableCell align='center'>Label</TableCell>
                         <TableCell align='center'>Value</TableCell>
-                    </TableRow>
+                    </TableRow> */}
                 </TableHead>
                 <TableBody>
                     {!isLoading && (

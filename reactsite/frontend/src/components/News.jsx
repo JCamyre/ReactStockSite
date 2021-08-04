@@ -76,7 +76,7 @@ function News(ticker) {
             {!isLoading && (
                 <>
                     {sectorsNews.map((articles) => (
-
+                        // Add thing in views.py that has what sector the news is about
                         articles.map((article) => (
                             <NewsArticle
                                 link={article.link}

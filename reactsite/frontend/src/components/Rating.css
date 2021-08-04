@@ -6,7 +6,7 @@
     border-radius: 50%;
     background-color: #ff2121; 
     width: 65px;
-    height: 100%;
-    float: center;
+    height: 65px;
     flex: 1;
+    display: inline-block;
 }

@@ -74,7 +74,7 @@ class GetStockInfo(APIView):
                 data_dict['Shs Float'] = data_dict['Shs Float'][:-1]
                 data['data1'] = data_dict
                 data['data3'] = data_dict['Volatility'], data_dict['Rel Volume'], data_dict['Volume']
-                print(data_dict)
+
                 data['table_data'] = [['Price', data_dict['Price']], ['Short Float', data_dict['Short Float']],
                                       ['Market Cap', data_dict['Market Cap']], ['Forward P/E', data_dict['Forward P/E']], 
                                       ['Avg Volume', data_dict['Avg Volume']]]
