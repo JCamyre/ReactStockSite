@@ -100,6 +100,8 @@ export default function Stock(props) {
             <div style={{boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)',
                             padding: '15px -15px 15px -15px', borderRadius: '6px', width: '1400px', margin: 'auto', backgroundColor: '#fff',
                             zIndex: 1}}>
+
+                I WANT THE COOL LOOKING TABLE WITH FUNCIONALITY (REACT TABLE)
                 <Grid item xs={12} align='center'>
                     <Table columns={columns1} data={[data1]} />
                 </Grid>
