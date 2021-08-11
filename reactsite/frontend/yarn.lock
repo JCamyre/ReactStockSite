@@ -1833,7 +1833,7 @@
     "schema-utils" "^2.6.5"
     "source-map" "^0.7.3"
 
-"@react-financial-charts/annotations@^1.3.0", "@react-financial-charts/annotations@^1.3.1":
+"@react-financial-charts/annotations@^1.3.0":
   "integrity" "sha512-Fv3vbQM0plGP4rKFO+YQrDJlHhw0yuwiNOpS0xGfL5zgvOboL/nN/99ScV1JE5TxMHl9wrKBRarfql6UOcoJ5w=="
   "resolved" "https://registry.npmjs.org/@react-financial-charts/annotations/-/annotations-1.3.1.tgz"
   "version" "1.3.1"
@@ -1842,7 +1842,7 @@
     "@types/d3-scale" "^3.2.2"
     "prop-types" "^15.7.2"
 
-"@react-financial-charts/axes@^1.3.0", "@react-financial-charts/axes@^1.3.1":
+"@react-financial-charts/axes@^1.3.0":
   "integrity" "sha512-BJZHKOYJn4UDcAeCIBLagQJcaKgPgKMj5wQ82NCCluBexLpfsBr7Sd5jvsQSRUlXEC7qlY90dbprJ88oYHzhCg=="
   "resolved" "https://registry.npmjs.org/@react-financial-charts/axes/-/axes-1.3.1.tgz"
   "version" "1.3.1"
@@ -1896,7 +1896,7 @@
     "d3-path" "^2.0.0"
     "prop-types" "^15.7.2"
 
-"@react-financial-charts/scales@^1.3.0", "@react-financial-charts/scales@^1.3.1":
+"@react-financial-charts/scales@^1.3.0":
   "integrity" "sha512-ab+d2I8biIF0NL6RCc8BX2hQKsGtMU4+w/kRb1qoxif/uImYkFdQ7li4IfT6S9gZGhIcYnkb82eFQ3c/HPrLKw=="
   "resolved" "https://registry.npmjs.org/@react-financial-charts/scales/-/scales-1.3.1.tgz"
   "version" "1.3.1"
@@ -1906,7 +1906,7 @@
     "d3-scale" "^3.2.3"
     "d3-time-format" "^3.0.0"
 
-"@react-financial-charts/series@^1.3.0", "@react-financial-charts/series@^1.3.1":
+"@react-financial-charts/series@^1.3.0":
   "integrity" "sha512-i//pGfDLmsJnB+AtH9duj6L7y9X7I5Usa5XuxP9PQFNnxfPGcNWh+Ad6do6nv6i70YdFWLMM8sxL56esTdd+aQ=="
   "resolved" "https://registry.npmjs.org/@react-financial-charts/series/-/series-1.3.1.tgz"
   "version" "1.3.1"
@@ -1917,7 +1917,7 @@
     "d3-scale" "^3.2.3"
     "d3-shape" "^2.0.0"
 
-"@react-financial-charts/tooltip@^1.3.0", "@react-financial-charts/tooltip@^1.3.1":
+"@react-financial-charts/tooltip@^1.3.0":
   "integrity" "sha512-rmSX+zungxRfC58SFU1aeWNXShrQRAhjNYmsrBW94pkq4/fCVG6sy9ccqBaSdDc3pePXL15aMqfF2OpxFTyegA=="
   "resolved" "https://registry.npmjs.org/@react-financial-charts/tooltip/-/tooltip-1.3.1.tgz"
   "version" "1.3.1"
@@ -8181,20 +8181,6 @@
   "integrity" "sha1-xg7taebY/bazEEofy8ocGS3FtQE="
   "resolved" "https://registry.npmjs.org/iferr/-/iferr-0.1.5.tgz"
   "version" "0.1.5"
-
-"igniteui-react-charts@^16.14.1":
-  "integrity" "sha512-v1uqesjgb9f6ydK8mBocPrhe4ZUP/NFoaylzAR/H6iUsGxf7G4UudXOpp4xJyfKGuqQ8FNARb/cb7hR6J7tTLQ=="
-  "resolved" "https://registry.npmjs.org/igniteui-react-charts/-/igniteui-react-charts-16.14.1.tgz"
-  "version" "16.14.1"
-  dependencies:
-    "tslib" "^1.7.1"
-
-"igniteui-react-core@16.14.1":
-  "integrity" "sha512-g7yircsYXxs7tPZV/PeS/YDUgj2PKJNUoiL3L12E2b0QtCXn8YBmIRPXZa7S5hTOS7Qegi+hwRITsrK8Cvq6AA=="
-  "resolved" "https://registry.npmjs.org/igniteui-react-core/-/igniteui-react-core-16.14.1.tgz"
-  "version" "16.14.1"
-  dependencies:
-    "tslib" "^1.7.1"
 
 "ignore@^3.3.3":
   "integrity" "sha512-Pgs951kaMm5GXP7MOvxERINe3gsaVjUWFm+UZPSq9xYriQAksyhg0csnS0KXSNRD5NmNdapXEpjxG49+AKh/ug=="
@@ -14993,11 +14979,6 @@
     "json5" "^1.0.1"
     "minimist" "^1.2.0"
     "strip-bom" "^3.0.0"
-
-"tslib@^1.7.1":
-  "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
-  "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
-  "version" "1.14.1"
 
 "tslib@^1.8.1":
   "integrity" "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="

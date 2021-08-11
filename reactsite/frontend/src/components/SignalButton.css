@@ -1,3 +1,5 @@
+/* INCREASE TOP PADDING FOR SIGNAL BUTTONS SO THAT THEY DON'T COLLIDE WITH RATINGS */
+
 a.button1{
   display:inline-block;
   padding:0.35em 1.2em;

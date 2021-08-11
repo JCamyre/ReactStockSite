@@ -9,7 +9,7 @@ import SearchBar from '../SearchBar';
 
   
 export default function Home() {
-    const image = require("../../images/bg-img-3.jpg").default;
+    const background_image = require("../../images/bg-img-3.jpg").default;
 
     return (
         
@@ -17,9 +17,9 @@ export default function Home() {
             <Grid container spacing={1}>
             {/* Good video for a drop down menu: https://www.youtube.com/watch?v=IF6k0uZuypA */}
                 <Grid item align='center' style={{margin: 'auto'}}>
-                    <div style={{backgroundImage: "url(" + image + ")", backgroundSize: 'auto', 
+                    <div style={{backgroundImage: "url(" + background_image + ")", backgroundSize: 'auto', 
                         boxShadow: '0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%)', 
-                        width: '1903px', height: '750px',padding: '0px 35px 0px 35px', position: 'relative',
+                        width: '50%', height: '750px',padding: '0px 35px 0px 35px', position: 'relative',
                         filter: 'brightness(90%)'}}>
                         <Grid item xs={12} align='flex-start' style={{filter: 'brightness(100%)', position: 'relative', left: '-500px', top: '345px'}}>
                             <SearchBar />
