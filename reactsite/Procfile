@@ -1,1 +1,1 @@
-web: gunicorn reactsite.wsgi
+web: waitress-serve reactsite.wsgi
