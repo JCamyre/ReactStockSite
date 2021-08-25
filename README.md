@@ -1,1 +1,1 @@
-# Stocks-Site-React
+# React Stock Site (yoTrading)
