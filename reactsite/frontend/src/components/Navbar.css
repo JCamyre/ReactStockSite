@@ -1,8 +1,12 @@
 /* Going to test a different type of navbar css */
 .navbar {
-  /* background: transparent; */
-  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
-  background-color: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  background: transparent;
+  /* background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  background-color: linear-gradient(
+    90deg,
+    rgb(28, 27, 27) 0%,
+    rgb(26, 23, 23) 100%
+  ); */
   height: 80px;
   display: flex;
   justify-content: center;
@@ -12,15 +16,22 @@
   top: 0;
   z-index: 999;
   border-radius: 2px;
-  box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 20%);
+  box-shadow: 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%),
+    0 8px 10px -5px rgb(0 0 0 / 20%);
 }
 
 .navbar.active {
-height: 60px;
+  height: 60px;
+  background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+  background-color: linear-gradient(
+    90deg,
+    rgb(28, 27, 27) 0%,
+    rgb(26, 23, 23) 100%
+  );
 }
 
 .nav-links.active {
-  padding: 0 1.0rem;
+  padding: 0 1rem;
 }
 
 .navbar-container {
@@ -29,6 +40,8 @@ height: 60px;
   align-items: center;
   height: 80px;
   max-width: 1500px;
+  z-index: 1;
+  position: relative;
 }
 
 .navbar-logo {
@@ -139,7 +152,6 @@ height: 60px;
   }
 
   .navbar-logo:hover {
-
   }
 
   .menu-icon {

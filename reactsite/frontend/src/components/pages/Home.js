@@ -14,7 +14,11 @@ export default function Home() {
     <div>
       <Grid container spacing={1}>
         {/* Good video for a drop down menu: https://www.youtube.com/watch?v=IF6k0uZuypA */}
-        <Grid item align="center" style={{ margin: "auto" }}>
+        <Grid
+          item
+          align="center"
+          style={{ margin: "auto", zIndex: 0, position: "relative" }}
+        >
           <div
             style={{
               backgroundImage: "url(" + background_image + ")",

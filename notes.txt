@@ -1,3 +1,6 @@
+
+
+
 Instead of stealing technical indictators from other websites, get the equations for them and put them in py_trading.
 
 Paper trading?
