@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import StockSerializer, PortfolioSerializer, CreatePortfolioSerializer
 from .models import Portfolio, Stock
@@ -6,7 +5,6 @@ from .methods import add_stocks, delete_duplicate_stocks, test_stocks
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import py_trading
-import datetime
 
 
 # So the frontend.views handles the rendering of the index.html, which contains code for reactjs. 
